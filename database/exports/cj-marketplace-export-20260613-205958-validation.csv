@@ -1,0 +1,7 @@
+﻿level,message
+error,"eBay export could not map a category for CJ product 2009543586599702530."
+error,"eBay 2009543586599702530 missing required field: *Category"
+error,"eBay export could not map a category for CJ product 2009543223639269377."
+error,"eBay 2009543223639269377 missing required field: *Category"
+error,"eBay export could not map a category for CJ product 2057016728968265730."
+error,"eBay 2057016728968265730 missing required field: *Category"

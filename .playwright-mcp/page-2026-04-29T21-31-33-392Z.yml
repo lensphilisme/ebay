@@ -1,0 +1,247 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - generic [ref=e4]:
+      - generic [ref=e5]:
+        - generic [ref=e6]: Live eBay seller management
+        - heading "Integrations" [level=1] [ref=e7]
+        - paragraph [ref=e8]: Cleaner workspaces, less filler, faster paths into the parts of eBay you actually use.
+        - generic [ref=e9]:
+          - generic [ref=e10]: Needs attention
+          - generic [ref=e11]: "Token: Manual user token"
+          - generic [ref=e12]: "Selling limit: Unavailable"
+          - generic [ref=e13]: "Store: Store status unavailable"
+        - generic [ref=e14]:
+          - link "Reconnect eBay" [ref=e15] [cursor=pointer]:
+            - /url: /ebay/index.php?action=oauth_start
+          - link "Notification API" [ref=e16] [cursor=pointer]:
+            - /url: /ebay/api_subscriptions.php
+          - link "Webhook check" [ref=e17] [cursor=pointer]:
+            - /url: /ebay/ebay.php?challenge_code=123
+        - generic [ref=e18]:
+          - link "Dashboard" [ref=e19] [cursor=pointer]:
+            - /url: /ebay/index.php?page=dashboard
+          - link "Listings" [ref=e20] [cursor=pointer]:
+            - /url: /ebay/index.php?page=listings
+          - link "Offers" [ref=e21] [cursor=pointer]:
+            - /url: /ebay/index.php?page=offers
+          - link "Orders" [ref=e22] [cursor=pointer]:
+            - /url: /ebay/index.php?page=orders
+          - link "Marketing" [ref=e23] [cursor=pointer]:
+            - /url: /ebay/index.php?page=marketing
+          - link "Policies" [ref=e24] [cursor=pointer]:
+            - /url: /ebay/index.php?page=policies
+          - link "Notifications" [ref=e25] [cursor=pointer]:
+            - /url: /ebay/index.php?page=notifications
+          - link "Integrations" [ref=e26] [cursor=pointer]:
+            - /url: /ebay/index.php?page=integrations
+      - generic [ref=e27]:
+        - generic [ref=e28]:
+          - generic [ref=e29]: Store status
+          - generic [ref=e30]: Store status unavailable
+          - generic [ref=e31]: Store visibility comes from the live Stores API. If you do not pay for an eBay Store, the console says so directly.
+        - generic [ref=e32]:
+          - generic [ref=e33]: Listings visible
+          - generic [ref=e34]: "0"
+          - generic [ref=e35]: Prefers Trading active listings when they exist, because some seller accounts list there before Inventory API reflects them.
+        - generic [ref=e36]:
+          - generic [ref=e37]: Offers visible
+          - generic [ref=e38]: "0"
+          - generic [ref=e39]: Useful for seeing which SKUs are actually market-ready.
+        - generic [ref=e40]:
+          - generic [ref=e41]: Campaigns running
+          - generic [ref=e42]: "0"
+          - generic [ref=e43]: Marketing data comes from the live Promoted Listings endpoint.
+    - generic [ref=e44]:
+      - generic [ref=e46]:
+        - heading "Integrations" [level=2] [ref=e47]
+        - generic [ref=e48]: Keep CJdropshipping, shipping services, and automation launch points on a page that is honest about what is and is not connected yet.
+      - generic [ref=e50]:
+        - generic [ref=e51]:
+          - heading "CJ connection" [level=3] [ref=e52]
+          - generic [ref=e53]: Backend-only CJ auth, refresh handling, and token persistence for product research and order sync.
+          - generic [ref=e55]:
+            - generic [ref=e56]:
+              - generic [ref=e57]:
+                - generic [ref=e59]: Connected
+                - generic [ref=e60]: "Source: env_cj_access"
+              - generic [ref=e61]:
+                - generic [ref=e62]:
+                  - generic [ref=e63]: API key
+                  - generic [ref=e64]: Configured in .env
+                - generic [ref=e65]:
+                  - generic [ref=e66]: Access token
+                  - generic [ref=e67]: Saved in .env
+                - generic [ref=e68]:
+                  - generic [ref=e69]: Refresh token
+                  - generic [ref=e70]: Saved in .env
+                - generic [ref=e71]:
+                  - generic [ref=e72]: Mapped listings
+                  - generic [ref=e73]: 7 linked for future CJ sync
+            - generic [ref=e74]:
+              - button "Connect CJ" [ref=e76]
+              - button "Refresh CJ token" [ref=e78]
+            - generic [ref=e79]:
+              - heading "CJ settings snapshot" [level=4] [ref=e80]
+              - generic [ref=e81]: CJ settings endpoint responded successfully for this account.
+          - generic [ref=e83]:
+            - generic [ref=e84]:
+              - generic [ref=e85]: Not connected
+              - heading "CJdropshipping" [level=4] [ref=e86]
+              - paragraph [ref=e87]: Ready for supplier sync once CJ credentials and workflow rules are added.
+              - link "Open CJdropshipping" [ref=e88] [cursor=pointer]:
+                - /url: https://app.cjdropshipping.com/
+            - generic [ref=e89]:
+              - generic [ref=e90]: Not connected
+              - heading "AutoDS" [level=4] [ref=e91]
+              - paragraph [ref=e92]: Use this space for automated catalog sync and repricing later.
+              - link "Open AutoDS" [ref=e93] [cursor=pointer]:
+                - /url: https://platform.autods.com/
+            - generic [ref=e94]:
+              - generic [ref=e95]: Not connected
+              - heading "ShipStation" [level=4] [ref=e96]
+              - paragraph [ref=e97]: Good fit for shipping and fulfillment workflows after API keys are added.
+              - link "Open ShipStation" [ref=e98] [cursor=pointer]:
+                - /url: https://ship.shipstation.com/
+            - generic [ref=e99]:
+              - generic [ref=e100]: Live endpoint ready
+              - heading "Webhook automation" [level=4] [ref=e101]
+              - paragraph [ref=e102]: Your current webhook endpoint can fan out to third-party automations as the next step.
+              - link "Open webhook URL" [ref=e103] [cursor=pointer]:
+                - /url: http://localhost/ebay/ebay.php
+        - generic [ref=e104]:
+          - heading "MCP-aligned management surfaces" [level=3] [ref=e105]
+          - generic [ref=e106]: This console now prioritizes the non-store-dependent surfaces that are actually useful for your account.
+          - generic [ref=e107]:
+            - generic [ref=e108]:
+              - generic [ref=e109]: Regular listings
+              - generic [ref=e110]: HTTP 500
+            - generic [ref=e111]:
+              - generic [ref=e112]: Offers
+              - generic [ref=e113]: HTTP 401
+            - generic [ref=e114]:
+              - generic [ref=e115]: Orders
+              - generic [ref=e116]: HTTP 401
+            - generic [ref=e117]:
+              - generic [ref=e118]: Notifications
+              - generic [ref=e119]: HTTP 401
+          - generic [ref=e120]:
+            - generic [ref=e121]:
+              - generic [ref=e122]:
+                - generic [ref=e123]: Inventory sync
+                - generic [ref=e124]: Updates mapped eBay listing quantities from CJ product, variant, and SKU inventory endpoints.
+              - generic [ref=e125]:
+                - text: Country
+                - textbox "Country" [ref=e126]: US
+              - generic [ref=e127]:
+                - text: Max mappings
+                - spinbutton "Max mappings" [ref=e128]: "250"
+              - button "Bulk sync inventory" [ref=e129]
+            - table [ref=e131]:
+              - rowgroup [ref=e132]:
+                - row "eBay item CJ product Variants Saved" [ref=e133]:
+                  - columnheader "eBay item" [ref=e134]
+                  - columnheader "CJ product" [ref=e135]
+                  - columnheader "Variants" [ref=e136]
+                  - columnheader "Saved" [ref=e137]
+              - rowgroup [ref=e138]:
+                - row "336558010739 Women Shoes Sports Sneakers FCC62DBF-994A-402D-9746-FA9C8F26939E 34 2026-04-29 00:44:44" [ref=e139]:
+                  - cell "336558010739 Women Shoes Sports Sneakers" [ref=e140]:
+                    - strong [ref=e141]: "336558010739"
+                    - generic [ref=e142]: Women Shoes Sports Sneakers
+                  - cell "FCC62DBF-994A-402D-9746-FA9C8F26939E" [ref=e143]
+                  - cell "34" [ref=e144]
+                  - cell "2026-04-29 00:44:44" [ref=e145]
+                - row "336558005214 Autumn Women Shoes Retro High Heel Ankle Boots F8CE0C0C-E3AF-4673-9F5A-92CC2118F350 2 2026-04-29 00:41:32" [ref=e146]:
+                  - cell "336558005214 Autumn Women Shoes Retro High Heel Ankle Boots" [ref=e147]:
+                    - strong [ref=e148]: "336558005214"
+                    - generic [ref=e149]: Autumn Women Shoes Retro High Heel Ankle Boots
+                  - cell "F8CE0C0C-E3AF-4673-9F5A-92CC2118F350" [ref=e150]
+                  - cell "2" [ref=e151]
+                  - cell "2026-04-29 00:41:32" [ref=e152]
+                - row "336558004986 Women Shoes Sports Sneakers FCC62DBF-994A-402D-9746-FA9C8F26939E 34 2026-04-29 00:41:20" [ref=e153]:
+                  - cell "336558004986 Women Shoes Sports Sneakers" [ref=e154]:
+                    - strong [ref=e155]: "336558004986"
+                    - generic [ref=e156]: Women Shoes Sports Sneakers
+                  - cell "FCC62DBF-994A-402D-9746-FA9C8F26939E" [ref=e157]
+                  - cell "34" [ref=e158]
+                  - cell "2026-04-29 00:41:20" [ref=e159]
+                - row "336557856605 Dog Portable Water Bottle Foldable Pet Water Dispenser Pet Products 1634758645298769920 2 2026-04-28 22:54:48" [ref=e160]:
+                  - cell "336557856605 Dog Portable Water Bottle Foldable Pet Water Dispenser Pet Products" [ref=e161]:
+                    - strong [ref=e162]: "336557856605"
+                    - generic [ref=e163]: Dog Portable Water Bottle Foldable Pet Water Dispenser Pet Products
+                  - cell "1634758645298769920" [ref=e164]
+                  - cell "2" [ref=e165]
+                  - cell "2026-04-28 22:54:48" [ref=e166]
+                - row "336557848271 Whitening Strips 1990987337713094658 1 2026-04-28 22:50:12" [ref=e167]:
+                  - cell "336557848271 Whitening Strips" [ref=e168]:
+                    - strong [ref=e169]: "336557848271"
+                    - generic [ref=e170]: Whitening Strips
+                  - cell "1990987337713094658" [ref=e171]
+                  - cell "1" [ref=e172]
+                  - cell "2026-04-28 22:50:12" [ref=e173]
+                - row "336556628796 Spine Bending Posture Corrector 85C80F84-A4D8-4178-8227-4F797E312692 7 2026-04-28 07:28:25" [ref=e174]:
+                  - cell "336556628796 Spine Bending Posture Corrector" [ref=e175]:
+                    - strong [ref=e176]: "336556628796"
+                    - generic [ref=e177]: Spine Bending Posture Corrector
+                  - cell "85C80F84-A4D8-4178-8227-4F797E312692" [ref=e178]
+                  - cell "7" [ref=e179]
+                  - cell "2026-04-28 07:28:25" [ref=e180]
+                - row "336556593620 Spine Bending Posture Corrector 85C80F84-A4D8-4178-8227-4F797E312692 7 2026-04-28 07:01:51" [ref=e181]:
+                  - cell "336556593620 Spine Bending Posture Corrector" [ref=e182]:
+                    - strong [ref=e183]: "336556593620"
+                    - generic [ref=e184]: Spine Bending Posture Corrector
+                  - cell "85C80F84-A4D8-4178-8227-4F797E312692" [ref=e185]
+                  - cell "7" [ref=e186]
+                  - cell "2026-04-28 07:01:51" [ref=e187]
+          - table [ref=e190]:
+            - rowgroup [ref=e191]:
+              - row "CJ order Status Shipping Tracking" [ref=e192]:
+                - columnheader "CJ order" [ref=e193]
+                - columnheader "Status" [ref=e194]
+                - columnheader "Shipping" [ref=e195]
+                - columnheader "Tracking" [ref=e196]
+            - rowgroup [ref=e197]:
+              - row "576493515091318519 CLOSED Unknown Pending" [ref=e198]:
+                - cell "576493515091318519" [ref=e199]:
+                  - strong [ref=e200]: "576493515091318519"
+                - cell "CLOSED" [ref=e201]
+                - cell "Unknown" [ref=e202]
+                - cell "Pending" [ref=e203]
+              - row "576495367812847163 TRASH Unknown Pending" [ref=e204]:
+                - cell "576495367812847163" [ref=e205]:
+                  - strong [ref=e206]: "576495367812847163"
+                - cell "TRASH" [ref=e207]
+                - cell "Unknown" [ref=e208]
+                - cell "Pending" [ref=e209]
+              - row "577307078306467847 CLOSED Unknown Pending" [ref=e210]:
+                - cell "577307078306467847" [ref=e211]:
+                  - strong [ref=e212]: "577307078306467847"
+                - cell "CLOSED" [ref=e213]
+                - cell "Unknown" [ref=e214]
+                - cell "Pending" [ref=e215]
+              - row "577307166309060876 CLOSED Unknown Pending" [ref=e216]:
+                - cell "577307166309060876" [ref=e217]:
+                  - strong [ref=e218]: "577307166309060876"
+                - cell "CLOSED" [ref=e219]
+                - cell "Unknown" [ref=e220]
+                - cell "Pending" [ref=e221]
+              - row "577307784054411599 CLOSED Unknown Pending" [ref=e222]:
+                - cell "577307784054411599" [ref=e223]:
+                  - strong [ref=e224]: "577307784054411599"
+                - cell "CLOSED" [ref=e225]
+                - cell "Unknown" [ref=e226]
+                - cell "Pending" [ref=e227]
+              - row "577342469885563252 DELIVERED Unknown Pending" [ref=e228]:
+                - cell "577342469885563252" [ref=e229]:
+                  - strong [ref=e230]: "577342469885563252"
+                - cell "DELIVERED" [ref=e231]
+                - cell "Unknown" [ref=e232]
+                - cell "Pending" [ref=e233]
+  - generic:
+    - generic:
+      - generic:
+        - heading [level=3]: Working
+      - generic: Your request is being sent to eBay and CJ.
+      - generic:
+        - generic: Preparing request...
+        - strong: 0%

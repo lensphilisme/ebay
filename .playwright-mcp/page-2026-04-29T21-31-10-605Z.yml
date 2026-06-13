@@ -1,0 +1,134 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - generic [ref=e4]:
+      - generic [ref=e5]:
+        - generic [ref=e6]: Live eBay seller management
+        - heading "Dashboard" [level=1] [ref=e7]
+        - paragraph [ref=e8]: Cleaner workspaces, less filler, faster paths into the parts of eBay you actually use.
+        - generic [ref=e9]:
+          - generic [ref=e10]: Needs attention
+          - generic [ref=e11]: "Token: Manual user token"
+          - generic [ref=e12]: "Selling limit: Unavailable"
+          - generic [ref=e13]: "Store: Store status unavailable"
+        - generic [ref=e14]:
+          - link "Reconnect eBay" [ref=e15] [cursor=pointer]:
+            - /url: /ebay/index.php?action=oauth_start
+          - link "Notification API" [ref=e16] [cursor=pointer]:
+            - /url: /ebay/api_subscriptions.php
+          - link "Webhook check" [ref=e17] [cursor=pointer]:
+            - /url: /ebay/ebay.php?challenge_code=123
+        - generic [ref=e18]:
+          - link "Dashboard" [ref=e19] [cursor=pointer]:
+            - /url: /ebay/index.php?page=dashboard
+          - link "Listings" [ref=e20] [cursor=pointer]:
+            - /url: /ebay/index.php?page=listings
+          - link "Offers" [ref=e21] [cursor=pointer]:
+            - /url: /ebay/index.php?page=offers
+          - link "Orders" [ref=e22] [cursor=pointer]:
+            - /url: /ebay/index.php?page=orders
+          - link "Marketing" [ref=e23] [cursor=pointer]:
+            - /url: /ebay/index.php?page=marketing
+          - link "Policies" [ref=e24] [cursor=pointer]:
+            - /url: /ebay/index.php?page=policies
+          - link "Notifications" [ref=e25] [cursor=pointer]:
+            - /url: /ebay/index.php?page=notifications
+          - link "Integrations" [ref=e26] [cursor=pointer]:
+            - /url: /ebay/index.php?page=integrations
+      - generic [ref=e27]:
+        - generic [ref=e28]:
+          - generic [ref=e29]: Store status
+          - generic [ref=e30]: Store status unavailable
+          - generic [ref=e31]: Store visibility comes from the live Stores API. If you do not pay for an eBay Store, the console says so directly.
+        - generic [ref=e32]:
+          - generic [ref=e33]: Listings visible
+          - generic [ref=e34]: "0"
+          - generic [ref=e35]: Prefers Trading active listings when they exist, because some seller accounts list there before Inventory API reflects them.
+        - generic [ref=e36]:
+          - generic [ref=e37]: Offers visible
+          - generic [ref=e38]: "0"
+          - generic [ref=e39]: Useful for seeing which SKUs are actually market-ready.
+        - generic [ref=e40]:
+          - generic [ref=e41]: Campaigns running
+          - generic [ref=e42]: "0"
+          - generic [ref=e43]: Marketing data comes from the live Promoted Listings endpoint.
+    - generic [ref=e44]:
+      - generic [ref=e46]:
+        - heading "Operator dashboard" [level=2] [ref=e47]
+        - generic [ref=e48]: A lighter home page with connection health, quick metrics, and direct entry points into real workspaces.
+      - generic [ref=e49]:
+        - generic [ref=e50]:
+          - generic [ref=e52]:
+            - generic [ref=e54]: HTTP 401
+            - paragraph [ref=e55]: Store status unavailable
+            - generic [ref=e56]: Invalid access token. Check the value of the Authorization HTTP request header.
+            - generic [ref=e57]:
+              - generic [ref=e58]:
+                - generic [ref=e59]: Account access
+                - generic [ref=e60]: HTTP 401
+              - generic [ref=e61]:
+                - generic [ref=e62]: Token source
+                - generic [ref=e63]: Manual user token
+              - generic [ref=e64]:
+                - generic [ref=e65]: Store URL
+                - generic [ref=e66]: Not available
+              - generic [ref=e67]:
+                - generic [ref=e68]: Store name
+                - generic [ref=e69]: Not available
+              - generic [ref=e70]:
+                - generic [ref=e71]: API note
+                - generic [ref=e72]: Invalid access token. Check the value of the Authorization HTTP request header.
+          - generic [ref=e73]:
+            - heading "What to open next" [level=3] [ref=e74]
+            - generic [ref=e75]: Use the cards below to jump straight into listings, orders, offers, campaigns, or integrations.
+            - generic [ref=e76]:
+              - generic [ref=e77]:
+                - generic [ref=e78]: Listings
+                - generic [ref=e79]: 0 live regular listings available
+              - generic [ref=e80]:
+                - generic [ref=e81]: Offers
+                - generic [ref=e82]: 0 Inventory API offers visible
+              - generic [ref=e83]:
+                - generic [ref=e84]: Campaigns
+                - generic [ref=e85]: 0 currently running
+              - generic [ref=e86]:
+                - generic [ref=e87]: Store
+                - generic [ref=e88]: Store status unavailable
+        - generic [ref=e90]:
+          - article [ref=e91]:
+            - generic [ref=e92]: Listings
+            - heading "0 live listings" [level=3] [ref=e93]
+            - paragraph [ref=e94]: Browse live items and open each product on its own detail page.
+            - link "Open listings" [ref=e95] [cursor=pointer]:
+              - /url: /ebay/index.php?page=listings
+          - article [ref=e96]:
+            - generic [ref=e97]: Orders
+            - heading "0 recent orders" [level=3] [ref=e98]
+            - paragraph [ref=e99]: Inspect line items, shipments, and refunds in one focused operations page.
+            - link "Manage orders" [ref=e100] [cursor=pointer]:
+              - /url: /ebay/index.php?page=orders
+          - article [ref=e101]:
+            - generic [ref=e102]: Campaigns
+            - heading "0 campaigns running" [level=3] [ref=e103]
+            - paragraph [ref=e104]: Pause, resume, or end promoted listing campaigns without digging through filler.
+            - link "Open marketing" [ref=e105] [cursor=pointer]:
+              - /url: /ebay/index.php?page=marketing
+          - article [ref=e106]:
+            - generic [ref=e107]: Offers
+            - heading "0 offers visible" [level=3] [ref=e108]
+            - paragraph [ref=e109]: Review Inventory API offers and publish or withdraw them from one screen.
+            - link "Manage offers" [ref=e110] [cursor=pointer]:
+              - /url: /ebay/index.php?page=offers
+          - article [ref=e111]:
+            - generic [ref=e112]: Integrations
+            - heading "3rd-party hub" [level=3] [ref=e113]
+            - paragraph [ref=e114]: Keep dropshipping, shipping, and automation launch points in one place.
+            - link "Open integrations" [ref=e115] [cursor=pointer]:
+              - /url: /ebay/index.php?page=integrations
+  - generic:
+    - generic:
+      - generic:
+        - heading [level=3]: Working
+      - generic: Your request is being sent to eBay and CJ.
+      - generic:
+        - generic: Preparing request...
+        - strong: 0%

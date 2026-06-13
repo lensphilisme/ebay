@@ -1,0 +1,336 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - generic [ref=e4]:
+      - generic [ref=e5]:
+        - generic [ref=e6]: Live eBay seller management
+        - heading "Listings" [level=1] [ref=e7]
+        - paragraph [ref=e8]: Cleaner workspaces, less filler, faster paths into the parts of eBay you actually use.
+        - generic [ref=e9]:
+          - generic [ref=e10]: Connected
+          - generic [ref=e11]: "Token: Manual user token"
+          - generic [ref=e12]: "Selling limit: USD 200000 / 3500 items"
+          - generic [ref=e13]: "Store: No active store subscription"
+        - generic [ref=e14]:
+          - link "Reconnect eBay" [ref=e15] [cursor=pointer]:
+            - /url: /ebay/index.php?action=oauth_start
+          - link "Notification API" [ref=e16] [cursor=pointer]:
+            - /url: /ebay/api_subscriptions.php
+          - link "Webhook check" [ref=e17] [cursor=pointer]:
+            - /url: /ebay/ebay.php?challenge_code=123
+        - generic [ref=e18]:
+          - link "Dashboard" [ref=e19] [cursor=pointer]:
+            - /url: /ebay/index.php?page=dashboard
+          - link "Listings" [ref=e20] [cursor=pointer]:
+            - /url: /ebay/index.php?page=listings
+          - link "Offers" [ref=e21] [cursor=pointer]:
+            - /url: /ebay/index.php?page=offers
+          - link "Orders" [ref=e22] [cursor=pointer]:
+            - /url: /ebay/index.php?page=orders
+          - link "Marketing" [ref=e23] [cursor=pointer]:
+            - /url: /ebay/index.php?page=marketing
+          - link "Policies" [ref=e24] [cursor=pointer]:
+            - /url: /ebay/index.php?page=policies
+          - link "Notifications" [ref=e25] [cursor=pointer]:
+            - /url: /ebay/index.php?page=notifications
+          - link "Integrations" [ref=e26] [cursor=pointer]:
+            - /url: /ebay/index.php?page=integrations
+      - generic [ref=e27]:
+        - generic [ref=e28]:
+          - generic [ref=e29]: Store status
+          - generic [ref=e30]: No active store subscription
+          - generic [ref=e31]: Store visibility comes from the live Stores API. If you do not pay for an eBay Store, the console says so directly.
+        - generic [ref=e32]:
+          - generic [ref=e33]: Listings visible
+          - generic [ref=e34]: "0"
+          - generic [ref=e35]: Prefers Trading active listings when they exist, because some seller accounts list there before Inventory API reflects them.
+        - generic [ref=e36]:
+          - generic [ref=e37]: Offers visible
+          - generic [ref=e38]: "0"
+          - generic [ref=e39]: Useful for seeing which SKUs are actually market-ready.
+        - generic [ref=e40]:
+          - generic [ref=e41]: Campaigns running
+          - generic [ref=e42]: "1"
+          - generic [ref=e43]: Marketing data comes from the live Promoted Listings endpoint.
+    - generic [ref=e44]:
+      - generic [ref=e45]:
+        - generic [ref=e46]:
+          - heading "Listings workspace" [level=2] [ref=e47]
+          - generic [ref=e48]: Image-first browsing for your active listings, with create and edit actions kept close to the products.
+        - link "Create listing" [ref=e50] [cursor=pointer]:
+          - /url: /ebay/index.php?page=create-listing
+      - generic [ref=e51]:
+        - generic [ref=e52]:
+          - generic [ref=e53]:
+            - heading "Regular active listings" [level=3] [ref=e54]
+            - generic [ref=e56]: No active listings are available for bulk ending right now.
+            - generic [ref=e58]: No active regular listings were returned.
+            - generic [ref=e60]: Showing the latest 0 listings.
+          - generic [ref=e61]:
+            - heading "Inventory snapshot" [level=3] [ref=e62]
+            - generic [ref=e64]: No inventory items came back from eBay right now. The connection still works, but there are no listing records in this response.
+            - generic [ref=e65]:
+              - heading "Inventory locations" [level=3] [ref=e66]
+              - generic [ref=e68]: No inventory locations were returned for this seller.
+        - generic [ref=e69]:
+          - heading "CJ product research" [level=3] [ref=e70]
+          - generic [ref=e71]:
+            - generic [ref=e72]:
+              - generic [ref=e73]:
+                - generic [ref=e74]:
+                  - text: Search name or SKU
+                  - textbox "Search name or SKU" [ref=e75]
+                - generic [ref=e76]:
+                  - text: Country
+                  - textbox "Country" [ref=e77]:
+                    - /placeholder: US
+                    - text: US
+                - generic [ref=e78]:
+                  - text: Category name
+                  - combobox "Category name" [ref=e79]
+                - generic [ref=e80]:
+                  - text: Direct PID
+                  - textbox "Direct PID" [ref=e81]
+                - generic [ref=e82]:
+                  - text: Products per page
+                  - combobox "Products per page" [ref=e83]:
+                    - option "20" [selected]
+                    - option "40"
+                    - option "60"
+                    - option "100"
+                - generic [ref=e84]:
+                  - text: Sort
+                  - combobox "Sort" [ref=e85]:
+                    - option "Newest first" [selected]
+                    - option "Oldest first"
+              - generic [ref=e86]:
+                - button "Search CJ" [ref=e87]
+                - link "Reset" [ref=e88] [cursor=pointer]:
+                  - /url: /ebay/index.php?page=listings
+            - group [ref=e89]:
+              - generic "CJ category hierarchy" [ref=e90] [cursor=pointer]
+          - generic [ref=e92]: Connect CJ and run a product search to see results here.
+        - generic [ref=e93]:
+          - generic [ref=e94]:
+            - heading "Imported CJ listing maps" [level=3] [ref=e95]
+            - generic [ref=e96]:
+              - generic [ref=e97]:
+                - generic [ref=e98]:
+                  - generic [ref=e99]: Inventory sync
+                  - generic [ref=e100]: Updates mapped eBay listing quantities from CJ product, variant, and SKU inventory endpoints.
+                - generic [ref=e101]:
+                  - text: Country
+                  - textbox "Country" [ref=e102]: US
+                - generic [ref=e103]:
+                  - text: Max mappings
+                  - spinbutton "Max mappings" [ref=e104]: "250"
+                - generic [ref=e105]:
+                  - text: Max eBay qty
+                  - spinbutton "Max eBay qty" [ref=e106]: "5"
+                - button "Bulk sync inventory" [ref=e107]
+              - generic [ref=e108]:
+                - generic [ref=e109]:
+                  - generic [ref=e110]: Manual inventory override
+                  - generic [ref=e111]: Paste one update per line as eBay item ID | SKU | quantity. Leave SKU blank for single-SKU listings.
+                - textbox "336565186527|CJBHNSNS11458-Red-40|2 336565186528||0" [ref=e112]:
+                  - /placeholder: "336565186527|CJBHNSNS11458-Red-40|2\n336565186528||0"
+                - button "Apply manual bulk update" [ref=e113]
+              - generic [ref=e114]:
+                - generic [ref=e115]:
+                  - generic [ref=e116]: Low inventory watch
+                  - generic [ref=e117]: Flags mapped CJ variants at or below 2 units.
+                - generic [ref=e118]: No mapped variant is at the low-stock threshold right now.
+              - table [ref=e120]:
+                - rowgroup [ref=e121]:
+                  - row "eBay item CJ product Variants Saved" [ref=e122]:
+                    - columnheader "eBay item" [ref=e123]
+                    - columnheader "CJ product" [ref=e124]
+                    - columnheader "Variants" [ref=e125]
+                    - columnheader "Saved" [ref=e126]
+                - rowgroup [ref=e127]:
+                  - row "336565186527 Men's Pierce Proof Air Labor Shoes 2406110341421620700 6 2026-05-02 23:31:37" [ref=e128]:
+                    - cell "336565186527 Men's Pierce Proof Air Labor Shoes" [ref=e129]:
+                      - strong [ref=e130]: "336565186527"
+                      - generic [ref=e131]: Men's Pierce Proof Air Labor Shoes
+                    - cell "2406110341421620700" [ref=e132]
+                    - cell "6" [ref=e133]
+                    - cell "2026-05-02 23:31:37" [ref=e134]
+                  - row "336565185625 Outdoor Hiking Shoes Men's Casual Hiking Shoes 1397461393799778304 3 2026-05-02 23:31:11" [ref=e135]:
+                    - cell "336565185625 Outdoor Hiking Shoes Men's Casual Hiking Shoes" [ref=e136]:
+                      - strong [ref=e137]: "336565185625"
+                      - generic [ref=e138]: Outdoor Hiking Shoes Men's Casual Hiking Shoes
+                    - cell "1397461393799778304" [ref=e139]
+                    - cell "3" [ref=e140]
+                    - cell "2026-05-02 23:31:11" [ref=e141]
+                  - row "336565185227 Men's Shoes Off-road Running Shoes Solomon Travel Hiking Shoes Hiking Boots 2406200256091606300 17 2026-05-02 23:31:00" [ref=e142]:
+                    - cell "336565185227 Men's Shoes Off-road Running Shoes Solomon Travel Hiking Shoes Hiking Boots" [ref=e143]:
+                      - strong [ref=e144]: "336565185227"
+                      - generic [ref=e145]: Men's Shoes Off-road Running Shoes Solomon Travel Hiking Shoes Hiking Boots
+                    - cell "2406200256091606300" [ref=e146]
+                    - cell "17" [ref=e147]
+                    - cell "2026-05-02 23:31:00" [ref=e148]
+                  - row "336565185007 Fashion Warm Cotton Slippers For Women Leisure Thick Bottom Non-slip Plus-velvet House Shoes Winter Bedroom Floor Suede Slipper 1836580388274589696 8 2026-05-02 23:30:55" [ref=e149]:
+                    - cell "336565185007 Fashion Warm Cotton Slippers For Women Leisure Thick Bottom Non-slip Plus-velvet House Shoes Winter Bedroom Floor Suede Slipper" [ref=e150]:
+                      - strong [ref=e151]: "336565185007"
+                      - generic [ref=e152]: Fashion Warm Cotton Slippers For Women Leisure Thick Bottom Non-slip Plus-velvet House Shoes Winter Bedroom Floor Suede Slipper
+                    - cell "1836580388274589696" [ref=e153]
+                    - cell "8" [ref=e154]
+                    - cell "2026-05-02 23:30:55" [ref=e155]
+                  - row "336565184762 Cute Cartoon Dog Slippers Summer Solid Color Non-slip Rhombus Bathroom Slipper Indoor House Shoes For Men Women Couples 1792909963233742848 18 2026-05-02 23:30:49" [ref=e156]:
+                    - cell "336565184762 Cute Cartoon Dog Slippers Summer Solid Color Non-slip Rhombus Bathroom Slipper Indoor House Shoes For Men Women Couples" [ref=e157]:
+                      - strong [ref=e158]: "336565184762"
+                      - generic [ref=e159]: Cute Cartoon Dog Slippers Summer Solid Color Non-slip Rhombus Bathroom Slipper Indoor House Shoes For Men Women Couples
+                    - cell "1792909963233742848" [ref=e160]
+                    - cell "18" [ref=e161]
+                    - cell "2026-05-02 23:30:49" [ref=e162]
+                  - row "336565184557 Fashion V-cut Plush Ankle Boots Winter Plus Velvet Flat Snow Boot Casual Warm Solid Suede Cotton Shoes For Women 1856928179077140480 28 2026-05-02 23:30:43" [ref=e163]:
+                    - cell "336565184557 Fashion V-cut Plush Ankle Boots Winter Plus Velvet Flat Snow Boot Casual Warm Solid Suede Cotton Shoes For Women" [ref=e164]:
+                      - strong [ref=e165]: "336565184557"
+                      - generic [ref=e166]: Fashion V-cut Plush Ankle Boots Winter Plus Velvet Flat Snow Boot Casual Warm Solid Suede Cotton Shoes For Women
+                    - cell "1856928179077140480" [ref=e167]
+                    - cell "28" [ref=e168]
+                    - cell "2026-05-02 23:30:43" [ref=e169]
+                  - row "336565184318 Women's Random Print Side Lace-Up Elastic Sport Shoes, Comfortable Slip-On Sneakers For Women, Casual Daily Wear Footwear 1981293493136293890 3 2026-05-02 23:30:37" [ref=e170]:
+                    - cell "336565184318 Women's Random Print Side Lace-Up Elastic Sport Shoes, Comfortable Slip-On Sneakers For Women, Casual Daily Wear Footwear" [ref=e171]:
+                      - strong [ref=e172]: "336565184318"
+                      - generic [ref=e173]: Women's Random Print Side Lace-Up Elastic Sport Shoes, Comfortable Slip-On Sneakers For Women, Casual Daily Wear Footwear
+                    - cell "1981293493136293890" [ref=e174]
+                    - cell "3" [ref=e175]
+                    - cell "2026-05-02 23:30:37" [ref=e176]
+                  - row "336565184120 Winter Fleece Boots With Side Zipper Design Fashion Simple Non-slip Ankle Boots For Women Warm Pu Leather Shoes 1856934920217055232 6 2026-05-02 23:30:31" [ref=e177]:
+                    - cell "336565184120 Winter Fleece Boots With Side Zipper Design Fashion Simple Non-slip Ankle Boots For Women Warm Pu Leather Shoes" [ref=e178]:
+                      - strong [ref=e179]: "336565184120"
+                      - generic [ref=e180]: Winter Fleece Boots With Side Zipper Design Fashion Simple Non-slip Ankle Boots For Women Warm Pu Leather Shoes
+                    - cell "1856934920217055232" [ref=e181]
+                    - cell "6" [ref=e182]
+                    - cell "2026-05-02 23:30:31" [ref=e183]
+          - generic [ref=e184]:
+            - heading "CJ sync preview" [level=3] [ref=e185]
+            - generic [ref=e186]:
+              - generic [ref=e187]:
+                - generic [ref=e188]:
+                  - generic [ref=e189]: CJ order automation
+                  - generic [ref=e190]: Push paid eBay orders into CJ, pull CJ status, and send CJ tracking back to eBay.
+                - generic [ref=e191]:
+                  - button "Two-way order sync" [ref=e193]
+                  - button "Push eBay to CJ" [ref=e195]
+                  - button "Pull CJ status" [ref=e197]
+                  - button "Push tracking to eBay" [ref=e199]
+                - generic [ref=e200]:
+                  - generic [ref=e201]:
+                    - text: CJ webhook URL
+                    - textbox "CJ webhook URL" [ref=e202]: https://23d2-172-56-74-76.ngrok-free.app/ebay/cj-webhook.php
+                  - button "Enable CJ webhooks" [ref=e203]
+              - table [ref=e205]:
+                - rowgroup [ref=e206]:
+                  - row "eBay / CJ CJ status Logistics Tracking Updated" [ref=e207]:
+                    - columnheader "eBay / CJ" [ref=e208]
+                    - columnheader "CJ status" [ref=e209]
+                    - columnheader "Logistics" [ref=e210]
+                    - columnheader "Tracking" [ref=e211]
+                    - columnheader "Updated" [ref=e212]
+                - rowgroup [ref=e213]:
+                  - row "CJ SD26022605462106467001 TRASH usps Pending 2026-05-03 16:19:57" [ref=e214]:
+                    - cell "CJ SD26022605462106467001" [ref=e215]:
+                      - strong
+                      - generic [ref=e216]: CJ SD26022605462106467001
+                    - cell "TRASH" [ref=e217]
+                    - cell "usps" [ref=e218]
+                    - cell "Pending" [ref=e219]
+                    - cell "2026-05-03 16:19:57" [ref=e220]
+                  - row "CJ SD26022506253606687001 TRASH UPS wig Pending 2026-05-03 16:19:57" [ref=e221]:
+                    - cell "CJ SD26022506253606687001" [ref=e222]:
+                      - strong
+                      - generic [ref=e223]: CJ SD26022506253606687001
+                    - cell "TRASH" [ref=e224]
+                    - cell "UPS wig" [ref=e225]
+                    - cell "Pending" [ref=e226]
+                    - cell "2026-05-03 16:19:57" [ref=e227]
+                  - row "CJ SD26022420413406623001 TRASH uniuni wm Pending 2026-05-03 16:19:57" [ref=e228]:
+                    - cell "CJ SD26022420413406623001" [ref=e229]:
+                      - strong
+                      - generic [ref=e230]: CJ SD26022420413406623001
+                    - cell "TRASH" [ref=e231]
+                    - cell "uniuni wm" [ref=e232]
+                    - cell "Pending" [ref=e233]
+                    - cell "2026-05-03 16:19:57" [ref=e234]
+                  - row "CJ SD26022111365106592001 TRASH Pending 2026-05-03 16:19:57" [ref=e235]:
+                    - cell "CJ SD26022111365106592001" [ref=e236]:
+                      - strong
+                      - generic [ref=e237]: CJ SD26022111365106592001
+                    - cell "TRASH" [ref=e238]
+                    - cell [ref=e239]
+                    - cell "Pending" [ref=e240]
+                    - cell "2026-05-03 16:19:57" [ref=e241]
+                  - row "CJ SD25060904045706534001 UNPAID USPS Pending 2026-05-03 16:19:57" [ref=e242]:
+                    - cell "CJ SD25060904045706534001" [ref=e243]:
+                      - strong
+                      - generic [ref=e244]: CJ SD25060904045706534001
+                    - cell "UNPAID" [ref=e245]
+                    - cell "USPS" [ref=e246]
+                    - cell "Pending" [ref=e247]
+                    - cell "2026-05-03 16:19:57" [ref=e248]
+                  - row "CJ DP2605031250550658300 CREATED Pending 2026-05-03 16:19:57" [ref=e249]:
+                    - cell "CJ DP2605031250550658300" [ref=e250]:
+                      - strong
+                      - generic [ref=e251]: CJ DP2605031250550658300
+                    - cell "CREATED" [ref=e252]
+                    - cell [ref=e253]
+                    - cell "Pending" [ref=e254]
+                    - cell "2026-05-03 16:19:57" [ref=e255]
+                  - row "CJ DP2603110454190991000 TRASH TikTok-US Pending 2026-05-03 16:19:57" [ref=e256]:
+                    - cell "CJ DP2603110454190991000" [ref=e257]:
+                      - strong
+                      - generic [ref=e258]: CJ DP2603110454190991000
+                    - cell "TRASH" [ref=e259]
+                    - cell "TikTok-US" [ref=e260]
+                    - cell "Pending" [ref=e261]
+                    - cell "2026-05-03 16:19:57" [ref=e262]
+                  - row "CJ DP2603010420570973000 DELIVERED TikTok-US 9234690393549004648941 2026-05-03 16:19:57" [ref=e263]:
+                    - cell "CJ DP2603010420570973000" [ref=e264]:
+                      - strong
+                      - generic [ref=e265]: CJ DP2603010420570973000
+                    - cell "DELIVERED" [ref=e266]
+                    - cell "TikTok-US" [ref=e267]
+                    - cell "9234690393549004648941" [ref=e268]
+                    - cell "2026-05-03 16:19:57" [ref=e269]
+                  - row "CJ DP2602260548381007700 DELIVERED TikTok-US 9234690393549004576879 2026-05-03 16:19:57" [ref=e270]:
+                    - cell "CJ DP2602260548381007700" [ref=e271]:
+                      - strong
+                      - generic [ref=e272]: CJ DP2602260548381007700
+                    - cell "DELIVERED" [ref=e273]
+                    - cell "TikTok-US" [ref=e274]
+                    - cell "9234690393549004576879" [ref=e275]
+                    - cell "2026-05-03 16:19:57" [ref=e276]
+                  - row "CJ DP2602182045211006200 TRASH TikTok-US Pending 2026-05-03 16:19:57" [ref=e277]:
+                    - cell "CJ DP2602182045211006200" [ref=e278]:
+                      - strong
+                      - generic [ref=e279]: CJ DP2602182045211006200
+                    - cell "TRASH" [ref=e280]
+                    - cell "TikTok-US" [ref=e281]
+                    - cell "Pending" [ref=e282]
+                    - cell "2026-05-03 16:19:57" [ref=e283]
+                  - row "CJ SD26022605461806505001 TRASH UPS wig Pending 2026-05-03 16:19:57" [ref=e284]:
+                    - cell "CJ SD26022605461806505001" [ref=e285]:
+                      - strong
+                      - generic [ref=e286]: CJ SD26022605461806505001
+                    - cell "TRASH" [ref=e287]
+                    - cell "UPS wig" [ref=e288]
+                    - cell "Pending" [ref=e289]
+                    - cell "2026-05-03 16:19:57" [ref=e290]
+                  - row "CJ SD26022506254006479001 TRASH usps Pending 2026-05-03 16:19:57" [ref=e291]:
+                    - cell "CJ SD26022506254006479001" [ref=e292]:
+                      - strong
+                      - generic [ref=e293]: CJ SD26022506254006479001
+                    - cell "TRASH" [ref=e294]
+                    - cell "usps" [ref=e295]
+                    - cell "Pending" [ref=e296]
+                    - cell "2026-05-03 16:19:57" [ref=e297]
+              - generic [ref=e298]: No recent CJ orders are visible right now.
+  - generic:
+    - generic:
+      - generic:
+        - heading [level=3]: Working
+      - generic: Your request is being sent to eBay and CJ.
+      - generic:
+        - generic: Preparing request...
+        - strong: 0%

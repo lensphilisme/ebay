@@ -1,0 +1,1058 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - generic [ref=e4]:
+      - generic [ref=e5]:
+        - generic [ref=e6]: Live eBay seller management
+        - heading "Listings" [level=1] [ref=e7]
+        - paragraph [ref=e8]: Cleaner workspaces, less filler, faster paths into the parts of eBay you actually use.
+        - generic [ref=e9]:
+          - generic [ref=e10]: Connected
+          - generic [ref=e11]: "Token: Manual user token"
+          - generic [ref=e12]: "Selling limit: USD 200000 / 3500 items"
+          - generic [ref=e13]: "Store: No active store subscription"
+        - generic [ref=e14]:
+          - link "Reconnect eBay" [ref=e15] [cursor=pointer]:
+            - /url: /ebay/index.php?action=oauth_start
+          - link "Notification API" [ref=e16] [cursor=pointer]:
+            - /url: /ebay/api_subscriptions.php
+          - link "Webhook check" [ref=e17] [cursor=pointer]:
+            - /url: /ebay/ebay.php?challenge_code=123
+        - generic [ref=e18]:
+          - link "Dashboard" [ref=e19] [cursor=pointer]:
+            - /url: /ebay/index.php?page=dashboard
+          - link "Listings" [ref=e20] [cursor=pointer]:
+            - /url: /ebay/index.php?page=listings
+          - link "Offers" [ref=e21] [cursor=pointer]:
+            - /url: /ebay/index.php?page=offers
+          - link "Orders" [ref=e22] [cursor=pointer]:
+            - /url: /ebay/index.php?page=orders
+          - link "Marketing" [ref=e23] [cursor=pointer]:
+            - /url: /ebay/index.php?page=marketing
+          - link "Policies" [ref=e24] [cursor=pointer]:
+            - /url: /ebay/index.php?page=policies
+          - link "Notifications" [ref=e25] [cursor=pointer]:
+            - /url: /ebay/index.php?page=notifications
+          - link "Integrations" [ref=e26] [cursor=pointer]:
+            - /url: /ebay/index.php?page=integrations
+      - generic [ref=e27]:
+        - generic [ref=e28]:
+          - generic [ref=e29]: Store status
+          - generic [ref=e30]: No active store subscription
+          - generic [ref=e31]: Store visibility comes from the live Stores API. If you do not pay for an eBay Store, the console says so directly.
+        - generic [ref=e32]:
+          - generic [ref=e33]: Listings visible
+          - generic [ref=e34]: "0"
+          - generic [ref=e35]: Prefers Trading active listings when they exist, because some seller accounts list there before Inventory API reflects them.
+        - generic [ref=e36]:
+          - generic [ref=e37]: Offers visible
+          - generic [ref=e38]: "0"
+          - generic [ref=e39]: Useful for seeing which SKUs are actually market-ready.
+        - generic [ref=e40]:
+          - generic [ref=e41]: Campaigns running
+          - generic [ref=e42]: "1"
+          - generic [ref=e43]: Marketing data comes from the live Promoted Listings endpoint.
+    - generic [ref=e44]:
+      - generic [ref=e45]:
+        - generic [ref=e46]:
+          - heading "Listings workspace" [level=2] [ref=e47]
+          - generic [ref=e48]: Image-first browsing for your active listings, with create and edit actions kept close to the products.
+        - link "Create listing" [ref=e50] [cursor=pointer]:
+          - /url: /ebay/index.php?page=create-listing
+      - generic [ref=e51]:
+        - generic [ref=e52]:
+          - generic [ref=e53]:
+            - heading "Regular active listings" [level=3] [ref=e54]
+            - generic [ref=e56]: No active listings are available for bulk ending right now.
+            - generic [ref=e58]: No active regular listings were returned.
+            - generic [ref=e60]: Showing the latest 0 listings.
+          - generic [ref=e61]:
+            - heading "Inventory snapshot" [level=3] [ref=e62]
+            - generic [ref=e64]: No inventory items came back from eBay right now. The connection still works, but there are no listing records in this response.
+            - generic [ref=e65]:
+              - heading "Inventory locations" [level=3] [ref=e66]
+              - generic [ref=e68]: No inventory locations were returned for this seller.
+        - generic [ref=e69]:
+          - heading "CJ product research" [level=3] [ref=e70]
+          - generic [ref=e71]:
+            - generic [ref=e72]:
+              - generic [ref=e73]:
+                - generic [ref=e74]:
+                  - text: Search name or SKU
+                  - textbox "Search name or SKU" [ref=e75]: ring
+                - generic [ref=e76]:
+                  - text: Country
+                  - textbox "Country" [ref=e77]:
+                    - /placeholder: US
+                    - text: US
+                - generic [ref=e78]:
+                  - text: Category name
+                  - combobox "Category name" [ref=e79]
+                - generic [ref=e80]:
+                  - text: Direct PID
+                  - textbox "Direct PID" [ref=e81]
+                - generic [ref=e82]:
+                  - text: Products per page
+                  - combobox "Products per page" [ref=e83]:
+                    - option "20" [selected]
+                    - option "40"
+                    - option "60"
+                    - option "100"
+                - generic [ref=e84]:
+                  - text: Sort
+                  - combobox "Sort" [ref=e85]:
+                    - option "Newest first" [selected]
+                    - option "Oldest first"
+              - generic [ref=e86]:
+                - button "Search CJ" [ref=e87]
+                - link "Reset" [ref=e88] [cursor=pointer]:
+                  - /url: /ebay/index.php?page=listings
+            - group [ref=e89]:
+              - generic "CJ category hierarchy" [ref=e90] [cursor=pointer]
+          - generic [ref=e91]:
+            - generic [ref=e92]:
+              - generic [ref=e93]:
+                - button "Select all displayed CJ products" [ref=e94]
+                - button "Clear" [ref=e95]
+                - generic [ref=e96]:
+                  - text: eBay category
+                  - combobox "eBay category" [ref=e97]:
+                    - option "Jewelry & Watches / Fashion Jewelry / Rings [67681]" [selected]
+                    - option "Jewelry & Watches / Fine Jewelry / Rings [261994]"
+                    - option "Jewelry & Watches / Vintage & Antique Jewelry / Rings [262014]"
+                    - option "Jewelry & Watches / Men's Jewelry / Rings [137856]"
+                    - option "Jewelry & Watches / Engagement & Wedding / Engagement Rings [261975]"
+                    - option "Jewelry & Watches / Vintage & Antique Jewelry / Other Vintage & Antique Jewelry [166734]"
+                    - option "Sports Mem, Cards & Fan Shop / Fan Apparel & Souvenirs / Football-NFL [206]"
+                    - option "Clothing, Shoes & Accessories / Women / Women's Accessories / Hair Accessories [45220]"
+                - generic [ref=e98]:
+                  - text: Postal Code
+                  - textbox "Postal Code" [ref=e99]: "10001"
+                - generic [ref=e100]:
+                  - text: Condition
+                  - combobox "Condition" [ref=e101]:
+                    - option "1000 - New with tags" [selected]
+                    - option "1500 - New without tags"
+                    - option "1750 - New with defects"
+                    - option "3000 - Pre-owned"
+                - generic [ref=e102]:
+                  - text: Max eBay qty
+                  - spinbutton "Max eBay qty" [ref=e103]: "5"
+                - button "Bulk List Selected" [ref=e104]
+              - generic [ref=e105]:
+                - generic [ref=e106]: Free shipping is applied automatically. Set price bands so cheaper products can carry a stronger markup.
+                - generic [ref=e108]:
+                  - text: Default markup % for prices above your tiers
+                  - spinbutton "Default markup % for prices above your tiers" [ref=e109]: "55"
+                - generic [ref=e110]:
+                  - generic [ref=e111]:
+                    - generic [ref=e112]:
+                      - text: Apply when base price is <=
+                      - spinbutton "Apply when base price is <=" [ref=e113]: "3"
+                    - generic [ref=e114]:
+                      - text: Markup %
+                      - spinbutton "Markup %" [ref=e115]: "700"
+                    - button "×" [ref=e116]
+                  - generic [ref=e117]:
+                    - generic [ref=e118]:
+                      - text: Apply when base price is <=
+                      - spinbutton "Apply when base price is <=" [ref=e119]: "2"
+                    - generic [ref=e120]:
+                      - text: Markup %
+                      - spinbutton "Markup %" [ref=e121]: "1000"
+                    - button "×" [ref=e122]
+                  - generic [ref=e123]:
+                    - generic [ref=e124]:
+                      - text: Apply when base price is <=
+                      - spinbutton "Apply when base price is <=" [ref=e125]: "5"
+                    - generic [ref=e126]:
+                      - text: Markup %
+                      - spinbutton "Markup %" [ref=e127]: "550"
+                    - button "×" [ref=e128]
+                  - generic [ref=e129]:
+                    - generic [ref=e130]:
+                      - text: Apply when base price is <=
+                      - spinbutton "Apply when base price is <=" [ref=e131]: "10"
+                    - generic [ref=e132]:
+                      - text: Markup %
+                      - spinbutton "Markup %" [ref=e133]: "350"
+                    - button "×" [ref=e134]
+                  - generic [ref=e135]:
+                    - generic [ref=e136]:
+                      - text: Apply when base price is <=
+                      - spinbutton "Apply when base price is <=" [ref=e137]: "15"
+                    - generic [ref=e138]:
+                      - text: Markup %
+                      - spinbutton "Markup %" [ref=e139]: "250"
+                    - button "×" [ref=e140]
+                  - generic [ref=e141]:
+                    - generic [ref=e142]:
+                      - text: Apply when base price is <=
+                      - spinbutton "Apply when base price is <=" [ref=e143]: "20"
+                    - generic [ref=e144]:
+                      - text: Markup %
+                      - spinbutton "Markup %" [ref=e145]: "160"
+                    - button "×" [ref=e146]
+                  - generic [ref=e147]:
+                    - generic [ref=e148]:
+                      - text: Apply when base price is <=
+                      - spinbutton "Apply when base price is <=" [ref=e149]: "30"
+                    - generic [ref=e150]:
+                      - text: Markup %
+                      - spinbutton "Markup %" [ref=e151]: "120"
+                    - button "×" [ref=e152]
+                  - generic [ref=e153]:
+                    - generic [ref=e154]:
+                      - text: Apply when base price is <=
+                      - spinbutton "Apply when base price is <=" [ref=e155]: "60"
+                    - generic [ref=e156]:
+                      - text: Markup %
+                      - spinbutton "Markup %" [ref=e157]: "82.5"
+                    - button "×" [ref=e158]
+                  - generic [ref=e159]:
+                    - generic [ref=e160]:
+                      - text: Apply when base price is <=
+                      - spinbutton "Apply when base price is <=" [ref=e161]: "100"
+                    - generic [ref=e162]:
+                      - text: Markup %
+                      - spinbutton "Markup %" [ref=e163]: "65"
+                    - button "×" [ref=e164]
+                - button "+ Add markup tier" [ref=e166]
+              - generic [ref=e167]:
+                - article [ref=e168]:
+                  - generic [ref=e170]:
+                    - checkbox "Select" [ref=e171]
+                    - text: Select
+                  - link "CJ product image" [ref=e172] [cursor=pointer]:
+                    - /url: /ebay/index.php?page=listings&cj_pid=1379601765888036864&cj_query=ring&cj_country=US&cj_page=1&cj_page_size=20&cj_sort=desc
+                    - img "CJ product image" [ref=e173]
+                  - heading "Vintage Popular Lotus Sn........" [level=3] [ref=e174]
+                  - generic [ref=e175]:
+                    - generic [ref=e176]:
+                      - generic [ref=e177]:
+                        - text: CJ price
+                        - strong [ref=e178]: 0.52 -- 0.94
+                      - generic [ref=e179]:
+                        - text: eBay price
+                        - strong [ref=e180]: $5.72
+                    - generic [ref=e181]:
+                      - generic [ref=e182]:
+                        - text: Override eBay price
+                        - spinbutton "Override eBay price" [ref=e183]: "5.72"
+                      - button "Save" [ref=e184]
+                      - button "Reset" [ref=e185]
+                    - generic [ref=e186]: Using markup
+                  - paragraph [ref=e187]:
+                    - text: "PID: 1379601765888036864"
+                    - text: "Inventory: 6"
+                    - text: "Category:"
+                    - strong [ref=e188]: Jewelry & Watches > Fashion Jewelry > Rings
+                  - link "Open detail" [ref=e189] [cursor=pointer]:
+                    - /url: /ebay/index.php?page=listings&cj_pid=1379601765888036864&cj_query=ring&cj_country=US&cj_page=1&cj_page_size=20&cj_sort=desc
+                - article [ref=e190]:
+                  - generic [ref=e192]:
+                    - checkbox "Select" [ref=e193]
+                    - text: Select
+                  - link "CJ product image" [ref=e194] [cursor=pointer]:
+                    - /url: /ebay/index.php?page=listings&cj_pid=1418846949561470976&cj_query=ring&cj_country=US&cj_page=1&cj_page_size=20&cj_sort=desc
+                    - img "CJ product image" [ref=e195]
+                  - heading "Sterling Silver Jewelry ........" [level=3] [ref=e196]
+                  - generic [ref=e197]:
+                    - generic [ref=e198]:
+                      - generic [ref=e199]:
+                        - text: CJ price
+                        - strong [ref=e200]: 0.97 -- 1.94
+                      - generic [ref=e201]:
+                        - text: eBay price
+                        - strong [ref=e202]: $10.67
+                    - generic [ref=e203]:
+                      - generic [ref=e204]:
+                        - text: Override eBay price
+                        - spinbutton "Override eBay price" [ref=e205]: "10.67"
+                      - button "Save" [ref=e206]
+                      - button "Reset" [ref=e207]
+                    - generic [ref=e208]: Using markup
+                  - paragraph [ref=e209]:
+                    - text: "PID: 1418846949561470976"
+                    - text: "Inventory: 5"
+                    - text: "Category:"
+                    - strong [ref=e210]: Jewelry & Watches > Fashion Jewelry > Rings
+                  - link "Open detail" [ref=e211] [cursor=pointer]:
+                    - /url: /ebay/index.php?page=listings&cj_pid=1418846949561470976&cj_query=ring&cj_country=US&cj_page=1&cj_page_size=20&cj_sort=desc
+                - article [ref=e212]:
+                  - generic [ref=e214]:
+                    - checkbox "Select" [ref=e215]
+                    - text: Select
+                  - link "CJ product image" [ref=e216] [cursor=pointer]:
+                    - /url: /ebay/index.php?page=listings&cj_pid=1768596398326423552&cj_query=ring&cj_country=US&cj_page=1&cj_page_size=20&cj_sort=desc
+                    - img "CJ product image" [ref=e217]
+                  - heading "Ring" [level=3] [ref=e218]
+                  - generic [ref=e219]:
+                    - generic [ref=e220]:
+                      - generic [ref=e221]:
+                        - text: CJ price
+                        - strong [ref=e222]: "1.94"
+                      - generic [ref=e223]:
+                        - text: eBay price
+                        - strong [ref=e224]: $21.34
+                    - generic [ref=e225]:
+                      - generic [ref=e226]:
+                        - text: Override eBay price
+                        - spinbutton "Override eBay price" [ref=e227]: "21.34"
+                      - button "Save" [ref=e228]
+                      - button "Reset" [ref=e229]
+                    - generic [ref=e230]: Using markup
+                  - paragraph [ref=e231]:
+                    - text: "PID: 1768596398326423552"
+                    - text: "Inventory: 134"
+                    - text: "Category:"
+                    - strong [ref=e232]: Jewelry & Watches > Fashion Jewelry > Rings
+                  - link "Open detail" [ref=e233] [cursor=pointer]:
+                    - /url: /ebay/index.php?page=listings&cj_pid=1768596398326423552&cj_query=ring&cj_country=US&cj_page=1&cj_page_size=20&cj_sort=desc
+                - article [ref=e234]:
+                  - generic [ref=e236]:
+                    - checkbox "Select" [ref=e237]
+                    - text: Select
+                  - link "CJ product image" [ref=e238] [cursor=pointer]:
+                    - /url: /ebay/index.php?page=listings&cj_pid=1430081570374553600&cj_query=ring&cj_country=US&cj_page=1&cj_page_size=20&cj_sort=desc
+                    - img "CJ product image" [ref=e239]
+                  - heading "Stainless Steel Ring Ret........" [level=3] [ref=e240]
+                  - generic [ref=e241]:
+                    - generic [ref=e242]:
+                      - generic [ref=e243]:
+                        - text: CJ price
+                        - strong [ref=e244]: 0.64 -- 1.24
+                      - generic [ref=e245]:
+                        - text: eBay price
+                        - strong [ref=e246]: $7.04
+                    - generic [ref=e247]:
+                      - generic [ref=e248]:
+                        - text: Override eBay price
+                        - spinbutton "Override eBay price" [ref=e249]: "7.04"
+                      - button "Save" [ref=e250]
+                      - button "Reset" [ref=e251]
+                    - generic [ref=e252]: Using markup
+                  - paragraph [ref=e253]:
+                    - text: "PID: 1430081570374553600"
+                    - text: "Inventory: 224"
+                    - text: "Category:"
+                    - strong [ref=e254]: Jewelry & Watches > Fashion Jewelry > Rings
+                  - link "Open detail" [ref=e255] [cursor=pointer]:
+                    - /url: /ebay/index.php?page=listings&cj_pid=1430081570374553600&cj_query=ring&cj_country=US&cj_page=1&cj_page_size=20&cj_sort=desc
+                - article [ref=e256]:
+                  - generic [ref=e258]:
+                    - checkbox "Select" [ref=e259]
+                    - text: Select
+                  - link "CJ product image" [ref=e260] [cursor=pointer]:
+                    - /url: /ebay/index.php?page=listings&cj_pid=1902362302659063809&cj_query=ring&cj_country=US&cj_page=1&cj_page_size=20&cj_sort=desc
+                    - img "CJ product image" [ref=e261]
+                  - heading "1Starry Diamond Ring Wed........" [level=3] [ref=e262]
+                  - generic [ref=e263]:
+                    - generic [ref=e264]:
+                      - generic [ref=e265]:
+                        - text: CJ price
+                        - strong [ref=e266]: "39.90"
+                      - generic [ref=e267]:
+                        - text: eBay price
+                        - strong [ref=e268]: $72.82
+                    - generic [ref=e269]:
+                      - generic [ref=e270]:
+                        - text: Override eBay price
+                        - spinbutton "Override eBay price" [ref=e271]: "72.82"
+                      - button "Save" [ref=e272]
+                      - button "Reset" [ref=e273]
+                    - generic [ref=e274]: Using markup
+                  - paragraph [ref=e275]:
+                    - text: "PID: 1902362302659063809"
+                    - text: "Inventory: 99"
+                    - text: "Category:"
+                    - strong [ref=e276]: Jewelry & Watches > Fine Jewelry > 925 Silver Jewelry
+                  - link "Open detail" [ref=e277] [cursor=pointer]:
+                    - /url: /ebay/index.php?page=listings&cj_pid=1902362302659063809&cj_query=ring&cj_country=US&cj_page=1&cj_page_size=20&cj_sort=desc
+                - article [ref=e278]:
+                  - generic [ref=e280]:
+                    - checkbox "Select" [ref=e281]
+                    - text: Select
+                  - link "CJ product image" [ref=e282] [cursor=pointer]:
+                    - /url: /ebay/index.php?page=listings&cj_pid=1902359983327694849&cj_query=ring&cj_country=US&cj_page=1&cj_page_size=20&cj_sort=desc
+                    - img "CJ product image" [ref=e283]
+                  - heading "1Galaxy Diamond Ring Wed........" [level=3] [ref=e284]
+                  - generic [ref=e285]:
+                    - generic [ref=e286]:
+                      - generic [ref=e287]:
+                        - text: CJ price
+                        - strong [ref=e288]: "49.90"
+                      - generic [ref=e289]:
+                        - text: eBay price
+                        - strong [ref=e290]: $91.07
+                    - generic [ref=e291]:
+                      - generic [ref=e292]:
+                        - text: Override eBay price
+                        - spinbutton "Override eBay price" [ref=e293]: "91.07"
+                      - button "Save" [ref=e294]
+                      - button "Reset" [ref=e295]
+                    - generic [ref=e296]: Using markup
+                  - paragraph [ref=e297]:
+                    - text: "PID: 1902359983327694849"
+                    - text: "Inventory: 100"
+                    - text: "Category:"
+                    - strong [ref=e298]: Jewelry & Watches > Fine Jewelry > 925 Silver Jewelry
+                  - link "Open detail" [ref=e299] [cursor=pointer]:
+                    - /url: /ebay/index.php?page=listings&cj_pid=1902359983327694849&cj_query=ring&cj_country=US&cj_page=1&cj_page_size=20&cj_sort=desc
+                - article [ref=e300]:
+                  - generic [ref=e302]:
+                    - checkbox "Select" [ref=e303]
+                    - text: Select
+                  - link "CJ product image" [ref=e304] [cursor=pointer]:
+                    - /url: /ebay/index.php?page=listings&cj_pid=1A9BFFC1-0DEC-4F71-A923-303DB3220184&cj_query=ring&cj_country=US&cj_page=1&cj_page_size=20&cj_sort=desc
+                    - img "CJ product image" [ref=e305]
+                  - heading "Classic Lotus Diamond Ri........" [level=3] [ref=e306]
+                  - generic [ref=e307]:
+                    - generic [ref=e308]:
+                      - generic [ref=e309]:
+                        - text: CJ price
+                        - strong [ref=e310]: 1.50 -- 5.98
+                      - generic [ref=e311]:
+                        - text: eBay price
+                        - strong [ref=e312]: $16.50
+                    - generic [ref=e313]:
+                      - generic [ref=e314]:
+                        - text: Override eBay price
+                        - spinbutton "Override eBay price" [ref=e315]: "16.50"
+                      - button "Save" [ref=e316]
+                      - button "Reset" [ref=e317]
+                    - generic [ref=e318]: Using markup
+                  - paragraph [ref=e319]:
+                    - text: "PID: 1A9BFFC1-0DEC-4F71-A923-303DB3220184"
+                    - text: "Inventory: 5"
+                    - text: "Category:"
+                    - strong [ref=e320]: Jewelry & Watches > Fashion Jewelry > Rings
+                  - link "Open detail" [ref=e321] [cursor=pointer]:
+                    - /url: /ebay/index.php?page=listings&cj_pid=1A9BFFC1-0DEC-4F71-A923-303DB3220184&cj_query=ring&cj_country=US&cj_page=1&cj_page_size=20&cj_sort=desc
+                - article [ref=e322]:
+                  - generic [ref=e324]:
+                    - checkbox "Select" [ref=e325]
+                    - text: Select
+                  - link "CJ product image" [ref=e326] [cursor=pointer]:
+                    - /url: /ebay/index.php?page=listings&cj_pid=2503220058021627800&cj_query=ring&cj_country=US&cj_page=1&cj_page_size=20&cj_sort=desc
+                    - img "CJ product image" [ref=e327]
+                  - heading "Simple Twelve Constellat........" [level=3] [ref=e328]
+                  - generic [ref=e329]:
+                    - generic [ref=e330]:
+                      - generic [ref=e331]:
+                        - text: CJ price
+                        - strong [ref=e332]: "0.48"
+                      - generic [ref=e333]:
+                        - text: eBay price
+                        - strong [ref=e334]: $5.28
+                    - generic [ref=e335]:
+                      - generic [ref=e336]:
+                        - text: Override eBay price
+                        - spinbutton "Override eBay price" [ref=e337]: "5.28"
+                      - button "Save" [ref=e338]
+                      - button "Reset" [ref=e339]
+                    - generic [ref=e340]: Using markup
+                  - paragraph [ref=e341]:
+                    - text: "PID: 2503220058021627800"
+                    - text: "Inventory: 3"
+                    - text: "Category:"
+                    - strong [ref=e342]: Jewelry & Watches > Fashion Jewelry > Rings
+                  - link "Open detail" [ref=e343] [cursor=pointer]:
+                    - /url: /ebay/index.php?page=listings&cj_pid=2503220058021627800&cj_query=ring&cj_country=US&cj_page=1&cj_page_size=20&cj_sort=desc
+                - article [ref=e344]:
+                  - generic [ref=e346]:
+                    - checkbox "Select" [ref=e347]
+                    - text: Select
+                  - link "CJ product image" [ref=e348] [cursor=pointer]:
+                    - /url: /ebay/index.php?page=listings&cj_pid=1901871087733612545&cj_query=ring&cj_country=US&cj_page=1&cj_page_size=20&cj_sort=desc
+                    - img "CJ product image" [ref=e349]
+                  - heading "1Baguette Diamond Ring W........" [level=3] [ref=e350]
+                  - generic [ref=e351]:
+                    - generic [ref=e352]:
+                      - generic [ref=e353]:
+                        - text: CJ price
+                        - strong [ref=e354]: "59.90"
+                      - generic [ref=e355]:
+                        - text: eBay price
+                        - strong [ref=e356]: $109.32
+                    - generic [ref=e357]:
+                      - generic [ref=e358]:
+                        - text: Override eBay price
+                        - spinbutton "Override eBay price" [ref=e359]: "109.32"
+                      - button "Save" [ref=e360]
+                      - button "Reset" [ref=e361]
+                    - generic [ref=e362]: Using markup
+                  - paragraph [ref=e363]:
+                    - text: "PID: 1901871087733612545"
+                    - text: "Inventory: 500"
+                    - text: "Category:"
+                    - strong [ref=e364]: Jewelry & Watches > Fine Jewelry > 925 Silver Jewelry
+                  - link "Open detail" [ref=e365] [cursor=pointer]:
+                    - /url: /ebay/index.php?page=listings&cj_pid=1901871087733612545&cj_query=ring&cj_country=US&cj_page=1&cj_page_size=20&cj_sort=desc
+                - article [ref=e366]:
+                  - generic [ref=e368]:
+                    - checkbox "Select" [ref=e369]
+                    - text: Select
+                  - link "CJ product image" [ref=e370] [cursor=pointer]:
+                    - /url: /ebay/index.php?page=listings&cj_pid=1902359115685580801&cj_query=ring&cj_country=US&cj_page=1&cj_page_size=20&cj_sort=desc
+                    - img "CJ product image" [ref=e371]
+                  - heading "1Crown Diamond Ring Wedd........" [level=3] [ref=e372]
+                  - generic [ref=e373]:
+                    - generic [ref=e374]:
+                      - generic [ref=e375]:
+                        - text: CJ price
+                        - strong [ref=e376]: "39.90"
+                      - generic [ref=e377]:
+                        - text: eBay price
+                        - strong [ref=e378]: $72.82
+                    - generic [ref=e379]:
+                      - generic [ref=e380]:
+                        - text: Override eBay price
+                        - spinbutton "Override eBay price" [ref=e381]: "72.82"
+                      - button "Save" [ref=e382]
+                      - button "Reset" [ref=e383]
+                    - generic [ref=e384]: Using markup
+                  - paragraph [ref=e385]:
+                    - text: "PID: 1902359115685580801"
+                    - text: "Inventory: 100"
+                    - text: "Category:"
+                    - strong [ref=e386]: Jewelry & Watches > Fine Jewelry > 925 Silver Jewelry
+                  - link "Open detail" [ref=e387] [cursor=pointer]:
+                    - /url: /ebay/index.php?page=listings&cj_pid=1902359115685580801&cj_query=ring&cj_country=US&cj_page=1&cj_page_size=20&cj_sort=desc
+                - article [ref=e388]:
+                  - generic [ref=e390]:
+                    - checkbox "Select" [ref=e391]
+                    - text: Select
+                  - link "CJ product image" [ref=e392] [cursor=pointer]:
+                    - /url: /ebay/index.php?page=listings&cj_pid=1901883256466481153&cj_query=ring&cj_country=US&cj_page=1&cj_page_size=20&cj_sort=desc
+                    - img "CJ product image" [ref=e393]
+                  - heading "1Luxury Fashion Diamond ........" [level=3] [ref=e394]
+                  - generic [ref=e395]:
+                    - generic [ref=e396]:
+                      - generic [ref=e397]:
+                        - text: CJ price
+                        - strong [ref=e398]: "46.90"
+                      - generic [ref=e399]:
+                        - text: eBay price
+                        - strong [ref=e400]: $85.59
+                    - generic [ref=e401]:
+                      - generic [ref=e402]:
+                        - text: Override eBay price
+                        - spinbutton "Override eBay price" [ref=e403]: "85.59"
+                      - button "Save" [ref=e404]
+                      - button "Reset" [ref=e405]
+                    - generic [ref=e406]: Using markup
+                  - paragraph [ref=e407]:
+                    - text: "PID: 1901883256466481153"
+                    - text: "Inventory: 50"
+                    - text: "Category:"
+                    - strong [ref=e408]: Jewelry & Watches > Fine Jewelry > 925 Silver Jewelry
+                  - link "Open detail" [ref=e409] [cursor=pointer]:
+                    - /url: /ebay/index.php?page=listings&cj_pid=1901883256466481153&cj_query=ring&cj_country=US&cj_page=1&cj_page_size=20&cj_sort=desc
+                - article [ref=e410]:
+                  - generic [ref=e412]:
+                    - checkbox "Select" [ref=e413]
+                    - text: Select
+                  - link "CJ product image" [ref=e414] [cursor=pointer]:
+                    - /url: /ebay/index.php?page=listings&cj_pid=399B2BB5-14DD-458C-9A82-EF2F3072E592&cj_query=ring&cj_country=US&cj_page=1&cj_page_size=20&cj_sort=desc
+                    - img "CJ product image" [ref=e415]
+                  - heading "Oval smooth ring atmosph........" [level=3] [ref=e416]
+                  - generic [ref=e417]:
+                    - generic [ref=e418]:
+                      - generic [ref=e419]:
+                        - text: CJ price
+                        - strong [ref=e420]: 0.73 -- 1.02
+                      - generic [ref=e421]:
+                        - text: eBay price
+                        - strong [ref=e422]: $8.03
+                    - generic [ref=e423]:
+                      - generic [ref=e424]:
+                        - text: Override eBay price
+                        - spinbutton "Override eBay price" [ref=e425]: "8.03"
+                      - button "Save" [ref=e426]
+                      - button "Reset" [ref=e427]
+                    - generic [ref=e428]: Using markup
+                  - paragraph [ref=e429]:
+                    - text: "PID: 399B2BB5-14DD-458C-9A82-EF2F3072E592"
+                    - text: "Inventory: 9"
+                    - text: "Category:"
+                    - strong [ref=e430]: Jewelry & Watches > Fashion Jewelry > Rings
+                  - link "Open detail" [ref=e431] [cursor=pointer]:
+                    - /url: /ebay/index.php?page=listings&cj_pid=399B2BB5-14DD-458C-9A82-EF2F3072E592&cj_query=ring&cj_country=US&cj_page=1&cj_page_size=20&cj_sort=desc
+                - article [ref=e432]:
+                  - generic [ref=e434]:
+                    - checkbox "Select" [ref=e435]
+                    - text: Select
+                  - link "CJ product image" [ref=e436] [cursor=pointer]:
+                    - /url: /ebay/index.php?page=listings&cj_pid=2407230850201602800&cj_query=ring&cj_country=US&cj_page=1&cj_page_size=20&cj_sort=desc
+                    - img "CJ product image" [ref=e437]
+                  - heading "Design Butterfly Ring Op........" [level=3] [ref=e438]
+                  - generic [ref=e439]:
+                    - generic [ref=e440]:
+                      - generic [ref=e441]:
+                        - text: CJ price
+                        - strong [ref=e442]: 0.60 -- 1.22
+                      - generic [ref=e443]:
+                        - text: eBay price
+                        - strong [ref=e444]: $6.60
+                    - generic [ref=e445]:
+                      - generic [ref=e446]:
+                        - text: Override eBay price
+                        - spinbutton "Override eBay price" [ref=e447]: "6.60"
+                      - button "Save" [ref=e448]
+                      - button "Reset" [ref=e449]
+                    - generic [ref=e450]: Using markup
+                  - paragraph [ref=e451]:
+                    - text: "PID: 2407230850201602800"
+                    - text: "Inventory: 13"
+                    - text: "Category:"
+                    - strong [ref=e452]: Jewelry & Watches > Fashion Jewelry > Rings
+                  - link "Open detail" [ref=e453] [cursor=pointer]:
+                    - /url: /ebay/index.php?page=listings&cj_pid=2407230850201602800&cj_query=ring&cj_country=US&cj_page=1&cj_page_size=20&cj_sort=desc
+                - article [ref=e454]:
+                  - generic [ref=e456]:
+                    - checkbox "Select" [ref=e457]
+                    - text: Select
+                  - link "CJ product image" [ref=e458] [cursor=pointer]:
+                    - /url: /ebay/index.php?page=listings&cj_pid=1902327546953232386&cj_query=ring&cj_country=US&cj_page=1&cj_page_size=20&cj_sort=desc
+                    - img "CJ product image" [ref=e459]
+                  - heading "1Star Ring Diamond Ring ........" [level=3] [ref=e460]
+                  - generic [ref=e461]:
+                    - generic [ref=e462]:
+                      - generic [ref=e463]:
+                        - text: CJ price
+                        - strong [ref=e464]: "49.90"
+                      - generic [ref=e465]:
+                        - text: eBay price
+                        - strong [ref=e466]: $91.07
+                    - generic [ref=e467]:
+                      - generic [ref=e468]:
+                        - text: Override eBay price
+                        - spinbutton "Override eBay price" [ref=e469]: "91.07"
+                      - button "Save" [ref=e470]
+                      - button "Reset" [ref=e471]
+                    - generic [ref=e472]: Using markup
+                  - paragraph [ref=e473]:
+                    - text: "PID: 1902327546953232386"
+                    - text: "Inventory: 100"
+                    - text: "Category:"
+                    - strong [ref=e474]: Jewelry & Watches > Fine Jewelry > 925 Silver Jewelry
+                  - link "Open detail" [ref=e475] [cursor=pointer]:
+                    - /url: /ebay/index.php?page=listings&cj_pid=1902327546953232386&cj_query=ring&cj_country=US&cj_page=1&cj_page_size=20&cj_sort=desc
+                - article [ref=e476]:
+                  - generic [ref=e478]:
+                    - checkbox "Select" [ref=e479]
+                    - text: Select
+                  - link "CJ product image" [ref=e480] [cursor=pointer]:
+                    - /url: /ebay/index.php?page=listings&cj_pid=1724234870894895104&cj_query=ring&cj_country=US&cj_page=1&cj_page_size=20&cj_sort=desc
+                    - img "CJ product image" [ref=e481]
+                  - heading "Solana Gold Ring" [level=3] [ref=e482]
+                  - generic [ref=e483]:
+                    - generic [ref=e484]:
+                      - generic [ref=e485]:
+                        - text: CJ price
+                        - strong [ref=e486]: "2.72"
+                      - generic [ref=e487]:
+                        - text: eBay price
+                        - strong [ref=e488]: $21.76
+                    - generic [ref=e489]:
+                      - generic [ref=e490]:
+                        - text: Override eBay price
+                        - spinbutton "Override eBay price" [ref=e491]: "21.76"
+                      - button "Save" [ref=e492]
+                      - button "Reset" [ref=e493]
+                    - generic [ref=e494]: Using markup
+                  - paragraph [ref=e495]:
+                    - text: "PID: 1724234870894895104"
+                    - text: "Inventory: 3"
+                    - text: "Category:"
+                    - strong [ref=e496]: Jewelry & Watches > Fashion Jewelry > Rings
+                  - link "Open detail" [ref=e497] [cursor=pointer]:
+                    - /url: /ebay/index.php?page=listings&cj_pid=1724234870894895104&cj_query=ring&cj_country=US&cj_page=1&cj_page_size=20&cj_sort=desc
+                - article [ref=e498]:
+                  - generic [ref=e500]:
+                    - checkbox "Select" [ref=e501]
+                    - text: Select
+                  - link "CJ product image" [ref=e502] [cursor=pointer]:
+                    - /url: /ebay/index.php?page=listings&cj_pid=4A14FE2B-FB83-41B4-8AA9-4B1B58CC0F7F&cj_query=ring&cj_country=US&cj_page=1&cj_page_size=20&cj_sort=desc
+                    - img "CJ product image" [ref=e503]
+                  - heading "Blue topaz ring" [level=3] [ref=e504]
+                  - generic [ref=e505]:
+                    - generic [ref=e506]:
+                      - generic [ref=e507]:
+                        - text: CJ price
+                        - strong [ref=e508]: 1.17 -- 2.00
+                      - generic [ref=e509]:
+                        - text: eBay price
+                        - strong [ref=e510]: $12.87
+                    - generic [ref=e511]:
+                      - generic [ref=e512]:
+                        - text: Override eBay price
+                        - spinbutton "Override eBay price" [ref=e513]: "12.87"
+                      - button "Save" [ref=e514]
+                      - button "Reset" [ref=e515]
+                    - generic [ref=e516]: Using markup
+                  - paragraph [ref=e517]:
+                    - text: "PID: 4A14FE2B-FB83-41B4-8AA9-4B1B58CC0F7F"
+                    - text: "Inventory: 49"
+                    - text: "Category:"
+                    - strong [ref=e518]: Jewelry & Watches > Fashion Jewelry > Rings
+                  - link "Open detail" [ref=e519] [cursor=pointer]:
+                    - /url: /ebay/index.php?page=listings&cj_pid=4A14FE2B-FB83-41B4-8AA9-4B1B58CC0F7F&cj_query=ring&cj_country=US&cj_page=1&cj_page_size=20&cj_sort=desc
+                - article [ref=e520]:
+                  - generic [ref=e522]:
+                    - checkbox "Select" [ref=e523]
+                    - text: Select
+                  - link "CJ product image" [ref=e524] [cursor=pointer]:
+                    - /url: /ebay/index.php?page=listings&cj_pid=FFE74354-8F8C-41C2-B9B7-F0C78C4D74C4&cj_query=ring&cj_country=US&cj_page=1&cj_page_size=20&cj_sort=desc
+                    - img "CJ product image" [ref=e525]
+                  - heading "Lovers Purple Ring" [level=3] [ref=e526]
+                  - generic [ref=e527]:
+                    - generic [ref=e528]:
+                      - generic [ref=e529]:
+                        - text: CJ price
+                        - strong [ref=e530]: 0.83 -- 2.10
+                      - generic [ref=e531]:
+                        - text: eBay price
+                        - strong [ref=e532]: $9.13
+                    - generic [ref=e533]:
+                      - generic [ref=e534]:
+                        - text: Override eBay price
+                        - spinbutton "Override eBay price" [ref=e535]: "9.13"
+                      - button "Save" [ref=e536]
+                      - button "Reset" [ref=e537]
+                    - generic [ref=e538]: Using markup
+                  - paragraph [ref=e539]:
+                    - text: "PID: FFE74354-8F8C-41C2-B9B7-F0C78C4D74C4"
+                    - text: "Inventory: 92"
+                    - text: "Category:"
+                    - strong [ref=e540]: Jewelry & Watches > Fashion Jewelry > Rings
+                  - link "Open detail" [ref=e541] [cursor=pointer]:
+                    - /url: /ebay/index.php?page=listings&cj_pid=FFE74354-8F8C-41C2-B9B7-F0C78C4D74C4&cj_query=ring&cj_country=US&cj_page=1&cj_page_size=20&cj_sort=desc
+                - article [ref=e542]:
+                  - generic [ref=e544]:
+                    - checkbox "Select" [ref=e545]
+                    - text: Select
+                  - link "CJ product image" [ref=e546] [cursor=pointer]:
+                    - /url: /ebay/index.php?page=listings&cj_pid=CD626882-DE39-487A-8BDA-4196D056DB5B&cj_query=ring&cj_country=US&cj_page=1&cj_page_size=20&cj_sort=desc
+                    - img "CJ product image" [ref=e547]
+                  - heading "Personalized nail ring" [level=3] [ref=e548]
+                  - generic [ref=e549]:
+                    - generic [ref=e550]:
+                      - generic [ref=e551]:
+                        - text: CJ price
+                        - strong [ref=e552]: "2.87"
+                      - generic [ref=e553]:
+                        - text: eBay price
+                        - strong [ref=e554]: $22.96
+                    - generic [ref=e555]:
+                      - generic [ref=e556]:
+                        - text: Override eBay price
+                        - spinbutton "Override eBay price" [ref=e557]: "22.96"
+                      - button "Save" [ref=e558]
+                      - button "Reset" [ref=e559]
+                    - generic [ref=e560]: Using markup
+                  - paragraph [ref=e561]:
+                    - text: "PID: CD626882-DE39-487A-8BDA-4196D056DB5B"
+                    - text: "Inventory: 2"
+                    - text: "Category:"
+                    - strong [ref=e562]: Jewelry & Watches > Fashion Jewelry > Rings
+                  - link "Open detail" [ref=e563] [cursor=pointer]:
+                    - /url: /ebay/index.php?page=listings&cj_pid=CD626882-DE39-487A-8BDA-4196D056DB5B&cj_query=ring&cj_country=US&cj_page=1&cj_page_size=20&cj_sort=desc
+                - article [ref=e564]:
+                  - generic [ref=e566]:
+                    - checkbox "Select" [ref=e567]
+                    - text: Select
+                  - link "CJ product image" [ref=e568] [cursor=pointer]:
+                    - /url: /ebay/index.php?page=listings&cj_pid=7FE3B203-AF10-4812-A820-E104F0208753&cj_query=ring&cj_country=US&cj_page=1&cj_page_size=20&cj_sort=desc
+                    - img "CJ product image" [ref=e569]
+                  - heading "Hollow love ring" [level=3] [ref=e570]
+                  - generic [ref=e571]:
+                    - generic [ref=e572]:
+                      - generic [ref=e573]:
+                        - text: CJ price
+                        - strong [ref=e574]: "0.53"
+                      - generic [ref=e575]:
+                        - text: eBay price
+                        - strong [ref=e576]: $5.83
+                    - generic [ref=e577]:
+                      - generic [ref=e578]:
+                        - text: Override eBay price
+                        - spinbutton "Override eBay price" [ref=e579]: "5.83"
+                      - button "Save" [ref=e580]
+                      - button "Reset" [ref=e581]
+                    - generic [ref=e582]: Using markup
+                  - paragraph [ref=e583]:
+                    - text: "PID: 7FE3B203-AF10-4812-A820-E104F0208753"
+                    - text: "Inventory: 2"
+                    - text: "Category:"
+                    - strong [ref=e584]: Jewelry & Watches > Fashion Jewelry > Rings
+                  - link "Open detail" [ref=e585] [cursor=pointer]:
+                    - /url: /ebay/index.php?page=listings&cj_pid=7FE3B203-AF10-4812-A820-E104F0208753&cj_query=ring&cj_country=US&cj_page=1&cj_page_size=20&cj_sort=desc
+                - article [ref=e586]:
+                  - generic [ref=e588]:
+                    - checkbox "Select" [ref=e589]
+                    - text: Select
+                  - link "CJ product image" [ref=e590] [cursor=pointer]:
+                    - /url: /ebay/index.php?page=listings&cj_pid=99004A1B-751F-420B-9754-7C2FD5E62B15&cj_query=ring&cj_country=US&cj_page=1&cj_page_size=20&cj_sort=desc
+                    - img "CJ product image" [ref=e591]
+                  - heading "Zodiac Sign Ring" [level=3] [ref=e592]
+                  - generic [ref=e593]:
+                    - generic [ref=e594]:
+                      - generic [ref=e595]:
+                        - text: CJ price
+                        - strong [ref=e596]: "8.29"
+                      - generic [ref=e597]:
+                        - text: eBay price
+                        - strong [ref=e598]: $37.30
+                    - generic [ref=e599]:
+                      - generic [ref=e600]:
+                        - text: Override eBay price
+                        - spinbutton "Override eBay price" [ref=e601]: "37.30"
+                      - button "Save" [ref=e602]
+                      - button "Reset" [ref=e603]
+                    - generic [ref=e604]: Using markup
+                  - paragraph [ref=e605]:
+                    - text: "PID: 99004A1B-751F-420B-9754-7C2FD5E62B15"
+                    - text: "Inventory: 23"
+                    - text: "Category:"
+                    - strong [ref=e606]: Jewelry & Watches > Fashion Jewelry > Rings
+                  - link "Open detail" [ref=e607] [cursor=pointer]:
+                    - /url: /ebay/index.php?page=listings&cj_pid=99004A1B-751F-420B-9754-7C2FD5E62B15&cj_query=ring&cj_country=US&cj_page=1&cj_page_size=20&cj_sort=desc
+            - generic [ref=e608]:
+              - generic [ref=e609]: Page 1 of 14 (263 results)
+              - link "1" [ref=e610] [cursor=pointer]:
+                - /url: /ebay/index.php?page=listings&cj_query=ring&cj_country=US&cj_page=1&cj_page_size=20&cj_sort=desc
+              - link "2" [ref=e611] [cursor=pointer]:
+                - /url: /ebay/index.php?page=listings&cj_query=ring&cj_country=US&cj_page=2&cj_page_size=20&cj_sort=desc
+              - link "3" [ref=e612] [cursor=pointer]:
+                - /url: /ebay/index.php?page=listings&cj_query=ring&cj_country=US&cj_page=3&cj_page_size=20&cj_sort=desc
+              - generic [ref=e613]: ...
+              - link "14" [ref=e614] [cursor=pointer]:
+                - /url: /ebay/index.php?page=listings&cj_query=ring&cj_country=US&cj_page=14&cj_page_size=20&cj_sort=desc
+              - link "Next" [ref=e615] [cursor=pointer]:
+                - /url: /ebay/index.php?page=listings&cj_query=ring&cj_country=US&cj_page=2&cj_page_size=20&cj_sort=desc
+        - generic [ref=e616]:
+          - generic [ref=e617]:
+            - heading "Imported CJ listing maps" [level=3] [ref=e618]
+            - generic [ref=e619]:
+              - generic [ref=e620]:
+                - generic [ref=e621]:
+                  - generic [ref=e622]: Inventory sync
+                  - generic [ref=e623]: Updates mapped eBay listing quantities from CJ product, variant, and SKU inventory endpoints.
+                - generic [ref=e624]:
+                  - text: Country
+                  - textbox "Country" [ref=e625]: US
+                - generic [ref=e626]:
+                  - text: Max mappings
+                  - spinbutton "Max mappings" [ref=e627]: "250"
+                - generic [ref=e628]:
+                  - text: Max eBay qty
+                  - spinbutton "Max eBay qty" [ref=e629]: "5"
+                - button "Bulk sync inventory" [ref=e630]
+              - generic [ref=e631]:
+                - generic [ref=e632]:
+                  - generic [ref=e633]: Manual inventory override
+                  - generic [ref=e634]: Paste one update per line as eBay item ID | SKU | quantity. Leave SKU blank for single-SKU listings.
+                - textbox "336565186527|CJBHNSNS11458-Red-40|2 336565186528||0" [ref=e635]:
+                  - /placeholder: "336565186527|CJBHNSNS11458-Red-40|2\n336565186528||0"
+                - button "Apply manual bulk update" [ref=e636]
+              - generic [ref=e637]:
+                - generic [ref=e638]:
+                  - generic [ref=e639]: Low inventory watch
+                  - generic [ref=e640]: Flags mapped CJ variants at or below 2 units.
+                - generic [ref=e641]: No mapped variant is at the low-stock threshold right now.
+              - table [ref=e643]:
+                - rowgroup [ref=e644]:
+                  - row "eBay item CJ product Variants Saved" [ref=e645]:
+                    - columnheader "eBay item" [ref=e646]
+                    - columnheader "CJ product" [ref=e647]
+                    - columnheader "Variants" [ref=e648]
+                    - columnheader "Saved" [ref=e649]
+                - rowgroup [ref=e650]:
+                  - row "336565186527 Men's Pierce Proof Air Labor Shoes 2406110341421620700 6 2026-05-02 23:31:37" [ref=e651]:
+                    - cell "336565186527 Men's Pierce Proof Air Labor Shoes" [ref=e652]:
+                      - strong [ref=e653]: "336565186527"
+                      - generic [ref=e654]: Men's Pierce Proof Air Labor Shoes
+                    - cell "2406110341421620700" [ref=e655]
+                    - cell "6" [ref=e656]
+                    - cell "2026-05-02 23:31:37" [ref=e657]
+                  - row "336565185625 Outdoor Hiking Shoes Men's Casual Hiking Shoes 1397461393799778304 3 2026-05-02 23:31:11" [ref=e658]:
+                    - cell "336565185625 Outdoor Hiking Shoes Men's Casual Hiking Shoes" [ref=e659]:
+                      - strong [ref=e660]: "336565185625"
+                      - generic [ref=e661]: Outdoor Hiking Shoes Men's Casual Hiking Shoes
+                    - cell "1397461393799778304" [ref=e662]
+                    - cell "3" [ref=e663]
+                    - cell "2026-05-02 23:31:11" [ref=e664]
+                  - row "336565185227 Men's Shoes Off-road Running Shoes Solomon Travel Hiking Shoes Hiking Boots 2406200256091606300 17 2026-05-02 23:31:00" [ref=e665]:
+                    - cell "336565185227 Men's Shoes Off-road Running Shoes Solomon Travel Hiking Shoes Hiking Boots" [ref=e666]:
+                      - strong [ref=e667]: "336565185227"
+                      - generic [ref=e668]: Men's Shoes Off-road Running Shoes Solomon Travel Hiking Shoes Hiking Boots
+                    - cell "2406200256091606300" [ref=e669]
+                    - cell "17" [ref=e670]
+                    - cell "2026-05-02 23:31:00" [ref=e671]
+                  - row "336565185007 Fashion Warm Cotton Slippers For Women Leisure Thick Bottom Non-slip Plus-velvet House Shoes Winter Bedroom Floor Suede Slipper 1836580388274589696 8 2026-05-02 23:30:55" [ref=e672]:
+                    - cell "336565185007 Fashion Warm Cotton Slippers For Women Leisure Thick Bottom Non-slip Plus-velvet House Shoes Winter Bedroom Floor Suede Slipper" [ref=e673]:
+                      - strong [ref=e674]: "336565185007"
+                      - generic [ref=e675]: Fashion Warm Cotton Slippers For Women Leisure Thick Bottom Non-slip Plus-velvet House Shoes Winter Bedroom Floor Suede Slipper
+                    - cell "1836580388274589696" [ref=e676]
+                    - cell "8" [ref=e677]
+                    - cell "2026-05-02 23:30:55" [ref=e678]
+                  - row "336565184762 Cute Cartoon Dog Slippers Summer Solid Color Non-slip Rhombus Bathroom Slipper Indoor House Shoes For Men Women Couples 1792909963233742848 18 2026-05-02 23:30:49" [ref=e679]:
+                    - cell "336565184762 Cute Cartoon Dog Slippers Summer Solid Color Non-slip Rhombus Bathroom Slipper Indoor House Shoes For Men Women Couples" [ref=e680]:
+                      - strong [ref=e681]: "336565184762"
+                      - generic [ref=e682]: Cute Cartoon Dog Slippers Summer Solid Color Non-slip Rhombus Bathroom Slipper Indoor House Shoes For Men Women Couples
+                    - cell "1792909963233742848" [ref=e683]
+                    - cell "18" [ref=e684]
+                    - cell "2026-05-02 23:30:49" [ref=e685]
+                  - row "336565184557 Fashion V-cut Plush Ankle Boots Winter Plus Velvet Flat Snow Boot Casual Warm Solid Suede Cotton Shoes For Women 1856928179077140480 28 2026-05-02 23:30:43" [ref=e686]:
+                    - cell "336565184557 Fashion V-cut Plush Ankle Boots Winter Plus Velvet Flat Snow Boot Casual Warm Solid Suede Cotton Shoes For Women" [ref=e687]:
+                      - strong [ref=e688]: "336565184557"
+                      - generic [ref=e689]: Fashion V-cut Plush Ankle Boots Winter Plus Velvet Flat Snow Boot Casual Warm Solid Suede Cotton Shoes For Women
+                    - cell "1856928179077140480" [ref=e690]
+                    - cell "28" [ref=e691]
+                    - cell "2026-05-02 23:30:43" [ref=e692]
+                  - row "336565184318 Women's Random Print Side Lace-Up Elastic Sport Shoes, Comfortable Slip-On Sneakers For Women, Casual Daily Wear Footwear 1981293493136293890 3 2026-05-02 23:30:37" [ref=e693]:
+                    - cell "336565184318 Women's Random Print Side Lace-Up Elastic Sport Shoes, Comfortable Slip-On Sneakers For Women, Casual Daily Wear Footwear" [ref=e694]:
+                      - strong [ref=e695]: "336565184318"
+                      - generic [ref=e696]: Women's Random Print Side Lace-Up Elastic Sport Shoes, Comfortable Slip-On Sneakers For Women, Casual Daily Wear Footwear
+                    - cell "1981293493136293890" [ref=e697]
+                    - cell "3" [ref=e698]
+                    - cell "2026-05-02 23:30:37" [ref=e699]
+                  - row "336565184120 Winter Fleece Boots With Side Zipper Design Fashion Simple Non-slip Ankle Boots For Women Warm Pu Leather Shoes 1856934920217055232 6 2026-05-02 23:30:31" [ref=e700]:
+                    - cell "336565184120 Winter Fleece Boots With Side Zipper Design Fashion Simple Non-slip Ankle Boots For Women Warm Pu Leather Shoes" [ref=e701]:
+                      - strong [ref=e702]: "336565184120"
+                      - generic [ref=e703]: Winter Fleece Boots With Side Zipper Design Fashion Simple Non-slip Ankle Boots For Women Warm Pu Leather Shoes
+                    - cell "1856934920217055232" [ref=e704]
+                    - cell "6" [ref=e705]
+                    - cell "2026-05-02 23:30:31" [ref=e706]
+          - generic [ref=e707]:
+            - heading "CJ sync preview" [level=3] [ref=e708]
+            - generic [ref=e709]:
+              - generic [ref=e710]:
+                - generic [ref=e711]:
+                  - generic [ref=e712]: CJ order automation
+                  - generic [ref=e713]: Push paid eBay orders into CJ, pull CJ status, and send CJ tracking back to eBay.
+                - generic [ref=e714]:
+                  - button "Two-way order sync" [ref=e716]
+                  - button "Push eBay to CJ" [ref=e718]
+                  - button "Pull CJ status" [ref=e720]
+                  - button "Push tracking to eBay" [ref=e722]
+                - generic [ref=e723]:
+                  - generic [ref=e724]:
+                    - text: CJ webhook URL
+                    - textbox "CJ webhook URL" [ref=e725]: https://23d2-172-56-74-76.ngrok-free.app/ebay/cj-webhook.php
+                  - button "Enable CJ webhooks" [ref=e726]
+              - table [ref=e728]:
+                - rowgroup [ref=e729]:
+                  - row "eBay / CJ CJ status Logistics Tracking Updated" [ref=e730]:
+                    - columnheader "eBay / CJ" [ref=e731]
+                    - columnheader "CJ status" [ref=e732]
+                    - columnheader "Logistics" [ref=e733]
+                    - columnheader "Tracking" [ref=e734]
+                    - columnheader "Updated" [ref=e735]
+                - rowgroup [ref=e736]:
+                  - row "CJ SD26022605462106467001 TRASH usps Pending 2026-05-03 16:19:57" [ref=e737]:
+                    - cell "CJ SD26022605462106467001" [ref=e738]:
+                      - strong
+                      - generic [ref=e739]: CJ SD26022605462106467001
+                    - cell "TRASH" [ref=e740]
+                    - cell "usps" [ref=e741]
+                    - cell "Pending" [ref=e742]
+                    - cell "2026-05-03 16:19:57" [ref=e743]
+                  - row "CJ SD26022506253606687001 TRASH UPS wig Pending 2026-05-03 16:19:57" [ref=e744]:
+                    - cell "CJ SD26022506253606687001" [ref=e745]:
+                      - strong
+                      - generic [ref=e746]: CJ SD26022506253606687001
+                    - cell "TRASH" [ref=e747]
+                    - cell "UPS wig" [ref=e748]
+                    - cell "Pending" [ref=e749]
+                    - cell "2026-05-03 16:19:57" [ref=e750]
+                  - row "CJ SD26022420413406623001 TRASH uniuni wm Pending 2026-05-03 16:19:57" [ref=e751]:
+                    - cell "CJ SD26022420413406623001" [ref=e752]:
+                      - strong
+                      - generic [ref=e753]: CJ SD26022420413406623001
+                    - cell "TRASH" [ref=e754]
+                    - cell "uniuni wm" [ref=e755]
+                    - cell "Pending" [ref=e756]
+                    - cell "2026-05-03 16:19:57" [ref=e757]
+                  - row "CJ SD26022111365106592001 TRASH Pending 2026-05-03 16:19:57" [ref=e758]:
+                    - cell "CJ SD26022111365106592001" [ref=e759]:
+                      - strong
+                      - generic [ref=e760]: CJ SD26022111365106592001
+                    - cell "TRASH" [ref=e761]
+                    - cell [ref=e762]
+                    - cell "Pending" [ref=e763]
+                    - cell "2026-05-03 16:19:57" [ref=e764]
+                  - row "CJ SD25060904045706534001 UNPAID USPS Pending 2026-05-03 16:19:57" [ref=e765]:
+                    - cell "CJ SD25060904045706534001" [ref=e766]:
+                      - strong
+                      - generic [ref=e767]: CJ SD25060904045706534001
+                    - cell "UNPAID" [ref=e768]
+                    - cell "USPS" [ref=e769]
+                    - cell "Pending" [ref=e770]
+                    - cell "2026-05-03 16:19:57" [ref=e771]
+                  - row "CJ DP2605031250550658300 CREATED Pending 2026-05-03 16:19:57" [ref=e772]:
+                    - cell "CJ DP2605031250550658300" [ref=e773]:
+                      - strong
+                      - generic [ref=e774]: CJ DP2605031250550658300
+                    - cell "CREATED" [ref=e775]
+                    - cell [ref=e776]
+                    - cell "Pending" [ref=e777]
+                    - cell "2026-05-03 16:19:57" [ref=e778]
+                  - row "CJ DP2603110454190991000 TRASH TikTok-US Pending 2026-05-03 16:19:57" [ref=e779]:
+                    - cell "CJ DP2603110454190991000" [ref=e780]:
+                      - strong
+                      - generic [ref=e781]: CJ DP2603110454190991000
+                    - cell "TRASH" [ref=e782]
+                    - cell "TikTok-US" [ref=e783]
+                    - cell "Pending" [ref=e784]
+                    - cell "2026-05-03 16:19:57" [ref=e785]
+                  - row "CJ DP2603010420570973000 DELIVERED TikTok-US 9234690393549004648941 2026-05-03 16:19:57" [ref=e786]:
+                    - cell "CJ DP2603010420570973000" [ref=e787]:
+                      - strong
+                      - generic [ref=e788]: CJ DP2603010420570973000
+                    - cell "DELIVERED" [ref=e789]
+                    - cell "TikTok-US" [ref=e790]
+                    - cell "9234690393549004648941" [ref=e791]
+                    - cell "2026-05-03 16:19:57" [ref=e792]
+                  - row "CJ DP2602260548381007700 DELIVERED TikTok-US 9234690393549004576879 2026-05-03 16:19:57" [ref=e793]:
+                    - cell "CJ DP2602260548381007700" [ref=e794]:
+                      - strong
+                      - generic [ref=e795]: CJ DP2602260548381007700
+                    - cell "DELIVERED" [ref=e796]
+                    - cell "TikTok-US" [ref=e797]
+                    - cell "9234690393549004576879" [ref=e798]
+                    - cell "2026-05-03 16:19:57" [ref=e799]
+                  - row "CJ DP2602182045211006200 TRASH TikTok-US Pending 2026-05-03 16:19:57" [ref=e800]:
+                    - cell "CJ DP2602182045211006200" [ref=e801]:
+                      - strong
+                      - generic [ref=e802]: CJ DP2602182045211006200
+                    - cell "TRASH" [ref=e803]
+                    - cell "TikTok-US" [ref=e804]
+                    - cell "Pending" [ref=e805]
+                    - cell "2026-05-03 16:19:57" [ref=e806]
+                  - row "CJ SD26022605461806505001 TRASH UPS wig Pending 2026-05-03 16:19:57" [ref=e807]:
+                    - cell "CJ SD26022605461806505001" [ref=e808]:
+                      - strong
+                      - generic [ref=e809]: CJ SD26022605461806505001
+                    - cell "TRASH" [ref=e810]
+                    - cell "UPS wig" [ref=e811]
+                    - cell "Pending" [ref=e812]
+                    - cell "2026-05-03 16:19:57" [ref=e813]
+                  - row "CJ SD26022506254006479001 TRASH usps Pending 2026-05-03 16:19:57" [ref=e814]:
+                    - cell "CJ SD26022506254006479001" [ref=e815]:
+                      - strong
+                      - generic [ref=e816]: CJ SD26022506254006479001
+                    - cell "TRASH" [ref=e817]
+                    - cell "usps" [ref=e818]
+                    - cell "Pending" [ref=e819]
+                    - cell "2026-05-03 16:19:57" [ref=e820]
+              - generic [ref=e821]: No recent CJ orders are visible right now.
+  - generic:
+    - generic:
+      - generic:
+        - heading [level=3]: Working
+      - generic: Your request is being sent to eBay and CJ.
+      - generic:
+        - generic: Preparing request...
+        - strong: 0%
