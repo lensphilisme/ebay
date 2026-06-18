@@ -1,91 +1,87 @@
-# eBay API Starter (PHP)
+# CJ to eBay Family Automation
 
-Production-ready starter for:
-- eBay marketplace account deletion webhook verification (GET challenge)
-- eBay webhook acknowledgment + event logging (POST)
-- eBay Notification API smoke test endpoint
-- eBay OAuth dashboard with full Authorization Code scope set
+Private TypeScript/Expo automation console for moving CJ Dropshipping products into eBay listing drafts, pricing them safely, and recommending listing optimizations from real marketplace signals.
 
-## Project Structure
+## Why There Is Still a Server
 
-- `index.php` main router
-- `ebay.php` compatibility entrypoint for direct webhook path
-- `src/Controllers` request handlers (MVC controller layer)
-- `src/Services` API/hash business logic
-- `src/Repositories` persistence layer (SQLite)
-- `src/Services/EbayOAuthService.php` OAuth URL + token exchange
-- `src/Controllers/EbayDashboardController.php` management dashboard UI
-- `database/schema.sql` SQL schema file
-- `scripts/smoke_test.php` CLI smoke test script
+The browser should never receive eBay client secrets, refresh tokens, CJ tokens, or webhook credentials. This project keeps those in `.env` and exposes only safe status flags and automation actions through the TypeScript server.
 
-## Setup
+After a web export, the same TypeScript server can serve the frontend and API from one URL.
 
-1. Copy `.env.example` to `.env`
-2. Fill values in `.env`:
-   - `EBAY_CLIENT_SECRET`
-   - `EBAY_RUNAME` (your Production RuName from eBay app settings)
-   - `APP_BASE_URL` (your public base URL used for callback path)
-   - `EBAY_APP_TOKEN`
-   - `EBAY_WEBHOOK_ENDPOINT` (exact URL used in eBay portal)
-3. Make sure Apache/WAMP serves this folder.
+## Commands
 
-## Webhook URL
+Install:
 
-Use:
+```bash
+npm install
+```
 
-`https://<your-domain-or-ngrok>/ebay/ebay.php`
+Development UI:
 
-This endpoint supports:
-- `GET ?challenge_code=...` -> returns `challengeResponse`
-- `POST` -> stores payload in SQLite and returns acknowledgment JSON
+```bash
+npm run web
+```
 
-## Routes
+Expo Go on phone:
 
-- `GET /ebay/ebay.php`
-- `POST /ebay/ebay.php`
-- `GET /ebay/api_subscriptions.php` (tests Notification subscriptions API using `EBAY_APP_TOKEN`)
-- `GET /ebay/api_action.php?name=<action>&token_source=user|app` (seller action cards JSON)
-- `GET /ebay/dashboard.php` (OAuth + management dashboard)
-- `GET /ebay/oauth_start.php` (redirects to eBay consent)
-- `GET /ebay/oauth_callback.php` (Authorization Code callback handler)
+```bash
+npm run phone
+```
 
-## Quick Tests
+API/server:
 
-Challenge check:
+```bash
+npm run api
+```
 
-`https://<host>/ebay/ebay.php?challenge_code=123`
+One URL production-style run:
 
-Subscription API check:
+```bash
+npm run build:web
+npm run start
+```
 
-`https://<host>/ebay/api_subscriptions.php`
+Then open:
 
-Dashboard:
+```text
+http://localhost:8787
+```
 
-`https://<host>/ebay/dashboard.php`
+## Current API Routes
 
-Seller action test:
+- `GET /api/health`
+- `GET /api/settings/status`
+- `GET /api/integrations/health`
+- `GET /api/ebay/oauth/start`
+- `GET /api/cj/categories`
+- `GET /api/cj/warehouses`
+- `POST /api/cj/search`
+- `POST /api/cj/freight`
+- `POST /api/ebay/market-research`
+- `POST /api/drafts/build`
+- `POST /api/optimizer/recommend`
+- `GET /api/rules`
+- `GET /api/logs`
 
-`https://<host>/ebay/api_action.php?name=orders&token_source=user`
+## Environment
 
-Available actions:
-- `inventory_items`
-- `offers`
-- `orders`
-- `finances_transactions`
-- `account_privileges`
-- `fulfillment_policies`
-- `payment_policies`
-- `return_policies`
-- `marketing_campaigns`
-- `seller_stores`
-- `notification_subscriptions`
+Copy `.env.example` to `.env`, then fill eBay and CJ credentials. The Settings screen reads only safe true/false status from the server.
 
-CLI smoke test:
+## Strategy
 
-`php scripts/smoke_test.php`
+The optimizer does not blindly “end after X days.” It evaluates listing age together with views, clicks, CTR, sales, CJ stock, CJ cost changes, and competitor price movement.
 
-## Security Notes
+Examples:
 
-- Keep `.env` out of git.
-- Rotate credentials if shared publicly.
-- Move from ngrok to a stable HTTPS domain for production webhooks.
+- Low views after several days: rewrite title, fill item specifics, validate category.
+- Views with low clicks: change first image and title hook.
+- Clicks with no sales: improve description, trust details, and test price above break-even.
+- No sales after 30 days: full creative refresh.
+- Poor exposure after 45 days: research again, change angle/category, or end.
+- Fast early sales: raise price carefully and monitor conversion.
+
+## Current Real-Data Status
+
+- CJ credentials are read from `.env` and category/warehouse API calls work.
+- eBay credentials are read from `.env`; refresh-token auth is used before stale access tokens.
+- The optimizer scans eBay Inventory API listings first, then requests eBay Analytics traffic for listing IDs. If no REST Inventory listings exist yet, it returns a clear warning instead of asking you to type fake data.

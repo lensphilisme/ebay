@@ -1,0 +1,523 @@
+You are a senior full-stack AI automation engineer. REBuild a private family-use automation system that connects CJ Dropshipping products to eBay listings using these repositories as the technical foundation: add a settings for the env credentials 
+use typescript/expo instead of php
+1. Clone eBay MCP repository at @[github:https%3A%2F%2Fgithub.com%2Fyosefhayim%2Febay-mcp:GitHub Sync - yosefhayim/ebay-mcp]  
+@[github:https%3A%2F%2Fgithub.com%2Fyosefhayim%2Febay-mcp:GitHub Sync - yosefhayim/ebay-mcp] 
+Important eBay files to inspect and reuse:
+ebay api doc can found for more research here https://developer.ebay.com/develop/guides-v2/using-ebay-restful-apis#response-components
+* src/api/client.ts
+* src/utils/http.ts
+* src/api/index.ts
+* src/mcp/runtime.ts
+* src/tools/registry.ts
+* src/tools/definitions/index.ts
+* src/auth/oauth.ts
+* src/server-http.ts
+* src/index.ts
+* package.json
+
+2. Clone CJ Dropshipping MCP repository at 
+    @[github:https%3A%2F%2Fgithub.com%2Flensphilisme%2Fapi-mcp:GitHub Sync - lensphilisme/api-mcp] @[github:https%3A%2F%2Fgithub.com%2Flensphilisme%2Fapi-mcp:GitHub Sync - lensphilisme/api-mcp] 
+
+Important CJ files to inspect and reuse if not clone but please clone instead
+
+* src/mcp-server/index.ts
+* src/api-client/http-client.ts
+* src/api-client/endpoints.ts
+* src/mcp-server/tools/product.tool.ts
+
+Main goal:
+Create a private automation machine that finds products on CJ Dropshipping, calculates profitable eBay prices, creates eBay listings, modifies listings over time, and optimizes titles, descriptions, item specifics, images, prices, and promoted listing rules.
+
+The app must support both:
+
+1. Manual bulk product import from CJ to eBay.
+2. AI-assisted automated product selection and listing creation.
+
+This is not a public SaaS yet. Build it as a private family tool first, but structure the code so it can become SaaS later.
+
+Preferred frontend:
+Use Expo / React Native if building in Rork.
+Make the UI responsive for mobile, tablet, and desktop widths.
+Use a clean modern dashboard style with gradient backgrounds, cards, clear status badges, and simple action buttons.
+
+Core system modules: NO demo data no seed data: 
+
+1. Authentication and integrations documentation of cj api can be found here https://developers.cjdropshipping.com/en/api/api2/mcp.html#_1-local-mode-vs-code-copilot-codex-cursor-and-more  https://developers.cjdropshipping.com/en/api/api2/api/auth.html#_1-authentication-2
+
+* Connect to eBay using OAuth.
+* Connect to CJ Dropshipping using CJ API/MCP credentials.
+* Store tokens securely.
+* Add integration health checks.
+* Show connection status for eBay and CJ.
+* Support sandbox/dev mode and production mode.
+
+2. CJ product discovery
+    Use CJ MCP tools/endpoints to:
+
+* search_products
+* get_product_detail
+* get_product_variants
+* query_cj_inventory
+* calculate_freight
+* get_category_tree
+* get_warehouses
+* list_product_connections
+* create_product_connection
+* get_product_reviews if available
+
+Build a CJ search screen with filters:
+
+* keyword
+* category
+* warehouse country
+* minimum inventory
+* minimum/maximum product price
+* shipping country
+* product weight
+* rating/reviews if available
+* platform zone, especially eBay
+* exclude products already listed
+* exclude duplicate/similar products
+
+3. eBay market research
+    Before listing a CJ product, search eBay for comparable items.
+
+Use the first 60–75 characters of the CJ product title as the initial eBay search query.
+Retrieve the latest/best matching 10–15 comparable eBay listings.
+Use matching logic to compare:
+
+* title similarity
+* category similarity
+* product type
+* variant similarity
+* price
+* shipping cost
+* condition
+* seller/listing style if available
+
+Calculate:
+
+* average market price
+* median market price
+* lowest reasonable price
+* highest reasonable price
+* outliers to ignore
+* recommended listing price
+* confidence score
+
+Do not blindly match unrelated products. Add a confidence score and reject weak matches.
+
+4. Profit calculator
+    Use this default fee model:
+
+* eBay fee buffer: 15%
+* promoted ad buffer: 2%
+* total marketplace buffer: 17%
+
+Formula:
+landed_cost = CJ product cost + CJ shipping cost
+break_even_price = landed_cost / (1 - 0.17)
+target_price = break_even_price + desired_profit
+
+Add a dynamic profit ladder from $0 to $450 profit.
+
+The ladder must increase gradually, not in giant jumps.
+Do not price a $100 landed-cost product at $400 unless market data supports it.
+Do not price a $400 landed-cost product at only $500 if profit rules and market data suggest otherwise.
+
+Create a smart profit function:
+
+* Low-cost products can use higher percentage markup.
+* High-cost products should use lower percentage markup but higher dollar profit.
+* Never exceed market average unless confidence is high.
+* Never list below break-even.
+* Always show estimated profit after fees.
+* Always show margin percentage.
+
+Example pricing logic:
+
+* landed cost $0–$10: profit target $5–$15
+* landed cost $10–$25: profit target $8–$25
+* landed cost $25–$50: profit target $15–$45
+* landed cost $50–$100: profit target $25–$75
+* landed cost $100–$200: profit target $40–$125
+* landed cost $200–$450: profit target $75–$250
+* landed cost $450+: profit target can go higher but must be validated by eBay market data
+
+Also allow manual override.
+
+5. eBay listing creation
+    Create eBay listings from CJ product data.
+
+For every listing, generate:
+
+* SEO-optimized eBay title
+* subtitle if supported
+* clean description
+* bullet features
+* full item specifics
+* category suggestion
+* condition
+* brand
+* model
+* type
+* color
+* size
+* material
+* dimensions
+* weight
+* compatibility if relevant
+* package contents
+* shipping policy
+* return policy
+* payment policy
+* quantity
+* SKU mapping
+* CJ product ID
+* CJ variant ID
+* CJ supplier/warehouse data
+* images
+
+Important:
+Maximize item specifics because eBay search visibility depends heavily on complete product attributes.
+Never create vague listings.
+Never create duplicate listings.
+Never create two listings with the same title.
+Detect duplicates even if CJ has the same product from different suppliers.
+
+6. Image optimization
+    Build an image manager.
+
+For each CJ product:
+
+* pull product images
+* choose the strongest main image
+* score images for click appeal
+* prefer clear, bright, product-focused images
+* avoid cluttered, low-resolution, watermarked, ugly, or misleading images
+* allow manual selection of main image
+* allow AI to recommend better image order
+* optionally generate enhanced image suggestions later through a separate AI/image API
+
+Do not falsely modify images unless a real image-processing integration is added.
+For now, implement image scoring, sorting, cropping preview, and main-image selection.
+Add a field for future AI image enhancement integration.
+
+7. Listing optimizer
+    After listings are live, monitor performance and automatically recommend or apply changes.
+
+Track:
+
+* views
+* clicks
+* click-through rate
+* watchers
+* sales
+* days live
+* impressions if available
+* price changes
+* title changes
+* description changes
+* image changes
+
+Rules:
+
+* If views are low after X days, improve title and item specifics.
+* If views are high but clicks are low, change main image and title.
+* If clicks are high but no sales, reduce price slightly or improve description.
+* If item has no sales after 14 days, reduce price by 2–5%.
+* If item has no sales after 30 days, rewrite title, improve image, and reduce price again.
+* If item has no sales after 45–60 days, end listing or relist with a better title/category/image.
+* If CJ stock becomes low or unavailable, pause/end eBay listing.
+* If CJ cost or shipping rises, recalculate price and revise eBay listing.
+* If competitor market price drops, adjust price carefully.
+* If product sells quickly, increase price slightly.
+
+All automation must support:
+
+* approval mode
+* semi-auto mode
+* full-auto mode
+
+Default should be approval mode.
+
+8. Anti-duplicate engine
+    Create a duplicate detection system.
+
+Check duplicates by:
+
+* CJ product ID
+* CJ variant ID
+* normalized title
+* image hash if possible
+* product dimensions
+* SKU
+* supplier product similarity
+* eBay active listing title similarity
+
+If similarity is above threshold, block auto-listing and show warning.
+
+9. Category automation
+    Allow the user to choose categories to monitor.
+
+Example:
+
+* pet supplies
+* home improvement
+* phone accessories
+* kitchen gadgets
+* car accessories
+* beauty tools
+* office supplies
+
+When new CJ products appear in selected categories:
+
+* scan product
+* calculate landed cost
+* research eBay market
+* estimate profit
+* check duplicate risk
+* draft eBay listing
+* send to approval queue
+
+Do not auto-publish brand-new products unless full-auto mode is enabled.
+
+10. Dashboard screens
+    Build these screens:
+
+A. Home Dashboard
+
+* total active listings
+* draft listings
+* products needing approval
+* listings needing optimization
+* estimated monthly profit
+* low stock warnings
+* failed sync warnings
+* CJ/eBay connection status
+
+B. CJ Product Search
+
+* filters
+* product cards
+* landed cost
+* estimated eBay price
+* estimated profit
+* duplicate warning
+* “Create Draft Listing” button
+* “Bulk Select” button
+
+C. Product Detail / Listing Builder
+
+* CJ product data
+* variants
+* inventory
+* freight calculation
+* eBay market comparison
+* title generator
+* description generator
+* item specifics editor
+* image selector
+* profit calculator
+* publish/draft buttons
+
+D. Bulk Listing Queue
+
+* selected products
+* generated titles
+* generated prices
+* profit estimate
+* image preview
+* duplicate status
+* approval checkboxes
+* bulk publish
+
+E. Active Listings
+
+* eBay listings
+* price
+* profit estimate
+* views/clicks/sales
+* optimization score
+* stock status
+* quick actions: revise title, revise price, change image, end listing
+
+F. Optimization Center
+
+* listings with low views
+* listings with low clicks
+* listings with no sales
+* listings with price mismatch
+* listings with CJ stock/cost issues
+* recommended action
+* approve action button
+
+G. Rules Engine
+Let user configure:
+
+* fee percentage
+* ad percentage
+* minimum profit
+* maximum profit
+* price drop schedule
+* title rewrite schedule
+* image change schedule
+* end listing after X days
+* auto-list categories
+* approval/full-auto mode
+
+H. Settings
+
+* eBay credentials
+* CJ credentials
+* marketplace
+* default shipping country
+* default eBay policies
+* default profit rules
+* AI model/API settings
+* logs
+
+11. Backend architecture
+    Use a clean modular backend.
+
+Recommended structure:
+
+* integrations/ebay
+* integrations/cj
+* services/product-research
+* services/pricing
+* services/listing-builder
+* services/optimizer
+* services/duplicate-detection
+* services/rules-engine
+* services/image-scoring
+* services/scheduler
+* database/models
+* api/routes
+* jobs/workers
+
+Database tables:
+
+* users
+* integrations
+* cj_products
+* cj_variants
+* ebay_market_comparisons
+* listing_drafts
+* ebay_listings
+* product_connections
+* price_history
+* optimization_events
+* automation_rules
+* image_assets
+* duplicate_checks
+* job_logs
+* audit_logs
+
+12. AI bridge
+    Create an AI service abstraction so the app can later connect to OpenAI, Claude, Gemini, local LLMs, or another AI app.
+
+AI tasks:
+
+* title generation
+* description generation
+* item specifics extraction
+* category suggestion
+* market comparison reasoning
+* duplicate reasoning
+* image attractiveness scoring
+* optimization recommendations
+
+Never hardcode one AI provider deeply into the system.
+Use an interface:
+AIProvider.generateTitle()
+AIProvider.generateDescription()
+AIProvider.extractItemSpecifics()
+AIProvider.scoreImages()
+AIProvider.compareMarketListings()
+AIProvider.recommendOptimization()
+
+13. Safety and control
+    The system must not randomly publish or change listings without rules.
+
+Add:
+
+* action preview
+* approval queue
+* rollback history where possible
+* audit logs
+* dry-run mode
+* manual override
+* error logs
+* rate limit handling
+* failed job retry
+* token refresh handling
+
+14. Initial MVP priority
+    Build in this order:
+
+Phase 1:
+
+* connect CJ
+* connect eBay
+* search CJ products
+* calculate freight
+* calculate profit
+* create listing draft
+
+Phase 2:
+
+* eBay market research
+* duplicate detection
+* AI title/description/item specifics
+* bulk draft queue
+
+Phase 3:
+
+* publish to eBay
+* active listing monitoring
+* price/title/description revision
+
+Phase 4:
+
+* autonomous rules engine
+* category auto-scanner
+* image scoring
+* optimization center
+
+Phase 5:
+
+* full family dashboard
+* advanced analytics
+* AI provider switching
+* SaaS-ready structure
+
+15. Important implementation behavior
+    Inspect both repositories first.
+    Do not invent fake function names when real MCP tools exist.
+    Reuse the API clients and tool patterns from the repositories.
+    If direct MCP calling is difficult in the current environment, create wrapper services that call the same underlying API endpoints.
+    Build clean code, not a demo.
+    Every automation must produce logs.
+    Every automatic listing action must be traceable.
+    Every price must show how it was calculated.
+    Every duplicate decision must explain why.
+    Every optimization recommendation must show the reason.
+
+Final product:
+A private AI-powered CJ-to-eBay listing automation machine that can:
+
+* find CJ products
+* calculate true landed cost
+* research eBay market price
+* generate eBay-ready listing content
+* maximize eBay item specifics
+* select the best main image
+* prevent duplicate listings
+* bulk-list products
+* revise price/title/description/images
+* monitor performance
+* end or optimize weak listings
+* gradually adjust profit from $0 to $450+ intelligently
+* support approval mode, semi-auto mode, and full-auto mode
+* run beautifully on all screen sizes with a modern gradient UI

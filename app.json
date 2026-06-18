@@ -1,0 +1,17 @@
+{
+  "expo": {
+    "name": "CJ to eBay Automation",
+    "slug": "cj-ebay-family-automation",
+    "version": "0.1.0",
+    "orientation": "default",
+    "userInterfaceStyle": "light",
+    "web": {
+      "bundler": "metro",
+      "output": "single"
+    },
+    "plugins": [],
+    "experiments": {
+      "typedRoutes": false
+    }
+  }
+}

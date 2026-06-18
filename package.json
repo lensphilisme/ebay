@@ -1,0 +1,40 @@
+{
+  "name": "cj-ebay-family-automation",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Private family-use CJ Dropshipping to eBay automation dashboard.",
+  "main": "node_modules/expo/AppEntry.js",
+  "scripts": {
+    "start": "tsx src/backend/api/server.ts",
+    "build:web": "expo export --platform web --output-dir dist",
+    "serve": "tsx src/backend/api/server.ts",
+    "expo": "expo start",
+    "phone": "expo start --tunnel",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "web": "expo start --web --port 8081",
+    "api": "tsx src/backend/api/server.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@expo/metro-runtime": "^6.1.2",
+    "@react-native-async-storage/async-storage": "^2.2.0",
+    "dotenv": "^16.4.7",
+    "expo": "^54.0.0",
+    "expo-status-bar": "~3.0.8",
+    "lucide-react-native": "^1.21.0",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "react-native": "0.81.5",
+    "react-native-svg": "15.12.1",
+    "react-native-web": "^0.21.0",
+    "tsx": "^4.19.2",
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "@types/react": "~19.1.10",
+    "playwright": "^1.61.0",
+    "typescript": "^5.9.2"
+  }
+}
