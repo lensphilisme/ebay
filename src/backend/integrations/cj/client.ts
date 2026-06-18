@@ -16,6 +16,12 @@ function isApiSuccess(response: CjApiResponse): boolean {
   return response.result === true || response.success === true || response.code === 200 || response.code === 0;
 }
 
+function cleanParams(params: Record<string, unknown>): Record<string, unknown> {
+  return Object.fromEntries(
+    Object.entries(params).filter(([, value]) => value !== undefined && value !== null && value !== '' && !(Array.isArray(value) && value.length === 0))
+  );
+}
+
 export class CjClient {
   private readonly baseUrl = getConfig().cj.openApiBase;
   private accessToken = getConfig().cj.accessToken;
@@ -67,24 +73,33 @@ export class CjClient {
   }
 
   async searchProducts(filters: CjProductSearchFilters): Promise<unknown> {
-    const params: Record<string, unknown> = {
+    const params = cleanParams({
       page: filters.pageNum ?? 1,
       size: Math.min(filters.pageSize ?? 20, 100),
-      platform: filters.zonePlatform,
-      name: filters.keyword,
+      pageNum: filters.pageNum ?? 1,
+      pageSize: Math.min(filters.pageSize ?? 20, 100),
+      keyWord: filters.keyword,
       categoryId: filters.categoryId,
       countryCode: filters.countryCode,
       isWarehouse: filters.isWarehouse,
       startSellPrice: filters.minPrice,
       endSellPrice: filters.maxPrice,
-      startWarehouseInventory: filters.minInventory,
-    };
+      startWarehouseInventory: Math.max(filters.minInventory ?? 1, 1),
+      endWarehouseInventory: filters.maxInventory,
+      zonePlatform: filters.zonePlatform,
+      platform: filters.zonePlatform,
+      productFlag: filters.productFlag,
+      addMarkStatus: filters.addMarkStatus,
+      orderBy: filters.orderBy,
+      sort: filters.sort,
+      features: filters.features?.join(','),
+    });
 
     return this.request(CJ_ENDPOINTS.product.listV2, { method: 'GET', params });
   }
 
   async getProductDetail(args: { pid?: string; productSku?: string; variantSku?: string; countryCode?: string }): Promise<unknown> {
-    return this.request(CJ_ENDPOINTS.product.query, { method: 'GET', params: args });
+    return this.request(CJ_ENDPOINTS.product.query, { method: 'GET', params: cleanParams({ ...args, features: 'enable_combine,enable_video,enable_description,enable_category' }) });
   }
 
   async getProductVariants(args: { pid?: string; productSku?: string; variantSku?: string; countryCode?: string }): Promise<unknown> {

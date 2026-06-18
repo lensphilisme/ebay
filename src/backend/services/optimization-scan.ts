@@ -15,19 +15,27 @@ export async function scanEbayListingsForOptimization(options: {
 
   let listings: EbayListingSnapshot[] = [];
   try {
-    listings = await withTimeout(options.ebay.getActiveListings(limit), 25000, 'Timed out while fetching eBay inventory/offers.');
+    listings = await withTimeout(options.ebay.getActiveListings(limit), 60000, 'Timed out while fetching eBay inventory/offers.');
+    const imageTargets = listings.filter((listing) => !listing.imageUrl).slice(0, 60);
+    await Promise.all(imageTargets.map(async (listing) => {
+      const image = await withTimeout(options.ebay.getListingImage(listing.listingId), 12000, 'Timed out while fetching listing image.').catch(() => undefined);
+      if (image) listing.imageUrl = image;
+    }));
   } catch (error) {
     warnings.push(error instanceof Error ? error.message : 'Could not fetch eBay inventory/offers.');
   }
 
-  const listingIds = listings.map((listing) => listing.listingId).filter(Boolean).slice(0, 200);
+  const listingIds = listings.map((listing) => listing.listingId).filter(Boolean);
   let traffic: ListingTrafficSnapshot[] = [];
 
   if (listingIds.length === 0) {
     warnings.push('No active eBay listing IDs were returned by the Inventory API. Create/publish listings through Inventory API or add Trading API sync for legacy listings.');
   } else {
     try {
-      traffic = await withTimeout(options.ebay.getTrafficReport(listingIds, days), 25000, 'Timed out while fetching eBay Analytics traffic report.');
+      for (const batch of chunks(listingIds, 200)) {
+        const rows = await withTimeout(options.ebay.getTrafficReport(batch, days), 45000, 'Timed out while fetching eBay Analytics traffic report.');
+        traffic.push(...rows);
+      }
     } catch (error) {
       warnings.push(`Traffic report unavailable: ${error instanceof Error ? error.message : 'unknown error'}`);
     }
@@ -66,6 +74,12 @@ export async function scanEbayListingsForOptimization(options: {
     recommendations,
     warnings,
   };
+}
+
+function chunks<T>(items: T[], size: number): T[][] {
+  const result: T[][] = [];
+  for (let index = 0; index < items.length; index += size) result.push(items.slice(index, index + size));
+  return result;
 }
 
 function estimateClicks(views: number, clickThroughRate: number): number {

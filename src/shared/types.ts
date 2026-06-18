@@ -18,8 +18,14 @@ export interface CjProductSearchFilters {
   countryCode?: string;
   isWarehouse?: boolean;
   minInventory?: number;
+  maxInventory?: number;
   minPrice?: number;
   maxPrice?: number;
+  productFlag?: number;
+  orderBy?: number;
+  sort?: 'asc' | 'desc';
+  addMarkStatus?: number;
+  features?: string[];
   shippingCountry?: string;
   productWeightMax?: number;
   minimumRating?: number;
@@ -200,6 +206,8 @@ export interface EbayListingSnapshot {
   price: number;
   quantityAvailable: number;
   quantitySold: number;
+  imageUrl?: string;
+  viewUrl?: string;
   marketplaceId?: string;
   createdAt?: string;
   raw: unknown;

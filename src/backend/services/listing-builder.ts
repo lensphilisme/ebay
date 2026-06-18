@@ -1,4 +1,4 @@
-import { RuleBasedAIProvider, type AIProvider } from '@/backend/services/ai/provider';
+import { createAIProvider, type AIProvider } from '@/backend/services/ai/provider';
 import { detectDuplicate, type DuplicateContext } from '@/backend/services/duplicate-detection';
 import { scoreImages } from '@/backend/services/image-scoring';
 import { calculateProfit } from '@/backend/services/pricing';
@@ -15,7 +15,7 @@ export interface ListingBuilderInput {
 }
 
 export async function buildListingDraft(input: ListingBuilderInput): Promise<ListingDraft> {
-  const ai = input.aiProvider ?? new RuleBasedAIProvider();
+  const ai = input.aiProvider ?? createAIProvider();
   const itemSpecifics = await ai.extractItemSpecifics({ title: input.product.title, raw: input.product.raw });
   const title = await ai.generateTitle({ sourceTitle: input.product.title, itemSpecifics, maxLength: 80 });
   const bulletFeatures = createBullets(input.product, input.variant);

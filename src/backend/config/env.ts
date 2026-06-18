@@ -28,6 +28,10 @@ export interface AppConfig {
     provider: string;
     apiKey?: string;
     model?: string;
+    openaiApiKey?: string;
+    openaiModel?: string;
+    geminiApiKey?: string;
+    geminiModel?: string;
   };
 }
 
@@ -82,6 +86,10 @@ export function getConfig(): AppConfig {
       provider: envValue('AI_PROVIDER') ?? 'none',
       apiKey: envValue('AI_API_KEY'),
       model: envValue('AI_MODEL'),
+      openaiApiKey: envValue('OPENAI_API_KEY'),
+      openaiModel: envValue('OPENAI_MODEL') ?? 'gpt-4o-mini',
+      geminiApiKey: envValue('GEMINI_API_KEY') ?? envValue('GOOGLE_API_KEY'),
+      geminiModel: envValue('GEMINI_MODEL') ?? 'gemini-1.5-flash',
     },
   };
 }

@@ -10,6 +10,8 @@ import { defaultAutomationRules, canPublishDraft } from '@/backend/services/rule
 import { recommendOptimization } from '@/backend/services/optimizer';
 import { buildListingDraft } from '@/backend/services/listing-builder';
 import { scanEbayListingsForOptimization } from '@/backend/services/optimization-scan';
+import { createAIProvider } from '@/backend/services/ai/provider';
+import type { CjProduct, CjVariant, FreightQuote } from '@/shared/types';
 
 const cj = new CjClient();
 const ebay = new EbayClient();
@@ -93,6 +95,70 @@ function envStatus() {
   };
 }
 
+function numberFrom(value: unknown, fallback = 0): number {
+  const number = Number(value);
+  return Number.isFinite(number) ? number : fallback;
+}
+
+function imageUrlsFromQueueItem(item: Record<string, unknown>): string[] {
+  const urls = new Set<string>();
+  if (typeof item.image === 'string' && item.image) urls.add(item.image);
+  const raw = item.raw && typeof item.raw === 'object' ? item.raw as Record<string, unknown> : {};
+  for (const value of Object.values(raw)) {
+    if (typeof value === 'string' && /^https?:\/\/.+\.(jpg|jpeg|png|webp)(\?|$)/i.test(value)) urls.add(value);
+    if (Array.isArray(value)) {
+      value.filter((entry): entry is string => typeof entry === 'string' && /^https?:\/\//i.test(entry)).forEach((url) => urls.add(url));
+    }
+  }
+  return [...urls].slice(0, 20);
+}
+
+function queueItemToBuilderInput(item: Record<string, unknown>, activeListings: Awaited<ReturnType<EbayClient['getActiveListings']>>) {
+  const raw = item.raw && typeof item.raw === 'object' ? item.raw as Record<string, unknown> : {};
+  const productId = String(item.productId ?? item.id ?? raw.id ?? raw.pid ?? raw.productId ?? '');
+  const variantId = item.variantId ? String(item.variantId) : undefined;
+  const productCost = numberFrom(item.productCost ?? raw.nowPrice ?? raw.sellPrice ?? raw.price);
+  const shippingCost = numberFrom(item.shippingCost);
+  const product: CjProduct = {
+    id: productId,
+    title: String(item.title ?? raw.nameEn ?? raw.productNameEn ?? raw.productName ?? 'CJ product'),
+    categoryId: item.categoryId ? String(item.categoryId) : raw.categoryId ? String(raw.categoryId) : undefined,
+    price: productCost,
+    weight: item.weight != null ? numberFrom(item.weight) : undefined,
+    imageUrls: imageUrlsFromQueueItem(item),
+    raw,
+  };
+  const variant: CjVariant | undefined = variantId ? {
+    id: variantId,
+    productId,
+    sku: item.sku ? String(item.sku) : undefined,
+    price: productCost,
+    inventory: numberFrom(item.inventory, 1),
+    weight: item.weight != null ? numberFrom(item.weight) : undefined,
+    attributes: item.variant ? { Variant: String(item.variant) } : {},
+    raw: { variantName: item.variant },
+  } : undefined;
+  const freight: FreightQuote = {
+    productId,
+    variantId,
+    destinationCountry: 'US',
+    shippingCost,
+    raw: { source: 'bulk_queue' },
+  };
+  return {
+    product,
+    variant,
+    freight,
+    duplicateContext: {
+      existingCjProductIds: [],
+      existingCjVariantIds: [],
+      existingSkus: activeListings.map((listing) => listing.sku).filter((sku): sku is string => Boolean(sku)),
+      existingTitles: activeListings.map((listing) => listing.title),
+      existingImageUrls: activeListings.map((listing) => listing.imageUrl).filter((url): url is string => Boolean(url)),
+    },
+  };
+}
+
 async function route(req: IncomingMessage, res: ServerResponse): Promise<void> {
   if (req.method === 'OPTIONS') return send(res, 204, {});
   const url = new URL(req.url ?? '/', `http://${req.headers.host ?? 'localhost'}`);
@@ -127,16 +193,13 @@ async function route(req: IncomingMessage, res: ServerResponse): Promise<void> {
     }
 
     if (req.method === 'GET' && pathname === '/cj/product') {
-      return send(
-        res,
-        200,
-        await cj.getProductDetail({
-          pid: url.searchParams.get('pid') ?? undefined,
-          productSku: url.searchParams.get('productSku') ?? undefined,
-          variantSku: url.searchParams.get('variantSku') ?? undefined,
-          countryCode: url.searchParams.get('countryCode') ?? undefined,
-        })
-      );
+      const detailPromise = cj.getProductDetail({
+        pid: url.searchParams.get('pid') ?? undefined,
+        productSku: url.searchParams.get('productSku') ?? undefined,
+        variantSku: url.searchParams.get('variantSku') ?? undefined,
+        countryCode: url.searchParams.get('countryCode') ?? undefined,
+      });
+      return send(res, 200, await timeoutValue(detailPromise, 12000, { warning: 'CJ product detail did not respond quickly. Showing search-result data only.' }));
     }
 
     if (req.method === 'POST' && pathname === '/cj/search') {
@@ -166,6 +229,62 @@ async function route(req: IncomingMessage, res: ServerResponse): Promise<void> {
       return send(res, 200, { draft, publishGuard });
     }
 
+    if (req.method === 'POST' && pathname === '/drafts/from-queue') {
+      const body = await readJson(req);
+      const item = body.item && typeof body.item === 'object' ? body.item as Record<string, unknown> : body;
+      const activeListings = await timeoutValue(ebay.getActiveListings(250), 15000, []);
+      const draftInput = queueItemToBuilderInput(item, activeListings);
+      const title = draftInput.product.title;
+      const comparables = await timeoutValue(ebay.searchComparableListings(title.slice(0, 75), 15), 12000, []);
+      const marketComparison = comparables.length > 0 ? compareMarketListings(title, comparables) : undefined;
+      const draft = await buildListingDraft({ ...draftInput, marketComparison });
+      const publishGuard = canPublishDraft(draft, defaultAutomationRules);
+      automationStore.addAuditLog({
+        actor: 'automation',
+        action: 'listing_draft.create_from_queue',
+        targetType: 'listing_draft',
+        targetId: draft.id,
+        reason: draft.auditReason,
+        after: { draft, publishGuard, queueItemId: item.id },
+      });
+      automationStore.addJobLog({
+        jobName: 'queue_create_draft',
+        status: 'succeeded',
+        message: `Created listing draft for queued CJ product ${draft.cjProductId}.`,
+        metadata: { draftId: draft.id, duplicateStatus: draft.duplicateDecision.status, publishAllowed: publishGuard.allowed },
+      });
+      return send(res, 200, { draft, publishGuard });
+    }
+
+    if (req.method === 'POST' && pathname === '/ai/listing-suggestions') {
+      const body = await readJson(req);
+      const ai = createAIProvider();
+      const raw = (body.raw && typeof body.raw === 'object' ? body.raw : {}) as Record<string, unknown>;
+      const title = String(body.title ?? raw.productNameEn ?? raw.nameEn ?? '');
+      const description = String(body.description ?? raw.description ?? '');
+      const itemSpecifics = await ai.extractItemSpecifics({ title, description, raw });
+      const improvedTitle = await ai.generateTitle({ sourceTitle: title, itemSpecifics, maxLength: 80 });
+      const improvedDescription = await ai.generateDescription({
+        title: improvedTitle,
+        bullets: [
+          'Clear product-focused offer built from CJ product data.',
+          'Includes variant, material, size, package, and compatibility details when available.',
+          'Price must include CJ product cost, CJ logistics freight, eBay fees, ad buffer, and profit.',
+        ],
+        itemSpecifics,
+      });
+      const categoryName = String(raw.categoryName ?? raw.threeCategoryName ?? '');
+      const isCarPart = /car|auto|vehicle|motor|engine|ford|chevy|bmw|mercedes|wheel|tire|exhaust|headlight|brake/i.test(`${title} ${categoryName}`);
+      return send(res, 200, {
+        improvedTitle,
+        improvedDescription,
+        itemSpecifics,
+        mainImageStrategy: isCarPart
+          ? 'Car-part listing: keep the main image factual, clear, uncropped, and compatibility-safe. Do not generate lifestyle embellishment.'
+          : 'Non-car-part listing: use a bright product-first main image, clean background, high contrast, clear scale/context, and avoid misleading edits. AI enhancement can propose a cleaner click-focused design but must not change the actual product.',
+      });
+    }
+
     if (req.method === 'POST' && pathname === '/optimizer/recommend') {
       const body = await readJson(req);
       return send(res, 200, recommendOptimization(body as never, defaultAutomationRules.automationMode));
@@ -192,8 +311,52 @@ async function route(req: IncomingMessage, res: ServerResponse): Promise<void> {
       return send(res, 200, result);
     }
 
+    if ((req.method === 'POST' || req.method === 'GET') && pathname === '/optimizer/auto-run') {
+      const body = req.method === 'POST' ? await readJson(req) : {};
+      const result = await scanEbayListingsForOptimization({
+        ebay,
+        days: Number(body.days ?? url.searchParams.get('days') ?? 30),
+        limit: Number(body.limit ?? url.searchParams.get('limit') ?? 250),
+        mode: defaultAutomationRules.automationMode,
+      });
+      const executionAllowed = defaultAutomationRules.automationMode === 'full_auto' && !defaultAutomationRules.dryRun;
+      const actions: Array<Record<string, unknown>> = [];
+      for (const item of result.recommendations) {
+        const quantityTopUp = item.listing.quantityAvailable < 5 ? 5 : undefined;
+        const planned = {
+          listingId: item.listing.listingId,
+          sku: item.listing.sku,
+          title: item.listing.title,
+          recommendation: item.recommendation.action,
+          reason: item.recommendation.reason,
+          quantityTopUp,
+          executed: false,
+          execution: executionAllowed ? 'eligible' : 'dry_run_or_not_full_auto',
+        };
+        if (executionAllowed && quantityTopUp != null) {
+          await ebay.reviseInventoryQuantity({ listingId: item.listing.listingId, sku: item.listing.sku, quantity: quantityTopUp });
+          planned.executed = true;
+          planned.execution = 'quantity_revised_to_5';
+        }
+        actions.push(planned);
+      }
+      automationStore.addJobLog({
+        jobName: 'optimizer_auto_run',
+        status: 'succeeded',
+        message: `Autonomous optimizer analyzed ${result.listings.length} listings and prepared ${actions.length} actions.`,
+        metadata: { executionAllowed, dryRun: defaultAutomationRules.dryRun, mode: defaultAutomationRules.automationMode },
+      });
+      return send(res, 200, {
+        ...result,
+        executionAllowed,
+        dryRun: defaultAutomationRules.dryRun,
+        mode: defaultAutomationRules.automationMode,
+        actions,
+      });
+    }
+
     if (req.method === 'GET' && pathname === '/ebay/listings') {
-      const limit = Number(url.searchParams.get('limit') ?? 10);
+      const limit = Number(url.searchParams.get('limit') ?? 250);
       return send(res, 200, { listings: await ebay.getActiveListings(limit) });
     }
 
@@ -253,3 +416,17 @@ createServer((req, res) => void route(req, res)).listen(port, () => {
     console.log('No dist folder found yet. Run npm run build:web to serve the frontend from this same URL.');
   }
 });
+
+async function timeoutValue<T>(promise: Promise<T>, ms: number, fallback: T): Promise<T> {
+  let timer: ReturnType<typeof setTimeout> | undefined;
+  try {
+    return await Promise.race([
+      promise,
+      new Promise<T>((resolve) => {
+        timer = setTimeout(() => resolve(fallback), ms);
+      }),
+    ]);
+  } finally {
+    if (timer) clearTimeout(timer);
+  }
+}

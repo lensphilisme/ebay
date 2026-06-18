@@ -160,7 +160,109 @@ export class EbayClient {
       }
     }
 
-    return snapshots.filter((listing) => listing.status === 'PUBLISHED' || listing.status === 'ACTIVE' || listing.listingId);
+    const inventoryListings = snapshots.filter((listing) => listing.status === 'PUBLISHED' || listing.status === 'ACTIVE' || listing.listingId);
+    if (inventoryListings.length > 0) return inventoryListings;
+
+    return this.getTradingActiveListings(limit);
+  }
+
+  async getTradingActiveListings(limit = 25): Promise<EbayListingSnapshot[]> {
+    const pageSize = Math.min(Math.max(limit, 1), 100);
+    const target = Math.max(limit, 1);
+    const listings: EbayListingSnapshot[] = [];
+    let page = 1;
+    let totalPages = 1;
+
+    while (listings.length < target && page <= totalPages) {
+    const xml = `<?xml version="1.0" encoding="utf-8"?>
+<GetMyeBaySellingRequest xmlns="urn:ebay:apis:eBLBaseComponents">
+  <ActiveList>
+    <Sort>StartTime</Sort>
+    <Pagination>
+      <EntriesPerPage>${pageSize}</EntriesPerPage>
+      <PageNumber>${page}</PageNumber>
+    </Pagination>
+  </ActiveList>
+</GetMyeBaySellingRequest>`;
+    const response = await this.tradingRequest('GetMyeBaySelling', xml);
+    const ack = firstTag(response, 'Ack');
+    if (ack === 'Failure') throw new Error(`Trading API GetMyeBaySelling failed: ${allTags(response, 'LongMessage').join(' ') || allTags(response, 'ShortMessage').join(' ')}`);
+      totalPages = Number(firstTag(response, 'TotalNumberOfPages') || totalPages || 1);
+
+      listings.push(...allBlocks(response, 'Item').map((item) => ({
+      listingId: firstTag(item, 'ItemID'),
+      sku: optionalTag(item, 'SKU'),
+      title: decodeXml(firstTag(item, 'Title')),
+      status: firstTag(item, 'ListingStatus') || 'Active',
+      price: Number(firstTag(item, 'CurrentPrice') || firstTag(item, 'StartPrice') || 0),
+      quantityAvailable: Math.max(0, Number(firstTag(item, 'Quantity') || 0) - Number(firstTag(item, 'QuantitySold') || 0)),
+      quantitySold: Number(firstTag(item, 'QuantitySold') || 0),
+      imageUrl: optionalTag(item, 'PictureURL'),
+      viewUrl: optionalTag(item, 'ViewItemURL'),
+      marketplaceId: getConfig().ebay.marketplaceId,
+      createdAt: optionalTag(item, 'StartTime'),
+      raw: {
+        source: 'trading_api',
+        itemId: firstTag(item, 'ItemID'),
+        viewUrl: optionalTag(item, 'ViewItemURL'),
+        image: optionalTag(item, 'PictureURL'),
+      },
+      })));
+      page += 1;
+    }
+
+    return listings.filter((listing) => listing.listingId).slice(0, target);
+  }
+
+  async getListingImage(listingId: string): Promise<string | undefined> {
+    const xml = `<?xml version="1.0" encoding="utf-8"?>
+<GetItemRequest xmlns="urn:ebay:apis:eBLBaseComponents">
+  <ItemID>${escapeXml(listingId)}</ItemID>
+  <DetailLevel>ReturnAll</DetailLevel>
+</GetItemRequest>`;
+    const response = await this.tradingRequest('GetItem', xml);
+    const ack = firstTag(response, 'Ack');
+    if (ack === 'Failure') return undefined;
+    return optionalTag(response, 'PictureURL') ?? optionalTag(response, 'ExternalPictureURL');
+  }
+
+  async reviseInventoryQuantity(args: { listingId: string; sku?: string; quantity: number }): Promise<unknown> {
+    const skuXml = args.sku ? `<SKU>${escapeXml(args.sku)}</SKU>` : '';
+    const xml = `<?xml version="1.0" encoding="utf-8"?>
+<ReviseInventoryStatusRequest xmlns="urn:ebay:apis:eBLBaseComponents">
+  <InventoryStatus>
+    <ItemID>${escapeXml(args.listingId)}</ItemID>
+    ${skuXml}
+    <Quantity>${Math.max(0, Math.floor(args.quantity))}</Quantity>
+  </InventoryStatus>
+</ReviseInventoryStatusRequest>`;
+    const response = await this.tradingRequest('ReviseInventoryStatus', xml);
+    const ack = firstTag(response, 'Ack');
+    if (ack === 'Failure') throw new Error(`Trading API ReviseInventoryStatus failed: ${allTags(response, 'LongMessage').join(' ') || allTags(response, 'ShortMessage').join(' ')}`);
+    return { ack, warnings: allTags(response, 'LongMessage'), listingId: args.listingId, sku: args.sku, quantity: args.quantity };
+  }
+
+  private async tradingRequest(callName: string, xml: string): Promise<string> {
+    const config = getConfig().ebay;
+    const token = await this.auth.getAccessToken();
+    const endpoint = config.environment === 'sandbox' ? 'https://api.sandbox.ebay.com/ws/api.dll' : 'https://api.ebay.com/ws/api.dll';
+    const response = await httpRequest<string>({
+      method: 'POST',
+      url: endpoint,
+      body: xml,
+      headers: {
+        'Content-Type': 'text/xml',
+        'X-EBAY-API-CALL-NAME': callName,
+        'X-EBAY-API-SITEID': '0',
+        'X-EBAY-API-COMPATIBILITY-LEVEL': '1271',
+        'X-EBAY-API-IAF-TOKEN': token,
+        'X-EBAY-API-DEV-NAME': config.devId,
+        'X-EBAY-API-APP-NAME': config.clientId,
+        'X-EBAY-API-CERT-NAME': config.clientSecret,
+      },
+      timeoutMs: 30000,
+    });
+    return response.data;
   }
 
   async getTrafficReport(listingIds: string[], days = 30): Promise<ListingTrafficSnapshot[]> {
@@ -206,6 +308,41 @@ export class EbayClient {
       };
     });
   }
+}
+
+function allBlocks(xml: string, tag: string): string[] {
+  return [...xml.matchAll(new RegExp(`<${tag}(?:\\s[^>]*)?>([\\s\\S]*?)<\\/${tag}>`, 'g'))].map((match) => match[1] ?? '');
+}
+
+function allTags(xml: string, tag: string): string[] {
+  return allBlocks(xml, tag).map(decodeXml);
+}
+
+function firstTag(xml: string, tag: string): string {
+  return allTags(xml, tag)[0] ?? '';
+}
+
+function optionalTag(xml: string, tag: string): string | undefined {
+  return firstTag(xml, tag) || undefined;
+}
+
+function decodeXml(value: string): string {
+  return value
+    .replace(/<!\[CDATA\[([\s\S]*?)\]\]>/g, '$1')
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"')
+    .replace(/&apos;/g, "'");
+}
+
+function escapeXml(value: string): string {
+  return value
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&apos;');
 }
 
 function describeEbayError(data: unknown): string {
