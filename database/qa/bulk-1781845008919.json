@@ -1,0 +1,131 @@
+{
+  "startedAt": "2026-06-19T04:56:48.804Z",
+  "finishedAt": "2026-06-19T04:56:48.919Z",
+  "liveMode": true,
+  "total": 4,
+  "passed": 0,
+  "failed": 4,
+  "skipped": 0,
+  "results": [
+    {
+      "cjProductId": "FBD229E3-C8F2-407C-879D-BD3FEA63BB92",
+      "title": "",
+      "productType": "Unknown",
+      "variantKeys": [],
+      "variantCount": 0,
+      "imageCount": 0,
+      "preflight": [
+        {
+          "code": "PRODUCT_PROCESSING_ERROR",
+          "severity": "error",
+          "message": "fetch failed"
+        }
+      ],
+      "ebayAttempt": {
+        "attemptedAt": "2026-06-19T04:56:48.906Z",
+        "mode": "build_only",
+        "ack": "Skipped",
+        "errors": [
+          "fetch failed"
+        ],
+        "warnings": [],
+        "fees": []
+      },
+      "status": "failed",
+      "errors": [
+        "fetch failed"
+      ],
+      "warnings": []
+    },
+    {
+      "cjProductId": "1737725404842041344",
+      "title": "",
+      "productType": "Unknown",
+      "variantKeys": [],
+      "variantCount": 0,
+      "imageCount": 0,
+      "preflight": [
+        {
+          "code": "PRODUCT_PROCESSING_ERROR",
+          "severity": "error",
+          "message": "fetch failed"
+        }
+      ],
+      "ebayAttempt": {
+        "attemptedAt": "2026-06-19T04:56:48.910Z",
+        "mode": "build_only",
+        "ack": "Skipped",
+        "errors": [
+          "fetch failed"
+        ],
+        "warnings": [],
+        "fees": []
+      },
+      "status": "failed",
+      "errors": [
+        "fetch failed"
+      ],
+      "warnings": []
+    },
+    {
+      "cjProductId": "2013511897645211650",
+      "title": "",
+      "productType": "Unknown",
+      "variantKeys": [],
+      "variantCount": 0,
+      "imageCount": 0,
+      "preflight": [
+        {
+          "code": "PRODUCT_PROCESSING_ERROR",
+          "severity": "error",
+          "message": "fetch failed"
+        }
+      ],
+      "ebayAttempt": {
+        "attemptedAt": "2026-06-19T04:56:48.915Z",
+        "mode": "build_only",
+        "ack": "Skipped",
+        "errors": [
+          "fetch failed"
+        ],
+        "warnings": [],
+        "fees": []
+      },
+      "status": "failed",
+      "errors": [
+        "fetch failed"
+      ],
+      "warnings": []
+    },
+    {
+      "cjProductId": "FCC62DBF-994A-402D-9746-FA9C8F26939E",
+      "title": "",
+      "productType": "Unknown",
+      "variantKeys": [],
+      "variantCount": 0,
+      "imageCount": 0,
+      "preflight": [
+        {
+          "code": "PRODUCT_PROCESSING_ERROR",
+          "severity": "error",
+          "message": "fetch failed"
+        }
+      ],
+      "ebayAttempt": {
+        "attemptedAt": "2026-06-19T04:56:48.919Z",
+        "mode": "build_only",
+        "ack": "Skipped",
+        "errors": [
+          "fetch failed"
+        ],
+        "warnings": [],
+        "fees": []
+      },
+      "status": "failed",
+      "errors": [
+        "fetch failed"
+      ],
+      "warnings": []
+    }
+  ]
+}

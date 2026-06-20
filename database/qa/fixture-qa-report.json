@@ -1,0 +1,167 @@
+{
+  "generatedAt": "2026-06-19T04:51:57.757Z",
+  "total": 10,
+  "passed": 9,
+  "failed": 0,
+  "skipped": 1,
+  "results": [
+    {
+      "cjProductId": "FIXTURE-SIMPLE",
+      "productTitle": "Kitchen Storage Organizer Rack",
+      "productType": "Kitchen Storage",
+      "variantKeys": [
+        "Specification"
+      ],
+      "variantCount": 1,
+      "imageCount": 1,
+      "selectedEbayCategory": "20625",
+      "preflightResult": [],
+      "liveListingResult": "not enabled in fixture QA",
+      "errorsFound": [],
+      "finalStatus": "passed"
+    },
+    {
+      "cjProductId": "FIXTURE-COLOR",
+      "productTitle": "Portable Water Bottle",
+      "productType": "Bottle",
+      "variantKeys": [
+        "Color"
+      ],
+      "variantCount": 2,
+      "imageCount": 3,
+      "selectedEbayCategory": "20625",
+      "preflightResult": [],
+      "liveListingResult": "not enabled in fixture QA",
+      "errorsFound": [],
+      "finalStatus": "passed"
+    },
+    {
+      "cjProductId": "FIXTURE-SIZE",
+      "productTitle": "Stretch Storage Cover",
+      "productType": "Storage",
+      "variantKeys": [
+        "Size"
+      ],
+      "variantCount": 2,
+      "imageCount": 1,
+      "selectedEbayCategory": "11700",
+      "preflightResult": [],
+      "liveListingResult": "not enabled in fixture QA",
+      "errorsFound": [],
+      "finalStatus": "passed"
+    },
+    {
+      "cjProductId": "FIXTURE-COLOR-SIZE-IMG",
+      "productTitle": "Women Walking Shoes Red Blue Size Options",
+      "productType": "Women Shoes",
+      "variantKeys": [
+        "Color",
+        "US Shoe Size"
+      ],
+      "variantCount": 3,
+      "imageCount": 4,
+      "selectedEbayCategory": "95672",
+      "preflightResult": [],
+      "liveListingResult": "not enabled in fixture QA",
+      "errorsFound": [],
+      "finalStatus": "passed"
+    },
+    {
+      "cjProductId": "FIXTURE-STYLE",
+      "productTitle": "Desk Lamp Modern Classic Style",
+      "productType": "Home Decor",
+      "variantKeys": [
+        "Color",
+        "Style"
+      ],
+      "variantCount": 2,
+      "imageCount": 3,
+      "selectedEbayCategory": "11700",
+      "preflightResult": [],
+      "liveListingResult": "not enabled in fixture QA",
+      "errorsFound": [],
+      "finalStatus": "passed"
+    },
+    {
+      "cjProductId": "FIXTURE-SHIPS-FROM",
+      "productTitle": "Pet Grooming Brush",
+      "productType": "Pet Supplies",
+      "variantKeys": [
+        "Color",
+        "Ships From"
+      ],
+      "variantCount": 2,
+      "imageCount": 1,
+      "selectedEbayCategory": "20742",
+      "preflightResult": [],
+      "liveListingResult": "not enabled in fixture QA",
+      "errorsFound": [],
+      "finalStatus": "passed"
+    },
+    {
+      "cjProductId": "FIXTURE-PLUG-COLOR",
+      "productTitle": "USB Night Light Plug Type Options",
+      "productType": "Home Lighting",
+      "variantKeys": [
+        "Color",
+        "Plug Type"
+      ],
+      "variantCount": 2,
+      "imageCount": 1,
+      "selectedEbayCategory": "9394",
+      "preflightResult": [],
+      "liveListingResult": "not enabled in fixture QA",
+      "errorsFound": [],
+      "finalStatus": "passed"
+    },
+    {
+      "cjProductId": "FIXTURE-MESSY",
+      "productTitle": "Smart Cable Organizer !!!",
+      "productType": "Phone Accessories",
+      "variantKeys": [
+        "Color",
+        "Specification"
+      ],
+      "variantCount": 2,
+      "imageCount": 1,
+      "selectedEbayCategory": "9394",
+      "preflightResult": [],
+      "liveListingResult": "not enabled in fixture QA",
+      "errorsFound": [],
+      "finalStatus": "passed"
+    },
+    {
+      "cjProductId": "FIXTURE-SINGLE-SHOE",
+      "productTitle": "Women Running Shoe Red Size 40",
+      "productType": "Shoes",
+      "variantKeys": [
+        "Color",
+        "US Shoe Size"
+      ],
+      "variantCount": 1,
+      "imageCount": 2,
+      "selectedEbayCategory": "95672",
+      "preflightResult": [],
+      "liveListingResult": "not enabled in fixture QA",
+      "errorsFound": [],
+      "finalStatus": "passed"
+    },
+    {
+      "cjProductId": "FIXTURE-UNSAFE",
+      "productTitle": "Tactical Self Defense Tool",
+      "productType": "Outdoor",
+      "variantKeys": [
+        "Specification"
+      ],
+      "variantCount": 1,
+      "imageCount": 1,
+      "selectedEbayCategory": "631",
+      "preflightResult": [],
+      "liveListingResult": "not enabled in fixture QA",
+      "errorsFound": [
+        "Unsafe/restricted keyword detected: tactical"
+      ],
+      "finalStatus": "skipped"
+    }
+  ]
+}

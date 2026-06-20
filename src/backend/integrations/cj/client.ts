@@ -99,7 +99,7 @@ export class CjClient {
   }
 
   async getProductDetail(args: { pid?: string; productSku?: string; variantSku?: string; countryCode?: string }): Promise<unknown> {
-    return this.request(CJ_ENDPOINTS.product.query, { method: 'GET', params: cleanParams({ ...args, features: 'enable_combine,enable_video,enable_description,enable_category' }) });
+    return this.request(CJ_ENDPOINTS.product.query, { method: 'GET', params: cleanParams({ ...args, features: 'enable_combine,enable_video,enable_description,enable_category,enable_inventory' }) });
   }
 
   async getProductVariants(args: { pid?: string; productSku?: string; variantSku?: string; countryCode?: string }): Promise<unknown> {

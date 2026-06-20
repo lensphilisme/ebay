@@ -1,0 +1,75 @@
+{
+  "cjProductId": "2016750686621003777",
+  "title": "Shoe Cabinet, Shoe Storage Cabinet,",
+  "productType": "Furniture",
+  "variantKeys": [
+    "Color"
+  ],
+  "variantCount": 1,
+  "imageCount": 5,
+  "selectedEbayCategory": "95672",
+  "payload": {
+    "title": "Shoe Cabinet, Shoe Storage Cabinet,",
+    "categoryId": "95672",
+    "conditionId": "1000",
+    "country": "US",
+    "currency": "USD",
+    "postalCode": "10001",
+    "location": "New York, New York",
+    "dispatchTimeMax": 3,
+    "listingDuration": "GTC",
+    "listingType": "FixedPriceItem",
+    "descriptionHtml": "<p><em></em></p>\n <p><em>About this item<br>SOLID CONSTRUCTION: Say goodbye to the flimsy and cheap shoe stand closet shoe rack. Made of premium E0 particle board, our entryway shoe cabinet with solid construction that would not make your shoes wobble or even let them down; 0.59' thicker boards enable this shoe organizer to load much heavier items, and making the rack more solid while using.<br>FLEXIBLE AND LARGE CAPACITY: The top shelf of this shoe storage can be used to place your bags, potted plants and decorations; 7-tier shoe cabinet with adjustable panel helps you easily classify your different types of shoes from slippers to boots. Measuring: 29.6\" W x 14.6\" D x 43.3\" H, this shoe rack can store up to 24 pairs of shoes, which can easily organize messy shoes for your family.<br>ELEGANT HOME DECOR: Crafted with wooden board and finely polished with water-proof and wear-resistant grey paint, this eye-catching shoes cabinet with doors will impress your friends deeply when they enter your home. Sleek gray with black metal handles and legs, adds a warm touch and some modern flair, to be decorative enough to suit any corner of your house.<br>SIMPLE AND COMPACT DESIGN: Simple design plus powerful function, this storage cabinet is not only as a shoe shelf, but also can be as a kitchen storage cabinet. With two swinging doors, this cabinet offers plenty of hidden storage to keep your home clutter-free. The space-saving vertical storage design is an ideal storage solution for your hallway, entryway, closet, dormitory, garage.</em></p>\n <br>\n <p></p>\n <img src=\"https://cf.cjdropshipping.com/17696448/79e6ad4f-6d9e-4b77-b070-6a01c51f9746.jpg\" style=\"max-width:100%;\" contenteditable=\"false\">\n <br>\n <p></p>",
+    "itemSpecifics": {
+      "Brand": "Changsha Jihuai E-commerce Co., Ltd.",
+      "Type": "Furniture",
+      "Source": "CJ Dropshipping",
+      "CJ PID": "2016750686621003777",
+      "Color": "Rustic Brown"
+    },
+    "images": [
+      "https://cf.cjdropshipping.com/17696448/79e6ad4f-6d9e-4b77-b070-6a01c51f9746.jpg",
+      "https://cf.cjdropshipping.com/17696448/90490d6e-e2cb-4c9a-9753-3f36922a1516.jpg",
+      "https://cf.cjdropshipping.com/17696448/1d8ebf2e-dd7d-4596-8aae-9189c1bf0dd5.jpg",
+      "https://cf.cjdropshipping.com/17696448/f0dae6d6-cf8a-470c-958f-e5e8f808dca9.jpg",
+      "https://cf.cjdropshipping.com/17696448/bffaaf5a-7c9b-45be-8ce4-c32c41afe375.jpg"
+    ],
+    "returnPolicy": {
+      "returnsAcceptedOption": "ReturnsAccepted",
+      "refundOption": "MoneyBack",
+      "returnsWithinOption": "Days_30",
+      "shippingCostPaidByOption": "Buyer"
+    },
+    "shippingDetails": {
+      "shippingType": "Flat",
+      "shippingService": "UPSGround",
+      "shippingServiceCost": 0
+    },
+    "sku": "CJFU27480160001",
+    "quantity": 5,
+    "startPrice": 188.99,
+    "debug": {
+      "cjProductId": "2016750686621003777",
+      "warnings": [
+        "CJFU27480160001: duplicate SKU skipped",
+        "Mapped by local rule: Shoes."
+      ]
+    }
+  },
+  "preflight": [],
+  "warnings": [
+    "CJFU27480160001: duplicate SKU skipped",
+    "Mapped by local rule: Shoes."
+  ],
+  "requestXml": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<VerifyAddFixedPriceItemRequest xmlns=\"urn:ebay:apis:eBLBaseComponents\">\n  <ErrorLanguage>en_US</ErrorLanguage>\n  <WarningLevel>High</WarningLevel>\n  <Item>\n    <Title>Shoe Cabinet, Shoe Storage Cabinet,</Title>\n    <PrimaryCategory><CategoryID>95672</CategoryID></PrimaryCategory>\n    <CategoryMappingAllowed>true</CategoryMappingAllowed>\n    <ConditionID>1000</ConditionID>\n    <Country>US</Country>\n    <Currency>USD</Currency>\n    <DispatchTimeMax>3</DispatchTimeMax>\n    <ListingDuration>GTC</ListingDuration>\n    <ListingType>FixedPriceItem</ListingType>\n    <Location>New York, New York</Location>\n    <PostalCode>10001</PostalCode>\n    <Description><![CDATA[<p><em></em></p>\n <p><em>About this item<br>SOLID CONSTRUCTION: Say goodbye to the flimsy and cheap shoe stand closet shoe rack. Made of premium E0 particle board, our entryway shoe cabinet with solid construction that would not make your shoes wobble or even let them down; 0.59' thicker boards enable this shoe organizer to load much heavier items, and making the rack more solid while using.<br>FLEXIBLE AND LARGE CAPACITY: The top shelf of this shoe storage can be used to place your bags, potted plants and decorations; 7-tier shoe cabinet with adjustable panel helps you easily classify your different types of shoes from slippers to boots. Measuring: 29.6\" W x 14.6\" D x 43.3\" H, this shoe rack can store up to 24 pairs of shoes, which can easily organize messy shoes for your family.<br>ELEGANT HOME DECOR: Crafted with wooden board and finely polished with water-proof and wear-resistant grey paint, this eye-catching shoes cabinet with doors will impress your friends deeply when they enter your home. Sleek gray with black metal handles and legs, adds a warm touch and some modern flair, to be decorative enough to suit any corner of your house.<br>SIMPLE AND COMPACT DESIGN: Simple design plus powerful function, this storage cabinet is not only as a shoe shelf, but also can be as a kitchen storage cabinet. With two swinging doors, this cabinet offers plenty of hidden storage to keep your home clutter-free. The space-saving vertical storage design is an ideal storage solution for your hallway, entryway, closet, dormitory, garage.</em></p>\n <br>\n <p></p>\n <img src=\"https://cf.cjdropshipping.com/17696448/79e6ad4f-6d9e-4b77-b070-6a01c51f9746.jpg\" style=\"max-width:100%;\" contenteditable=\"false\">\n <br>\n <p></p>]]></Description>\n    <Site>US</Site>\n    <SKU>CJFU27480160001</SKU>\n    <Quantity>5</Quantity>\n    <StartPrice currencyID=\"USD\">188.99</StartPrice>\n    <ReturnPolicy>\n      <ReturnsAcceptedOption>ReturnsAccepted</ReturnsAcceptedOption>\n      <RefundOption>MoneyBack</RefundOption>\n      <ReturnsWithinOption>Days_30</ReturnsWithinOption>\n      <ShippingCostPaidByOption>Buyer</ShippingCostPaidByOption>\n    </ReturnPolicy>\n    <ShippingDetails>\n      <ShippingType>Flat</ShippingType>\n      <ShippingServiceOptions>\n        <ShippingServicePriority>1</ShippingServicePriority>\n        <ShippingService>UPSGround</ShippingService>\n        <ShippingServiceCost currencyID=\"USD\">0.00</ShippingServiceCost>\n        <ShippingServiceAdditionalCost currencyID=\"USD\">0.00</ShippingServiceAdditionalCost>\n      </ShippingServiceOptions>\n    </ShippingDetails>\n    <PictureDetails><PictureURL>https://cf.cjdropshipping.com/17696448/79e6ad4f-6d9e-4b77-b070-6a01c51f9746.jpg</PictureURL><PictureURL>https://cf.cjdropshipping.com/17696448/90490d6e-e2cb-4c9a-9753-3f36922a1516.jpg</PictureURL><PictureURL>https://cf.cjdropshipping.com/17696448/1d8ebf2e-dd7d-4596-8aae-9189c1bf0dd5.jpg</PictureURL><PictureURL>https://cf.cjdropshipping.com/17696448/f0dae6d6-cf8a-470c-958f-e5e8f808dca9.jpg</PictureURL><PictureURL>https://cf.cjdropshipping.com/17696448/bffaaf5a-7c9b-45be-8ce4-c32c41afe375.jpg</PictureURL></PictureDetails>\n    <ItemSpecifics><NameValueList><Name>Brand</Name><Value>Changsha Jihuai E-commerce Co., Ltd.</Value></NameValueList><NameValueList><Name>Type</Name><Value>Furniture</Value></NameValueList><NameValueList><Name>Source</Name><Value>CJ Dropshipping</Value></NameValueList><NameValueList><Name>CJ PID</Name><Value>2016750686621003777</Value></NameValueList><NameValueList><Name>Color</Name><Value>Rustic Brown</Value></NameValueList></ItemSpecifics>\n    \n  </Item>\n</VerifyAddFixedPriceItemRequest>",
+  "ebayAttempt": {
+    "attemptedAt": "2026-06-19T00:05:59.051Z",
+    "mode": "build_only",
+    "ack": "NotRun",
+    "errors": [],
+    "warnings": [],
+    "fees": []
+  },
+  "status": "passed",
+  "errors": []
+}

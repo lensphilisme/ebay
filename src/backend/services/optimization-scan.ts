@@ -43,15 +43,22 @@ export async function scanEbayListingsForOptimization(options: {
 
   const recommendations = listings.map((listing) => {
     const trafficRow = traffic.find((row) => row.listingId === listing.listingId);
+    const lifetimeSold = listing.quantitySold;
+    const windowTransactions = trafficRow?.transactions;
     const performance: ListingPerformance = {
       listingId: listing.listingId,
       title: listing.title,
       daysLive: days,
       impressions: trafficRow?.impressions,
       views: trafficRow?.views ?? 0,
-      clicks: estimateClicks(trafficRow?.views ?? 0, trafficRow?.clickThroughRate ?? 0),
-      watchers: 0,
-      sales: trafficRow?.transactions ?? listing.quantitySold,
+      clicks: undefined,
+      clicksEstimated: trafficRow?.clicksEstimated,
+      clickDataAvailable: false,
+      watchers: listing.watchers ?? 0,
+      sales: Math.max(windowTransactions ?? 0, lifetimeSold),
+      trafficTransactions: windowTransactions,
+      lifetimeSold,
+      trafficAvailable: Boolean(trafficRow),
       currentPrice: listing.price,
       landedCost: 0,
       cjStock: listing.quantityAvailable,
@@ -80,11 +87,6 @@ function chunks<T>(items: T[], size: number): T[][] {
   const result: T[][] = [];
   for (let index = 0; index < items.length; index += size) result.push(items.slice(index, index + size));
   return result;
-}
-
-function estimateClicks(views: number, clickThroughRate: number): number {
-  if (!Number.isFinite(clickThroughRate) || clickThroughRate <= 0) return 0;
-  return Math.round(views * (clickThroughRate > 1 ? clickThroughRate / 100 : clickThroughRate));
 }
 
 async function withTimeout<T>(promise: Promise<T>, timeoutMs: number, message: string): Promise<T> {

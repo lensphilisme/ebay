@@ -6,16 +6,25 @@ import {
   ChevronRight,
   CheckCircle2,
   ClipboardList,
+  DollarSign,
+  Download,
+  Eye,
   ExternalLink,
   Gauge,
+  Heart,
   Image as ImageIcon,
   Loader2,
+  MousePointerClick,
   PackageSearch,
   RefreshCcw,
   Settings,
   ShieldCheck,
   SlidersHorizontal,
   Store,
+  ShoppingCart,
+  Sparkles,
+  TrendingUp,
+  UploadCloud,
   Wand2,
   X,
 } from 'lucide-react-native';
@@ -112,6 +121,17 @@ interface DraftResponse {
   publishGuard?: Record<string, unknown>;
 }
 
+interface MarketplaceExportResponse {
+  filename: string;
+  mimeType: string;
+  content: string;
+  encoding?: 'text' | 'base64';
+  rows: number;
+  warnings: string[];
+}
+
+type ManualEndFilter = 'no_views' | 'no_clicks' | 'no_sales' | 'optimizer_end';
+
 const screens: Array<{ key: ScreenKey; label: string; icon: IconType }> = [
   { key: 'home', label: 'Home', icon: Gauge },
   { key: 'search', label: 'CJ Search', icon: PackageSearch },
@@ -163,6 +183,22 @@ function writeStorage(key: string, value: unknown): void {
   } catch {
     // Browser storage can be unavailable in private modes; the app still works in memory.
   }
+}
+
+function downloadTextFile(file: MarketplaceExportResponse): void {
+  if (typeof window === 'undefined' || typeof document === 'undefined') return;
+  const bytes = file.encoding === 'base64'
+    ? Uint8Array.from(window.atob(file.content), (char) => char.charCodeAt(0))
+    : file.content;
+  const blob = new Blob([bytes], { type: file.mimeType || 'text/plain;charset=utf-8' });
+  const url = window.URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = file.filename;
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+  window.URL.revokeObjectURL(url);
 }
 
 function flattenCategories(value: unknown): CategoryOption[] {
@@ -652,6 +688,26 @@ function SearchScreen(props: {
     selected.forEach((product) => props.addToQueue(makeQueueItem(product)));
     if (selected.length > 0) setSelectedIds([]);
   };
+  const exportSelected = (marketplace: 'ebay' | 'facebook' | 'tiktok', format: 'csv' | 'xls' | 'xlsx' = 'csv') => {
+    const selected = products.filter((product) => selectedIds.includes(product.id));
+    return props.run(
+      `Building ${marketplace} marketplace export...`,
+      `${marketplace.toUpperCase()} export ready.`,
+      () => api<MarketplaceExportResponse>('/cj/export-marketplace', {
+        method: 'POST',
+        body: JSON.stringify({
+          marketplace,
+          format,
+          countryCode,
+          items: selected.map(makeQueueItem),
+        }),
+      }),
+      (file) => {
+        downloadTextFile(file);
+        if (file.warnings?.length) console.log(`${marketplace} export warnings`, file.warnings);
+      }
+    );
+  };
 
   return (
     <View>
@@ -673,6 +729,10 @@ function SearchScreen(props: {
           <Button label="Load Warehouses" icon={Store} onPress={loadWarehouses} secondary />
           <Button label="Search Products" icon={PackageSearch} onPress={() => search(1, pageSize)} />
           <Button label={`Add Selected (${selectedIds.length})`} icon={ClipboardList} onPress={addSelectedToQueue} secondary />
+          <Button label="eBay CSV" icon={Download} onPress={() => exportSelected('ebay')} secondary disabled={selectedIds.length === 0} />
+          <Button label="Meta Catalog CSV" icon={Download} onPress={() => exportSelected('facebook')} secondary disabled={selectedIds.length === 0} />
+          <Button label="Facebook XLSX" icon={Download} onPress={() => exportSelected('facebook', 'xlsx')} secondary disabled={selectedIds.length === 0} />
+          <Button label="TikTok XLSX" icon={Download} onPress={() => exportSelected('tiktok', 'xlsx')} secondary disabled={selectedIds.length === 0} />
         </View>
         <CategoryDropdown title="CJ category" options={props.categories} selected={selectedCategory} onSelect={setSelectedCategory} />
         <Segmented label="Products per page" values={[30, 40, 50, 100]} selected={pageSize} onSelect={(size) => search(1, size)} />
@@ -709,15 +769,17 @@ function BuilderScreen() {
   return (
     <TwoColumn
       left={
-        <Panel title="Listing Builder Inputs">
-          {['CJ product detail and variants', 'CJ inventory by product, SKU, or variant', 'Freight quote by destination', 'eBay market comparison from first 60-75 title characters', 'Duplicate check by ID, SKU, title, image, and active eBay titles'].map((item) => (
+        <Panel title="What Builder Means">
+          <Text style={styles.bodyText}>This screen is only the approval-mode draft sandbox. It explains the data the private automation uses before it builds a listing. You do not need to paste product text here for normal CJ to eBay listing.</Text>
+          {['CJ product detail, variants, images, and inventory are fetched by API.', 'eBay category and item-specific requirements are fetched from eBay before XML is created.', 'AI fills real eBay item specifics when it has factual product data, then rules repair missing required fields.', 'Duplicate and margin checks stay in approval mode before anything live is published.'].map((item) => (
             <ChecklistItem key={item} text={item} />
           ))}
         </Panel>
       }
       right={
-        <Panel title="Draft Output">
-          {['SEO title under eBay title limit', 'Buyer-focused description and bullets', 'Full item specifics extraction', 'Main image ranking with manual override', 'Profit calculation showing landed cost, fees, margin, and cap reason', 'Action preview before publish'].map((item) => (
+        <Panel title="What You Use Day To Day">
+          <Text style={styles.bodyText}>Use CJ Search and Queue for products, Listings for manual control, and Optimize for AI/rule recommendations. Draft preview text appears only when you intentionally create a review draft.</Text>
+          {['Search imports products from CJ and keeps product/variant IDs attached.', 'Queue can create approval drafts when you want to review price, title, and duplicate risk.', 'Listings shows live eBay data and lets you manually select weak listings to end.', 'Optimize can recommend improvements, but manual controls always stay available.'].map((item) => (
             <ChecklistItem key={item} text={item} />
           ))}
         </Panel>
@@ -728,6 +790,8 @@ function BuilderScreen() {
 
 function QueueScreen({ items, run }: { items: BulkQueueItem[]; run: <T>(loadingText: string, successText: string, work: () => Promise<T>, onSuccess?: (data: T) => void) => Promise<T | undefined> }) {
   const [drafts, setDrafts] = useState<Record<string, DraftResponse>>({});
+  const [listings, setListings] = useState<Record<string, JsonValue>>({});
+  const [bulkListResult, setBulkListResult] = useState<JsonValue>(null);
   const createDraft = (item: BulkQueueItem) =>
     run(
       `Creating draft for ${item.title.slice(0, 42)}...`,
@@ -735,18 +799,34 @@ function QueueScreen({ items, run }: { items: BulkQueueItem[]; run: <T>(loadingT
       () => api<DraftResponse>('/drafts/from-queue', { method: 'POST', body: JSON.stringify({ item }) }),
       (data) => setDrafts((current) => ({ ...current, [item.id]: data }))
     );
+  const listLive = (item: BulkQueueItem) =>
+    run(
+      `Listing ${item.title.slice(0, 42)} live on eBay...`,
+      'eBay live listing request finished.',
+      () => api<JsonValue>('/ebay/list/from-queue', { method: 'POST', body: JSON.stringify({ item, countryCode: 'US' }) }),
+      (data) => setListings((current) => ({ ...current, [item.id]: data }))
+    );
   const createAllDrafts = async () => {
     for (const item of items) {
       if (!drafts[item.id]) await createDraft(item);
     }
   };
-  if (items.length === 0) return <EmptyState title="Bulk Listing Queue" detail="Open a CJ product preview, calculate freight, then add it here for approval-mode bulk draft creation." />;
+  const listAllLive = () =>
+    run(
+      `Bulk listing ${items.length} queued CJ products on eBay...`,
+      'Bulk eBay live listing run finished.',
+      () => api<JsonValue>('/ebay/list/bulk-from-queue', { method: 'POST', body: JSON.stringify({ items, countryCode: 'US' }) }),
+      setBulkListResult
+    );
+  if (items.length === 0) return <EmptyState title="Bulk Listing Queue" detail="Open a CJ product preview, calculate freight, then add it here for live eBay listing or review-draft creation." />;
   return (
     <Panel title="Bulk Listing Queue">
-      <Text style={styles.bodyText}>These products are staged for eBay draft creation. Prices use CJ product cost, CJ logistics shipping, 17% eBay/ad buffer, and the smart profit ladder.</Text>
+      <Text style={styles.bodyText}>Queue items can still create local review drafts, but the main action now publishes through the production CJ-to-eBay listing engine with eBay preflight first.</Text>
       <View style={styles.actions}>
-        <Button label={`Create Drafts For All (${items.length})`} icon={ClipboardList} onPress={createAllDrafts} />
+        <Button label={`List All Live (${items.length})`} icon={UploadCloud} onPress={listAllLive} />
+        <Button label={`Create Review Drafts (${items.length})`} icon={ClipboardList} onPress={createAllDrafts} secondary />
       </View>
+      <ListingRunSummary data={bulkListResult} />
       <View style={styles.resultGrid}>
         {items.map((item) => (
           <View key={item.id} style={styles.productCard}>
@@ -759,13 +839,38 @@ function QueueScreen({ items, run }: { items: BulkQueueItem[]; run: <T>(loadingT
               <MetricCard label="Profit" value={`$${item.estimatedProfit.toFixed(2)}`} detail="After fee buffer" />
             </View>
             <View style={styles.actions}>
-              <Button label={drafts[item.id] ? 'Refresh Draft' : 'Create Draft'} icon={ClipboardList} onPress={() => createDraft(item)} />
+              <Button label="List Live" icon={UploadCloud} onPress={() => listLive(item)} />
+              <Button label={drafts[item.id] ? 'Refresh Draft' : 'Review Draft'} icon={ClipboardList} onPress={() => createDraft(item)} secondary />
             </View>
+            <ListingRunSummary data={listings[item.id]} compact />
             <DraftPreview response={drafts[item.id]} />
           </View>
         ))}
       </View>
     </Panel>
+  );
+}
+
+function ListingRunSummary({ data, compact }: { data: JsonValue; compact?: boolean }) {
+  if (!data || typeof data !== 'object') return null;
+  const root = data as Record<string, unknown>;
+  const results = Array.isArray(root.results) ? root.results as Array<Record<string, unknown>> : [root];
+  const passed = Number(root.passed ?? results.filter((item) => item.status === 'passed').length);
+  const failed = Number(root.failed ?? results.filter((item) => item.status === 'failed').length);
+  const itemIds = results
+    .map((item) => (item.ebayAttempt && typeof item.ebayAttempt === 'object' ? (item.ebayAttempt as Record<string, unknown>).itemId : undefined))
+    .filter(Boolean)
+    .map(String);
+  const errors = results.flatMap((item) => Array.isArray(item.errors) ? item.errors.map(String) : []);
+  return (
+    <View style={compact ? styles.inlineSummary : styles.runSummary}>
+      <View style={styles.cardStats}>
+        <Badge text={`${passed} passed`} tone={failed === 0 ? 'green' : undefined} />
+        <Badge text={`${failed} failed`} />
+        {itemIds.slice(0, 3).map((id) => <Badge key={id} text={`eBay ${id}`} tone="green" />)}
+      </View>
+      {errors.length > 0 && <Text style={styles.badLine} numberOfLines={3}>{errors.slice(0, 3).join(' | ')}</Text>}
+    </View>
   );
 }
 
@@ -792,7 +897,19 @@ function DraftPreview({ response }: { response?: DraftResponse }) {
 
 function ActiveListingsScreen({ run }: { run: <T>(loadingText: string, successText: string, work: () => Promise<T>, onSuccess?: (data: T) => void) => Promise<T | undefined> }) {
   const [scan, setScan] = useState<JsonValue>(null);
-  const load = () => run('Loading active eBay dashboard...', 'eBay dashboard loaded.', () => api<JsonValue>('/optimizer/scan?days=30&limit=250'), setScan);
+  const [days, setDays] = useState('14');
+  const [limit, setLimit] = useState('250');
+  const [manualFilter, setManualFilter] = useState<ManualEndFilter>('no_views');
+  const [selectedIds, setSelectedIds] = useState<string[]>([]);
+  const [confirmEnd, setConfirmEnd] = useState('');
+  const [endResult, setEndResult] = useState<JsonValue>(null);
+  const load = () =>
+    run(
+      'Loading active eBay dashboard...',
+      'eBay dashboard loaded.',
+      () => api<JsonValue>(`/optimizer/scan?days=${encodeURIComponent(days || '14')}&limit=${encodeURIComponent(limit || '250')}`),
+      setScan
+    );
   useEffect(() => {
     void load();
   }, []);
@@ -801,17 +918,70 @@ function ActiveListingsScreen({ run }: { run: <T>(loadingText: string, successTe
   const traffic = Array.isArray(root.traffic) ? (root.traffic as Array<Record<string, unknown>>) : [];
   const recommendations = Array.isArray(root.recommendations) ? (root.recommendations as Array<Record<string, unknown>>) : [];
   const totalValue = rows.reduce((sum, listing) => sum + Number(listing.price ?? 0) * Number(listing.quantityAvailable ?? 0), 0);
+  const selectableRows = rows.filter((listing) => listingMatchesManualFilter(listing, traffic, recommendations, manualFilter));
+  const selectedRows = rows.filter((listing) => selectedIds.includes(String(listing.listingId)));
+  const requiredConfirm = `END ${selectedIds.length}`;
+  const selectMatching = () => setSelectedIds(selectableRows.map((listing) => String(listing.listingId)).filter(Boolean));
+  const clearSelected = () => {
+    setSelectedIds([]);
+    setConfirmEnd('');
+  };
+  const toggleSelected = (listingId: string) =>
+    setSelectedIds((ids) => ids.includes(listingId) ? ids.filter((id) => id !== listingId) : [...ids, listingId]);
+  const endSelected = () =>
+    run(
+      `Ending ${selectedIds.length} selected eBay listings...`,
+      'Manual bulk end request finished.',
+      () => api<JsonValue>('/ebay/listings/end-bulk', {
+        method: 'POST',
+        body: JSON.stringify({
+          listingIds: selectedIds,
+          reason: 'NotAvailable',
+          confirm: confirmEnd,
+          note: `Manual dashboard bulk end: ${manualFilterLabel(manualFilter)} over ${days || '14'} days.`,
+        }),
+      }),
+      (data) => {
+        setEndResult(data);
+        clearSelected();
+        void load();
+      }
+    );
   return (
     <Panel title="Active eBay Listings">
+      <Text style={styles.bodyText}>Manual ending is separate from the AI optimizer. Load a traffic window, select weak listings by data, then type the exact confirmation phrase before anything is ended.</Text>
+      <View style={styles.formGrid}>
+        <Input label="Traffic window days" value={days} onChangeText={setDays} keyboardType="numeric" />
+        <Input label="Listing scan limit" value={limit} onChangeText={setLimit} keyboardType="numeric" />
+        <Input label={`Confirm bulk end (${requiredConfirm})`} value={confirmEnd} onChangeText={setConfirmEnd} placeholder={requiredConfirm} />
+      </View>
       <View style={styles.actions}>
         <Button label="Refresh Listings" icon={RefreshCcw} onPress={load} secondary />
+        <Button label="No Views" icon={Gauge} secondary={manualFilter !== 'no_views'} onPress={() => setManualFilter('no_views')} />
+        <Button label="No Clicks" icon={Gauge} secondary={manualFilter !== 'no_clicks'} onPress={() => setManualFilter('no_clicks')} />
+        <Button label="No Sales" icon={Gauge} secondary={manualFilter !== 'no_sales'} onPress={() => setManualFilter('no_sales')} />
+        <Button label="End/Relist Rec" icon={Bot} secondary={manualFilter !== 'optimizer_end'} onPress={() => setManualFilter('optimizer_end')} />
+        <Button label={`Select Matches (${selectableRows.length})`} icon={CheckCircle2} onPress={selectMatching} secondary />
+        <Button label="Clear Selection" icon={X} onPress={clearSelected} secondary />
+        <Button label={`End Selected (${selectedIds.length})`} icon={X} onPress={endSelected} danger disabled={selectedIds.length === 0 || confirmEnd !== requiredConfirm} />
       </View>
       <View style={styles.miniGrid}>
         <MetricCard label="Active listings" value={String(rows.length)} detail="Inventory + Trading API fallback" />
         <MetricCard label="Inventory value" value={`$${totalValue.toFixed(2)}`} detail="Price x available quantity" />
         <MetricCard label="Traffic rows" value={String(traffic.length)} detail="eBay Analytics listing metrics" />
         <MetricCard label="Needs action" value={String(recommendations.filter((item) => String((item.recommendation as Record<string, unknown> | undefined)?.action ?? 'none') !== 'none').length)} detail="Rule/AI optimizer candidates" />
+        <MetricCard label="Filter matches" value={String(selectableRows.length)} detail={manualFilterLabel(manualFilter)} />
+        <MetricCard label="Selected" value={String(selectedRows.length)} detail="Manual bulk-end queue" />
       </View>
+      {endResult && typeof endResult === 'object' && (
+        <Notice
+          title="Last manual end result"
+          items={[
+            `Ended ${String((endResult as Record<string, unknown>).ended ?? 0)} listing(s).`,
+            `Failed ${String((endResult as Record<string, unknown>).failed ?? 0)} listing(s).`,
+          ]}
+        />
+      )}
       {rows.length === 0 ? (
         <Notice title="No listings loaded" items={['The app checks Inventory API first and falls back to Trading API for legacy listings created by the old importer.']} />
       ) : (
@@ -821,23 +991,36 @@ function ActiveListingsScreen({ run }: { run: <T>(loadingText: string, successTe
             const recommendation = recommendations.find((item) => String((item.listing as Record<string, unknown> | undefined)?.listingId) === String(listing.listingId));
             const rec = recommendation?.recommendation as Record<string, unknown> | undefined;
             const imageUrl = typeof listing.imageUrl === 'string' ? listing.imageUrl : undefined;
+            const listingId = String(listing.listingId);
+            const hasTraffic = Boolean(metric);
+            const views = hasTraffic ? Number(metric?.views ?? 0) : undefined;
+            const clicks = hasTraffic ? listingClicks(metric) : undefined;
+            const sales = listingSales(listing, metric);
+            const matches = listingMatchesManualFilter(listing, traffic, recommendations, manualFilter);
+            const selected = selectedIds.includes(listingId);
             return (
-              <View key={String(listing.listingId)} style={styles.productCard}>
+              <View key={listingId} style={[styles.productCard, selected && styles.productCardSelected]}>
+              <Pressable onPress={() => toggleSelected(listingId)} style={[styles.selectToggle, selected && styles.selectToggleActive]}>
+                <Text style={[styles.selectToggleText, selected && styles.selectToggleTextActive]}>{selected ? 'Selected' : 'Select'}</Text>
+              </Pressable>
               {imageUrl ? <RNImage source={{ uri: imageUrl }} style={styles.queueImage} resizeMode="cover" /> : null}
               <Text style={styles.cardTitle} numberOfLines={2}>{String(listing.title ?? listing.listingId)}</Text>
+              <View style={styles.iconMetricGrid}>
+                <IconMetric icon={DollarSign} label="Price" value={`$${Number(listing.price ?? 0).toFixed(2)}`} tone="gold" />
+                <IconMetric icon={Store} label="Avail." value={String(Number(listing.quantityAvailable ?? 0))} />
+                <IconMetric icon={ShoppingCart} label="Sold" value={String(sales)} tone={sales > 0 ? 'green' : undefined} />
+                <IconMetric icon={Eye} label="Views" value={hasTraffic ? String(views ?? 0) : '--'} muted={!hasTraffic} />
+                <IconMetric icon={MousePointerClick} label="Clicks" value={hasTraffic ? String(clicks ?? 0) : '--'} muted={!hasTraffic} />
+                <IconMetric icon={TrendingUp} label="Imp." value={hasTraffic ? String(Number(metric?.impressions ?? 0)) : '--'} muted={!hasTraffic} />
+                <IconMetric icon={Heart} label="Watch" value={String(listingWatchers(listing))} />
+              </View>
               <View style={styles.cardStats}>
-                <Badge text={`$${Number(listing.price ?? 0).toFixed(2)}`} tone="green" />
-                <Badge text={`${Number(listing.quantityAvailable ?? 0)} available`} />
-                <Badge text={`${Number(listing.quantitySold ?? 0)} sold`} />
+                {matches && <Badge text="Filter match" tone="green" />}
+                {!hasTraffic && <Badge text="Traffic unavailable" />}
               </View>
-              <View style={styles.miniGrid}>
-                <MetricCard label="Impressions" value={String(Number(metric?.impressions ?? 0))} detail="30 days" />
-                <MetricCard label="Views" value={String(Number(metric?.views ?? 0))} detail="eBay Analytics" />
-                <MetricCard label="CTR" value={`${Number(metric?.clickThroughRate ?? 0).toFixed(2)}%`} detail="Click-through" />
-                <MetricCard label="Sales conv." value={`${Number(metric?.salesConversionRate ?? 0).toFixed(2)}%`} detail="Conversion" />
-              </View>
+              {hasTraffic && <Text style={styles.microCopy}>{days || '14'}d CTR {Number(metric?.clickThroughRate ?? 0).toFixed(2)}% | Sales conv. {Number(metric?.salesConversionRate ?? 0).toFixed(2)}%</Text>}
               {rec && <Notice title={String(rec.action ?? 'review')} items={[String(rec.reason ?? '')]} />}
-              <Text style={styles.muted}>Item ID {String(listing.listingId)}</Text>
+              <Text style={styles.muted}>Item ID {listingId}</Text>
               {listing.sku != null && <Text style={styles.muted}>SKU {String(listing.sku)}</Text>}
             </View>
             );
@@ -846,6 +1029,55 @@ function ActiveListingsScreen({ run }: { run: <T>(loadingText: string, successTe
       )}
     </Panel>
   );
+}
+
+function listingTraffic(listing: Record<string, unknown>, traffic: Array<Record<string, unknown>>): Record<string, unknown> | undefined {
+  return traffic.find((row) => String(row.listingId) === String(listing.listingId));
+}
+
+function listingRecommendation(listing: Record<string, unknown>, recommendations: Array<Record<string, unknown>>): Record<string, unknown> | undefined {
+  return recommendations.find((item) => String((item.listing as Record<string, unknown> | undefined)?.listingId) === String(listing.listingId));
+}
+
+function listingClicks(metric?: Record<string, unknown>): number {
+  const views = Number(metric?.views ?? 0);
+  const ctr = Number(metric?.clickThroughRate ?? 0);
+  if (!Number.isFinite(views) || !Number.isFinite(ctr) || views <= 0 || ctr <= 0) return 0;
+  return Math.round(views * (ctr > 1 ? ctr / 100 : ctr));
+}
+
+function listingSales(listing: Record<string, unknown>, metric?: Record<string, unknown>): number {
+  return Math.max(0, Number(metric?.transactions ?? 0), Number(listing.quantitySold ?? 0));
+}
+
+function listingWatchers(listing: Record<string, unknown>): number {
+  const raw = listing.raw && typeof listing.raw === 'object' ? listing.raw as Record<string, unknown> : {};
+  return Math.max(0, Number(listing.watchers ?? listing.watchCount ?? raw.watchers ?? raw.watchCount ?? 0));
+}
+
+function listingMatchesManualFilter(
+  listing: Record<string, unknown>,
+  traffic: Array<Record<string, unknown>>,
+  recommendations: Array<Record<string, unknown>>,
+  filter: ManualEndFilter,
+): boolean {
+  const metric = listingTraffic(listing, traffic);
+  const hasTraffic = Boolean(metric);
+  const views = hasTraffic ? Number(metric?.views ?? 0) : Number.NaN;
+  const clicks = hasTraffic ? listingClicks(metric) : Number.NaN;
+  const sales = listingSales(listing, metric);
+  if (filter === 'no_views') return hasTraffic && views <= 0 && sales <= 0;
+  if (filter === 'no_clicks') return hasTraffic && clicks <= 0 && sales <= 0;
+  if (filter === 'no_sales') return sales <= 0;
+  const recommendation = listingRecommendation(listing, recommendations)?.recommendation as Record<string, unknown> | undefined;
+  return ['end_listing', 'rewrite_relist'].includes(String(recommendation?.action ?? ''));
+}
+
+function manualFilterLabel(filter: ManualEndFilter): string {
+  if (filter === 'no_views') return 'No views and no sales';
+  if (filter === 'no_clicks') return 'No clicks and no sales';
+  if (filter === 'no_sales') return 'No sales';
+  return 'Optimizer says end or rewrite/relist';
 }
 
 function OptimizerScreen(props: {
@@ -1428,6 +1660,19 @@ function MetricCard({ label, value, detail }: { label: string; value: string; de
   );
 }
 
+function IconMetric({ icon: Icon, label, value, tone, muted }: { icon: IconType; label: string; value: string; tone?: 'green' | 'gold'; muted?: boolean }) {
+  const color = muted ? '#94a3b8' : tone === 'gold' ? '#a16207' : tone === 'green' ? '#0f766e' : '#334e68';
+  return (
+    <View style={[styles.iconMetric, tone === 'gold' && styles.iconMetricGold, tone === 'green' && styles.iconMetricGreen, muted && styles.iconMetricMuted]}>
+      <Icon size={15} color={color} />
+      <View style={styles.iconMetricText}>
+        <Text style={[styles.iconMetricValue, { color }]} numberOfLines={1}>{value}</Text>
+        <Text style={styles.iconMetricLabel} numberOfLines={1}>{label}</Text>
+      </View>
+    </View>
+  );
+}
+
 function Notice({ title, items }: { title: string; items: string[] }) {
   return (
     <View style={styles.notice}>
@@ -1566,10 +1811,20 @@ function OptimizationResult({ data }: { data: JsonValue }) {
         {recommendations.map((item, index) => {
           const recommendation = item.recommendation as Record<string, unknown> | undefined;
           const listing = item.listing as Record<string, unknown> | undefined;
+          const performance = item.performance as Record<string, unknown> | undefined;
+          const trafficAvailable = Boolean(performance?.trafficAvailable);
           return (
             <View key={index} style={styles.productCard}>
-              <Text style={styles.cardTitle}>{String(listing?.title ?? listing?.listingId ?? 'Listing')}</Text>
+              {typeof listing?.imageUrl === 'string' && <RNImage source={{ uri: listing.imageUrl }} style={styles.queueImage} resizeMode="cover" />}
+              <Text style={styles.cardTitle} numberOfLines={2}>{String(listing?.title ?? listing?.listingId ?? 'Listing')}</Text>
               <Badge text={String(recommendation?.action ?? 'review')} />
+              <View style={styles.iconMetricGrid}>
+                <IconMetric icon={DollarSign} label="Price" value={`$${Number(listing?.price ?? 0).toFixed(2)}`} tone="gold" />
+                <IconMetric icon={Store} label="Avail." value={String(Number(listing?.quantityAvailable ?? 0))} />
+                <IconMetric icon={ShoppingCart} label="Sold" value={String(Number(performance?.sales ?? listing?.quantitySold ?? 0))} tone={Number(performance?.sales ?? listing?.quantitySold ?? 0) > 0 ? 'green' : undefined} />
+                <IconMetric icon={Eye} label="Views" value={trafficAvailable ? String(Number(performance?.views ?? 0)) : '--'} muted={!trafficAvailable} />
+                <IconMetric icon={MousePointerClick} label="Clicks" value={trafficAvailable ? String(Number(performance?.clicks ?? 0)) : '--'} muted={!trafficAvailable} />
+              </View>
               <Text style={styles.muted}>{String(recommendation?.reason ?? '')}</Text>
             </View>
           );
@@ -1588,9 +1843,12 @@ function Input(props: { label: string; value?: string; onChangeText?: (value: st
   );
 }
 
-function Button({ label, icon: Icon, secondary, onPress }: { label: string; icon: IconType; secondary?: boolean; onPress?: () => void }) {
+function Button({ label, icon: Icon, secondary, danger, disabled, onPress }: { label: string; icon: IconType; secondary?: boolean; danger?: boolean; disabled?: boolean; onPress?: () => void }) {
   return (
-    <Pressable onPress={onPress} style={({ pressed }) => [styles.button, secondary && styles.secondaryButton, pressed && styles.buttonPressed]}>
+    <Pressable
+      onPress={disabled ? undefined : onPress}
+      style={({ pressed }) => [styles.button, secondary && styles.secondaryButton, danger && styles.dangerButton, disabled && styles.disabledButton, pressed && !disabled && styles.buttonPressed]}
+    >
       <Icon size={18} color={secondary ? '#0f766e' : '#ffffff'} />
       <Text style={[styles.buttonText, secondary && styles.secondaryButtonText]}>{label}</Text>
     </Pressable>
@@ -1644,35 +1902,35 @@ function TwoColumn({ left, right }: { left: React.ReactNode; right: React.ReactN
 }
 
 const styles = StyleSheet.create({
-  app: { flex: 1, backgroundColor: '#e8f7f2' },
+  app: { flex: 1, backgroundColor: '#f3f7ee' },
   shell: { flex: 1 },
   shellWide: { flexDirection: 'row' },
-  sidebar: { backgroundColor: 'rgba(255,255,255,0.9)', borderRightWidth: 1, borderRightColor: '#d5e7e2', padding: 18, width: 270 },
-  sidebarMobile: { width: '100%', borderRightWidth: 0, borderBottomWidth: 1, borderBottomColor: '#d5e7e2' },
+  sidebar: { backgroundColor: '#111813', borderRightWidth: 1, borderRightColor: '#d6b752', padding: 18, width: 270 },
+  sidebarMobile: { width: '100%', borderRightWidth: 0, borderBottomWidth: 1, borderBottomColor: '#d6b752' },
   brandRow: { flexDirection: 'row', alignItems: 'center', gap: 10, marginBottom: 18 },
-  brand: { fontSize: 18, fontWeight: '800', color: '#102a43' },
-  brandSub: { fontSize: 12, color: '#52606d', marginTop: 2 },
+  brand: { fontSize: 18, fontWeight: '800', color: '#f8fafc' },
+  brandSub: { fontSize: 12, color: '#d6b752', marginTop: 2 },
   mobileNavContent: { gap: 8 },
   navItem: { minHeight: 42, flexDirection: 'row', alignItems: 'center', gap: 9, paddingHorizontal: 12, borderRadius: 8, marginBottom: 6 },
-  navItemActive: { backgroundColor: '#d9f6ee' },
-  navText: { color: '#52606d', fontWeight: '700', fontSize: 14 },
-  navTextActive: { color: '#0f766e' },
+  navItemActive: { backgroundColor: '#f2cf63' },
+  navText: { color: '#cbd5e1', fontWeight: '700', fontSize: 14 },
+  navTextActive: { color: '#111813' },
   content: { flex: 1 },
   contentInner: { padding: 20, gap: 14 },
-  header: { minHeight: 116, backgroundColor: '#ffffff', borderRadius: 8, padding: 18, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', gap: 16, borderWidth: 1, borderColor: '#d5e7e2' },
+  header: { minHeight: 116, backgroundColor: '#111813', borderRadius: 8, padding: 18, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', gap: 16, borderWidth: 1, borderColor: '#d6b752' },
   headerText: { flex: 1, minWidth: 260 },
-  eyebrow: { color: '#0f766e', fontSize: 12, textTransform: 'uppercase', fontWeight: '800' },
-  title: { color: '#102a43', fontSize: 32, fontWeight: '900', marginTop: 4 },
-  headerCopy: { color: '#52606d', marginTop: 8, lineHeight: 21, maxWidth: 760 },
-  headerBadge: { flexDirection: 'row', alignItems: 'center', gap: 8, backgroundColor: '#effaf7', borderRadius: 8, paddingHorizontal: 12, paddingVertical: 10 },
-  headerBadgeText: { color: '#0f766e', fontWeight: '800' },
+  eyebrow: { color: '#a16207', fontSize: 12, textTransform: 'uppercase', fontWeight: '800' },
+  title: { color: '#f8fafc', fontSize: 32, fontWeight: '900', marginTop: 4 },
+  headerCopy: { color: '#dbe4d2', marginTop: 8, lineHeight: 21, maxWidth: 760 },
+  headerBadge: { flexDirection: 'row', alignItems: 'center', gap: 8, backgroundColor: '#f2cf63', borderRadius: 8, paddingHorizontal: 12, paddingVertical: 10 },
+  headerBadgeText: { color: '#111813', fontWeight: '800' },
   iconButton: { width: 42, height: 42, borderRadius: 8, alignItems: 'center', justifyContent: 'center', backgroundColor: '#f8fafc', borderWidth: 1, borderColor: '#dbe7e4' },
   messageBar: { minHeight: 44, backgroundColor: '#ffffff', borderRadius: 8, borderWidth: 1, borderColor: '#d5e7e2', paddingHorizontal: 14, flexDirection: 'row', alignItems: 'center', gap: 9 },
   messageText: { fontWeight: '800', flex: 1 },
   actions: { flexDirection: 'row', flexWrap: 'wrap', gap: 10, marginTop: 12 },
   metricGrid: { flexDirection: 'row', flexWrap: 'wrap', gap: 12, marginTop: 14 },
   miniGrid: { flexDirection: 'row', flexWrap: 'wrap', gap: 10, marginTop: 12 },
-  metricCard: { flexGrow: 1, flexBasis: 170, backgroundColor: '#f8fafc', borderRadius: 8, borderWidth: 1, borderColor: '#dbe7e4', padding: 14 },
+  metricCard: { flexGrow: 1, flexBasis: 170, backgroundColor: '#fffdf4', borderRadius: 8, borderWidth: 1, borderColor: '#ead089', padding: 14 },
   metricLabel: { color: '#52606d', fontWeight: '800', fontSize: 12 },
   metricValue: { color: '#102a43', fontSize: 24, fontWeight: '900', marginTop: 8 },
   healthGrid: { flexDirection: 'row', flexWrap: 'wrap', gap: 14, marginTop: 14 },
@@ -1681,7 +1939,7 @@ const styles = StyleSheet.create({
   statusText: { marginTop: 10, color: '#0f766e', fontWeight: '900' },
   muted: { color: '#62748a', lineHeight: 20, marginTop: 6 },
   bodyText: { color: '#334e68', lineHeight: 22, fontWeight: '600' },
-  panel: { backgroundColor: '#ffffff', borderRadius: 8, padding: 18, borderWidth: 1, borderColor: '#d5e7e2', marginTop: 14 },
+  panel: { backgroundColor: '#ffffff', borderRadius: 8, padding: 18, borderWidth: 1, borderColor: '#e0d5a8', marginTop: 14 },
   panelTitle: { color: '#102a43', fontWeight: '900', fontSize: 18, marginBottom: 14 },
   step: { flexDirection: 'row', alignItems: 'center', gap: 9, minHeight: 34 },
   stepText: { color: '#334e68', fontWeight: '700', flex: 1 },
@@ -1694,6 +1952,8 @@ const styles = StyleSheet.create({
   button: { minHeight: 42, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 8, backgroundColor: '#0f766e', borderRadius: 8, paddingHorizontal: 14 },
   buttonPressed: { opacity: 0.78 },
   secondaryButton: { backgroundColor: '#effaf7', borderWidth: 1, borderColor: '#99f6e4' },
+  dangerButton: { backgroundColor: '#b42318' },
+  disabledButton: { opacity: 0.45 },
   buttonText: { color: '#ffffff', fontWeight: '900' },
   secondaryButtonText: { color: '#0f766e' },
   resultSummary: { color: '#334e68', fontWeight: '900', marginTop: 12 },
@@ -1716,12 +1976,24 @@ const styles = StyleSheet.create({
   pillText: { color: '#102a43', fontWeight: '800' },
   pillTextSelected: { color: '#ffffff' },
   resultGrid: { flexDirection: 'row', flexWrap: 'wrap', gap: 12, marginTop: 14 },
-  productCard: { flexGrow: 1, flexBasis: 260, backgroundColor: '#ffffff', borderRadius: 8, padding: 14, borderWidth: 1, borderColor: '#d5e7e2' },
+  productCard: { flexGrow: 1, flexBasis: 260, backgroundColor: '#ffffff', borderRadius: 8, padding: 14, borderWidth: 1, borderColor: '#e0d5a8' },
+  productCardSelected: { borderColor: '#d6b752', backgroundColor: '#fffdf4' },
   selectToggle: { alignSelf: 'flex-start', minHeight: 30, borderRadius: 8, borderWidth: 1, borderColor: '#cbd5e1', paddingHorizontal: 10, justifyContent: 'center', marginBottom: 10, backgroundColor: '#f8fafc' },
   selectToggleActive: { backgroundColor: '#0f766e', borderColor: '#0f766e' },
   selectToggleText: { color: '#334e68', fontWeight: '900', fontSize: 12 },
   selectToggleTextActive: { color: '#ffffff' },
   draftPreview: { marginTop: 12, borderTopWidth: 1, borderTopColor: '#dbe7e4', paddingTop: 12 },
+  runSummary: { marginTop: 12, borderRadius: 8, borderWidth: 1, borderColor: '#e0d5a8', backgroundColor: '#fffdf4', padding: 12 },
+  inlineSummary: { marginTop: 10 },
+  iconMetricGrid: { flexDirection: 'row', flexWrap: 'wrap', gap: 8, marginTop: 12 },
+  iconMetric: { minWidth: 78, flexGrow: 1, flexBasis: 78, minHeight: 48, borderRadius: 8, borderWidth: 1, borderColor: '#dbe7e4', backgroundColor: '#f8fafc', paddingHorizontal: 8, paddingVertical: 7, flexDirection: 'row', alignItems: 'center', gap: 7 },
+  iconMetricGold: { borderColor: '#ead089', backgroundColor: '#fff8d7' },
+  iconMetricGreen: { borderColor: '#99f6e4', backgroundColor: '#effaf7' },
+  iconMetricMuted: { opacity: 0.72 },
+  iconMetricText: { flex: 1, minWidth: 0 },
+  iconMetricValue: { fontWeight: '900', fontSize: 14 },
+  iconMetricLabel: { color: '#62748a', fontWeight: '800', fontSize: 10, marginTop: 1 },
+  microCopy: { marginTop: 8, color: '#62748a', fontSize: 12, fontWeight: '800' },
   productMedia: { height: 180, borderRadius: 8, backgroundColor: '#effaf7', alignItems: 'center', justifyContent: 'center', overflow: 'hidden', marginBottom: 12 },
   productImage: { width: '100%', height: '100%' },
   videoBadge: { position: 'absolute', top: 10, right: 10, backgroundColor: '#102a43', borderRadius: 8, paddingHorizontal: 8, paddingVertical: 5 },

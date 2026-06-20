@@ -14,7 +14,15 @@
     "ios": "expo start --ios",
     "web": "expo start --web --port 8081",
     "api": "tsx src/backend/api/server.ts",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "cj:search-test-products": "tsx src/backend/scripts/ebay-listing-cli.ts cj-search",
+    "cj:inspect-product": "tsx src/backend/scripts/ebay-listing-cli.ts cj-inspect",
+    "ebay:test-single": "tsx src/backend/scripts/ebay-listing-cli.ts single",
+    "ebay:test-bulk": "tsx src/backend/scripts/ebay-listing-cli.ts bulk",
+    "ebay:parse-log": "tsx src/backend/scripts/ebay-listing-cli.ts parse-log",
+    "ebay:clear-log": "tsx src/backend/scripts/ebay-listing-cli.ts clear-log",
+    "ebay:end-test-listing": "tsx src/backend/scripts/ebay-listing-cli.ts end-test-listing",
+    "ebay:qa-fixtures": "tsx src/backend/scripts/ebay-engine-tests.ts"
   },
   "dependencies": {
     "@expo/metro-runtime": "^6.1.2",
@@ -29,6 +37,7 @@
     "react-native-svg": "15.12.1",
     "react-native-web": "^0.21.0",
     "tsx": "^4.19.2",
+    "xlsx": "^0.18.5",
     "zod": "^3.24.1"
   },
   "devDependencies": {

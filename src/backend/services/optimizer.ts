@@ -2,8 +2,9 @@ import type { AutomationMode, ListingPerformance, OptimizationRecommendation } f
 
 export function recommendOptimization(performance: ListingPerformance, mode: AutomationMode = 'approval'): OptimizationRecommendation {
   const requiresApproval = mode !== 'full_auto';
-  const ctr = performance.clicks / Math.max(performance.views, 1);
-  const conversionRate = performance.sales / Math.max(performance.clicks, 1);
+  const clicksKnown = performance.clickDataAvailable === true && typeof performance.clicks === 'number';
+  const ctr = clicksKnown ? performance.clicks! / Math.max(performance.views, 1) : undefined;
+  const conversionRate = clicksKnown ? performance.sales / Math.max(performance.clicks!, 1) : undefined;
 
   if (performance.cjStock <= 0) {
     return recommendation(performance.listingId, 'pause_for_stock', 'critical', mode, requiresApproval, 'CJ stock is unavailable. Stop exposure before overselling.', ['Pause or end the listing', 'Record stock snapshot and CJ product ID', 'Queue restock check before relist']);
@@ -14,13 +15,22 @@ export function recommendOptimization(performance: ListingPerformance, mode: Aut
   if (performance.competitorPriceDropped && performance.sales === 0) {
     return recommendation(performance.listingId, 'reduce_price', 'warning', mode, requiresApproval, 'Competitor price dropped and this listing has not converted. Protect margin but test a controlled price move.', ['Compare current price against median market price', 'Reduce 2-4% only if still above break-even', 'Do not chase outliers']);
   }
+  if (!performance.trafficAvailable) {
+    if (performance.sales > 0) {
+      return recommendation(performance.listingId, 'increase_price', 'info', mode, requiresApproval, 'Sales exist but eBay Analytics did not return traffic data for this window. Do not treat missing traffic as zero exposure.', ['Keep listing active', 'Review price after sold count updates', 'Retry analytics scan with a longer window']);
+    }
+    return recommendation(performance.listingId, 'none', 'info', mode, false, 'Traffic data is unavailable for this listing window. Wait for Analytics data or scan a longer window before optimizing.', ['Retry 30-90 day traffic scan', 'Do not end based on missing traffic alone']);
+  }
+  if (!clicksKnown && performance.sales > 0) {
+    return recommendation(performance.listingId, 'increase_price', 'info', mode, requiresApproval, 'This listing has sales, but eBay did not provide source-confirmed click count. Keep it active and do not end it from CTR math.', ['Keep listing active', 'Review price and inventory', 'Use impressions/views only for search exposure checks']);
+  }
   if (performance.daysLive >= 5 && performance.views < 15) {
     return recommendation(performance.listingId, 'improve_title_specifics', 'warning', mode, requiresApproval, 'Low views means eBay is not surfacing the listing. The first fix is search relevance, not price.', ['AI rewrite title using exact buyer keywords', 'Add missing item specifics', 'Check category fit', 'Avoid changing price until exposure improves']);
   }
-  if (performance.views >= 50 && ctr < 0.015) {
+  if (clicksKnown && performance.views >= 50 && ctr != null && ctr < 0.015) {
     return recommendation(performance.listingId, 'change_image_title', 'warning', mode, requiresApproval, 'People see the listing but do not click. Improve the first image and title promise before changing the description.', ['Choose brighter product-focused main image', 'Generate a non-misleading click-focused image concept', 'Rewrite title opening 45 characters', 'Keep car-parts images factual with no lifestyle embellishment']);
   }
-  if (performance.clicks >= 12 && performance.sales === 0 && conversionRate === 0) {
+  if (clicksKnown && performance.clicks! >= 12 && performance.sales === 0 && conversionRate === 0) {
     return recommendation(performance.listingId, 'reduce_price', 'warning', mode, requiresApproval, 'Clicks without sales means the offer is not convincing after the buyer opens it.', ['Improve description above the fold', 'Add trust details and package contents', 'Reduce price 2-5% if still profitable', 'Check shipping promise and returns']);
   }
   if (performance.sales === 0 && performance.daysLive >= 45 && performance.views < 40) {

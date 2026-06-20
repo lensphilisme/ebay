@@ -1,6 +1,8 @@
 import { getConfig } from '@/backend/config/env';
 import { EbayOAuthClient } from '@/backend/integrations/ebay/oauth';
 import { httpRequest, isHttpError } from '@/backend/utils/http';
+import { appendFileSync, mkdirSync } from 'node:fs';
+import { dirname } from 'node:path';
 import type { EbayComparableListing, EbayListingSnapshot, IntegrationHealth, ListingTrafficSnapshot } from '@/shared/types';
 
 class RateLimitTracker {
@@ -108,8 +110,65 @@ export class EbayClient {
     return this.request('POST', '/sell/inventory/v1/offer', { body: offer });
   }
 
+  async updateOffer(offerId: string, offer: Record<string, unknown>): Promise<unknown> {
+    return this.request('PUT', `/sell/inventory/v1/offer/${encodeURIComponent(offerId)}`, { body: offer });
+  }
+
   async publishOffer(offerId: string): Promise<unknown> {
     return this.request('POST', `/sell/inventory/v1/offer/${encodeURIComponent(offerId)}/publish`);
+  }
+
+  async bulkPublishOffers(offerIds: string[]): Promise<unknown> {
+    return this.request('POST', '/sell/inventory/v1/bulk_publish_offer', {
+      body: { requests: offerIds.slice(0, 25).map((offerId) => ({ offerId })) },
+    });
+  }
+
+  async createOrReplaceInventoryItemGroup(groupKey: string, group: Record<string, unknown>): Promise<unknown> {
+    return this.request('PUT', `/sell/inventory/v1/inventory_item_group/${encodeURIComponent(groupKey)}`, { body: group });
+  }
+
+  async publishOfferByInventoryItemGroup(groupKey: string): Promise<unknown> {
+    return this.request('POST', '/sell/inventory/v1/offer/publish_by_inventory_item_group', {
+      body: { inventoryItemGroupKey: groupKey },
+    });
+  }
+
+  async getSellerPolicies(): Promise<{ fulfillmentPolicyId?: string; paymentPolicyId?: string; returnPolicyId?: string; warnings: string[] }> {
+    const marketplaceId = getConfig().ebay.marketplaceId;
+    const warnings: string[] = [];
+    const [fulfillment, payment, returns] = await Promise.all([
+      this.request<{ fulfillmentPolicies?: Array<Record<string, unknown>> }>('GET', '/sell/account/v1/fulfillment_policy', { params: { marketplace_id: marketplaceId } }).catch((error) => {
+        warnings.push(`Fulfillment policies unavailable: ${error instanceof Error ? error.message : 'unknown error'}`);
+        return {};
+      }),
+      this.request<{ paymentPolicies?: Array<Record<string, unknown>> }>('GET', '/sell/account/v1/payment_policy', { params: { marketplace_id: marketplaceId } }).catch((error) => {
+        warnings.push(`Payment policies unavailable: ${error instanceof Error ? error.message : 'unknown error'}`);
+        return {};
+      }),
+      this.request<{ returnPolicies?: Array<Record<string, unknown>> }>('GET', '/sell/account/v1/return_policy', { params: { marketplace_id: marketplaceId } }).catch((error) => {
+        warnings.push(`Return policies unavailable: ${error instanceof Error ? error.message : 'unknown error'}`);
+        return {};
+      }),
+    ]);
+    return {
+      fulfillmentPolicyId: firstPolicyId(fulfillment.fulfillmentPolicies, 'fulfillmentPolicyId'),
+      paymentPolicyId: firstPolicyId(payment.paymentPolicies, 'paymentPolicyId'),
+      returnPolicyId: firstPolicyId(returns.returnPolicies, 'returnPolicyId'),
+      warnings,
+    };
+  }
+
+  async createOrUpdateOfferForSku(sku: string, offer: Record<string, unknown>): Promise<{ offerId?: string; action: 'created' | 'updated'; raw: unknown }> {
+    const existing = (await this.getOffersForSku(sku)).find((entry) => String(entry.marketplaceId ?? '') === getConfig().ebay.marketplaceId);
+    if (existing?.offerId) {
+      const offerId = String(existing.offerId);
+      const raw = await this.updateOffer(offerId, { ...offer, offerId });
+      return { offerId, action: 'updated', raw };
+    }
+    const raw = await this.createOffer(offer);
+    const offerId = raw && typeof raw === 'object' ? String((raw as Record<string, unknown>).offerId ?? '') : '';
+    return { offerId: offerId || undefined, action: 'created', raw };
   }
 
   getAuthorizationUrl(): string {
@@ -197,6 +256,7 @@ export class EbayClient {
       price: Number(firstTag(item, 'CurrentPrice') || firstTag(item, 'StartPrice') || 0),
       quantityAvailable: Math.max(0, Number(firstTag(item, 'Quantity') || 0) - Number(firstTag(item, 'QuantitySold') || 0)),
       quantitySold: Number(firstTag(item, 'QuantitySold') || 0),
+      watchers: Number(firstTag(item, 'WatchCount') || 0),
       imageUrl: optionalTag(item, 'PictureURL'),
       viewUrl: optionalTag(item, 'ViewItemURL'),
       marketplaceId: getConfig().ebay.marketplaceId,
@@ -242,6 +302,58 @@ export class EbayClient {
     return { ack, warnings: allTags(response, 'LongMessage'), listingId: args.listingId, sku: args.sku, quantity: args.quantity };
   }
 
+  async getCategorySuggestions(query: string): Promise<Array<{ categoryId: string; categoryName: string; categoryTreeNodeLevel?: number; raw: unknown }>> {
+    const data = await this.request<{ categorySuggestions?: Array<Record<string, unknown>> }>(
+      'GET',
+      '/commerce/taxonomy/v1/category_tree/0/get_category_suggestions',
+      { params: { q: query.slice(0, 350) } }
+    );
+    return (data.categorySuggestions ?? []).map((entry) => {
+      const category = (entry.category ?? {}) as Record<string, unknown>;
+      return {
+        categoryId: String(category.categoryId ?? ''),
+        categoryName: String(category.categoryName ?? ''),
+        categoryTreeNodeLevel: Number(entry.categoryTreeNodeLevel ?? 0) || undefined,
+        raw: entry,
+      };
+    }).filter((entry) => entry.categoryId);
+  }
+
+  async getItemAspectsForCategory(categoryId: string): Promise<Array<{ name: string; required: boolean; values: string[]; variationEnabled: boolean }>> {
+    const data = await this.request<{ aspects?: Array<Record<string, unknown>> }>(
+      'GET',
+      '/commerce/taxonomy/v1/category_tree/0/get_item_aspects_for_category',
+      { params: { category_id: categoryId } }
+    );
+    return (data.aspects ?? []).map((aspect) => {
+      const constraint = (aspect.aspectConstraint ?? {}) as Record<string, unknown>;
+      const values = Array.isArray(aspect.aspectValues) ? aspect.aspectValues as Array<Record<string, unknown>> : [];
+      return {
+        name: String(aspect.localizedAspectName ?? ''),
+        required: Boolean(constraint.aspectRequired),
+        values: values.map((value) => String(value.localizedValue ?? '')).filter(Boolean),
+        variationEnabled: constraint.aspectEnabledForVariations !== false,
+      };
+    }).filter((aspect) => aspect.name);
+  }
+
+  async verifyAddFixedPriceItem(requestXml: string): Promise<string> {
+    return this.tradingRequest('VerifyAddFixedPriceItem', requestXml);
+  }
+
+  async addFixedPriceItem(requestXml: string): Promise<string> {
+    return this.tradingRequest('AddFixedPriceItem', requestXml);
+  }
+
+  async endFixedPriceItem(itemId: string, reason: 'NotAvailable' | 'Incorrect' | 'LostOrBroken' | 'OtherListingError' | 'SellToHighBidder' = 'NotAvailable'): Promise<string> {
+    const xml = `<?xml version="1.0" encoding="utf-8"?>
+<EndFixedPriceItemRequest xmlns="urn:ebay:apis:eBLBaseComponents">
+  <ItemID>${escapeXml(itemId)}</ItemID>
+  <EndingReason>${reason}</EndingReason>
+</EndFixedPriceItemRequest>`;
+    return this.tradingRequest('EndFixedPriceItem', xml);
+  }
+
   private async tradingRequest(callName: string, xml: string): Promise<string> {
     const config = getConfig().ebay;
     const token = await this.auth.getAccessToken();
@@ -262,14 +374,16 @@ export class EbayClient {
       },
       timeoutMs: 30000,
     });
+    writeTradingLog(callName, xml, response.data, response.status);
     return response.data;
   }
 
   async getTrafficReport(listingIds: string[], days = 30): Promise<ListingTrafficSnapshot[]> {
     const config = getConfig().ebay;
     const end = new Date();
+    end.setUTCDate(end.getUTCDate() - 1);
     const start = new Date(end);
-    start.setUTCDate(start.getUTCDate() - days);
+    start.setUTCDate(start.getUTCDate() - Math.max(days - 1, 0));
     const formatDate = (date: Date) => date.toISOString().slice(0, 10).replace(/-/g, '');
     const filters = [
       listingIds.length > 0 ? `listing_ids:{${listingIds.join('|')}}` : undefined,
@@ -297,17 +411,31 @@ export class EbayClient {
     return records.map((record) => {
       const dimensions = record.dimensionValues as Array<{ value?: string }> | undefined;
       const values = record.metricValues as Array<{ value?: string | number }> | undefined;
+      const impressions = Number(values?.[0]?.value ?? 0);
+      const clickThroughRate = Number(values?.[2]?.value ?? 0);
       return {
         listingId: String(dimensions?.[0]?.value ?? ''),
-        impressions: Number(values?.[0]?.value ?? 0),
+        impressions,
         views: Number(values?.[1]?.value ?? 0),
-        clickThroughRate: Number(values?.[2]?.value ?? 0),
+        clickThroughRate,
         salesConversionRate: Number(values?.[3]?.value ?? 0),
         transactions: Number(values?.[4]?.value ?? 0),
+        clicksEstimated: estimateClicksFromCtr(impressions, clickThroughRate),
         raw: record,
       };
     });
   }
+}
+
+function firstPolicyId(rows: Array<Record<string, unknown>> | undefined, key: string): string | undefined {
+  const active = (rows ?? []).find((row) => row.categoryTypes || row.name || row[key]);
+  const id = active?.[key];
+  return typeof id === 'string' && id ? id : undefined;
+}
+
+function estimateClicksFromCtr(impressions: number, clickThroughRate: number): number | undefined {
+  if (!Number.isFinite(impressions) || !Number.isFinite(clickThroughRate) || impressions <= 0 || clickThroughRate <= 0) return undefined;
+  return Math.round(impressions * (clickThroughRate > 1 ? clickThroughRate / 100 : clickThroughRate));
 }
 
 function allBlocks(xml: string, tag: string): string[] {
@@ -360,4 +488,24 @@ function describeEbayError(data: unknown): string {
     return JSON.stringify(record).slice(0, 500);
   }
   return String(data);
+}
+
+function writeTradingLog(callName: string, requestXml: string, responseXml: string, httpStatus: number): void {
+  const logPath = 'database/logs/ebay-trading.log';
+  const ack = firstTag(responseXml, 'Ack');
+  const warnings = allBlocks(responseXml, 'Errors')
+    .filter((block) => firstTag(block, 'SeverityCode') === 'Warning')
+    .map((block) => firstTag(block, 'LongMessage') || firstTag(block, 'ShortMessage'));
+  const errors = allBlocks(responseXml, 'Errors')
+    .filter((block) => firstTag(block, 'SeverityCode') === 'Error')
+    .map((block) => firstTag(block, 'LongMessage') || firstTag(block, 'ShortMessage'));
+  mkdirSync(dirname(logPath), { recursive: true });
+  appendFileSync(logPath, JSON.stringify({
+    time: new Date().toISOString(),
+    call: callName,
+    http_status: httpStatus,
+    context: { ack, warnings, errors },
+    request_xml: requestXml,
+    response_xml: responseXml,
+  }) + '\n');
 }

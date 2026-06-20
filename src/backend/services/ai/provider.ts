@@ -5,6 +5,16 @@ export interface AIProvider {
   generateTitle(input: { sourceTitle: string; itemSpecifics: Record<string, string>; maxLength: number }): Promise<string>;
   generateDescription(input: { title: string; bullets: string[]; itemSpecifics: Record<string, string> }): Promise<string>;
   extractItemSpecifics(input: { title: string; description?: string; raw: Record<string, unknown> }): Promise<Record<string, string>>;
+  extractEbayCategorySpecifics(input: {
+    title: string;
+    description?: string;
+    raw: Record<string, unknown>;
+    categoryId: string;
+    categoryName?: string;
+    aspects: Array<{ name: string; required: boolean; values: string[]; variationEnabled: boolean }>;
+    existingSpecifics: Record<string, string>;
+    variationKeys: string[];
+  }): Promise<Record<string, string>>;
   scoreImages(input: { imageUrls: string[] }): Promise<ImageScore[]>;
   compareMarketListings(input: { sourceTitle: string; listings: EbayComparableListing[] }): Promise<{ confidence: number; reason: string }>;
   recommendOptimization(input: { listingId: string; metrics: Record<string, number> }): Promise<OptimizationRecommendation>;
@@ -34,6 +44,24 @@ export class RuleBasedAIProvider implements AIProvider {
       Size: String(raw.size ?? ''),
       Material: String(raw.material ?? ''),
     };
+  }
+
+  async extractEbayCategorySpecifics(input: {
+    title: string;
+    raw: Record<string, unknown>;
+    aspects: Array<{ name: string; required: boolean; values: string[] }>;
+    existingSpecifics: Record<string, string>;
+    variationKeys: string[];
+  }): Promise<Record<string, string>> {
+    const base = await this.extractItemSpecifics({ title: input.title, raw: input.raw });
+    const source = { ...base, ...input.existingSpecifics };
+    const specifics: Record<string, string> = {};
+    for (const aspect of input.aspects) {
+      if (input.variationKeys.includes(aspect.name)) continue;
+      const direct = source[aspect.name] ?? source[aspect.name.replace(/\s+/g, '')] ?? source[aspect.name.toLowerCase()];
+      if (direct) specifics[aspect.name] = String(direct);
+    }
+    return specifics;
   }
 
   async scoreImages(input: { imageUrls: string[] }): Promise<ImageScore[]> {
@@ -83,6 +111,18 @@ class FallbackAIProvider implements AIProvider {
   extractItemSpecifics(input: { title: string; description?: string; raw: Record<string, unknown> }): Promise<Record<string, string>> {
     return this.try((provider) => provider.extractItemSpecifics(input));
   }
+  extractEbayCategorySpecifics(input: {
+    title: string;
+    description?: string;
+    raw: Record<string, unknown>;
+    categoryId: string;
+    categoryName?: string;
+    aspects: Array<{ name: string; required: boolean; values: string[]; variationEnabled: boolean }>;
+    existingSpecifics: Record<string, string>;
+    variationKeys: string[];
+  }): Promise<Record<string, string>> {
+    return this.try((provider) => provider.extractEbayCategorySpecifics(input));
+  }
   scoreImages(input: { imageUrls: string[] }): Promise<ImageScore[]> {
     return this.try((provider) => provider.scoreImages(input));
   }
@@ -123,6 +163,34 @@ class OpenAIProvider extends RuleBasedAIProvider {
     return parseJsonObject(text);
   }
 
+  async extractEbayCategorySpecifics(input: {
+    title: string;
+    description?: string;
+    raw: Record<string, unknown>;
+    categoryId: string;
+    categoryName?: string;
+    aspects: Array<{ name: string; required: boolean; values: string[]; variationEnabled: boolean }>;
+    existingSpecifics: Record<string, string>;
+    variationKeys: string[];
+  }): Promise<Record<string, string>> {
+    const aspects = input.aspects.map((aspect) => ({
+      name: aspect.name,
+      required: aspect.required,
+      allowedValues: aspect.values.slice(0, 80),
+    }));
+    const text = await this.generateText(`You are filling ACTUAL eBay ItemSpecifics, not description text. Return one compact JSON object whose keys exactly match eBay aspect names. Fill as many eBay aspects as the product data truthfully supports, including optional recommended fields. Do not include variation keys: ${input.variationKeys.join(', ') || '(none)'}. If an aspect has allowedValues, choose one exact allowed value when possible. Prefer factual CJ data; use "Unbranded" for Brand when unknown and "Does not apply" only for part/model numbers where appropriate. Do not invent certification, compatibility, material, brand, model, country, or dimensions unless present in the title, description, images text, raw CJ data, or existing specifics.
+
+Category: ${input.categoryId} ${input.categoryName ?? ''}
+Title: ${input.title}
+Existing specifics: ${JSON.stringify(input.existingSpecifics)}
+eBay aspects: ${JSON.stringify(aspects)}
+Description: ${(input.description ?? '').slice(0, 3000)}
+Raw CJ: ${JSON.stringify(input.raw).slice(0, 7000)}
+
+JSON only.`);
+    return parseJsonObject(text);
+  }
+
   private async generateText(prompt: string): Promise<string> {
     if (!this.apiKey) throw new Error('Missing OpenAI API key.');
     const response = await fetch('https://api.openai.com/v1/chat/completions', {
@@ -151,6 +219,26 @@ class GeminiProvider extends RuleBasedAIProvider {
 
   async extractItemSpecifics(input: { title: string; description?: string; raw: Record<string, unknown> }): Promise<Record<string, string>> {
     const text = await this.generateText(`Extract eBay item specifics as JSON only.\nTitle: ${input.title}\nDescription: ${input.description ?? ''}\nRaw: ${JSON.stringify(input.raw).slice(0, 6000)}`);
+    return parseJsonObject(text);
+  }
+
+  async extractEbayCategorySpecifics(input: {
+    title: string;
+    description?: string;
+    raw: Record<string, unknown>;
+    categoryId: string;
+    categoryName?: string;
+    aspects: Array<{ name: string; required: boolean; values: string[]; variationEnabled: boolean }>;
+    existingSpecifics: Record<string, string>;
+    variationKeys: string[];
+  }): Promise<Record<string, string>> {
+    const text = await this.generateText(`Fill actual eBay ItemSpecifics as JSON only. Use keys exactly from these eBay aspects. Fill as many required and optional aspects as the product data truthfully supports. Do not include variation keys ${input.variationKeys.join(', ') || '(none)'}. Choose exact allowed values when supplied. Do not invent certification, compatibility, material, brand, model, country, or dimensions unless present in the provided product data.
+Category ${input.categoryId} ${input.categoryName ?? ''}
+Title ${input.title}
+Existing ${JSON.stringify(input.existingSpecifics)}
+Aspects ${JSON.stringify(input.aspects.map((aspect) => ({ name: aspect.name, required: aspect.required, allowedValues: aspect.values.slice(0, 80) })))}
+Description ${(input.description ?? '').slice(0, 3000)}
+Raw ${JSON.stringify(input.raw).slice(0, 7000)}`);
     return parseJsonObject(text);
   }
 

@@ -1,0 +1,800 @@
+{
+  "startedAt": "2026-06-19T04:06:21.822Z",
+  "finishedAt": "2026-06-19T04:06:36.142Z",
+  "liveMode": true,
+  "total": 3,
+  "passed": 3,
+  "failed": 0,
+  "skipped": 0,
+  "results": [
+    {
+      "cjProductId": "2016750686621003777",
+      "title": "Shoe Cabinet, Shoe Storage Cabinet,",
+      "productType": "Shoe Organizer",
+      "variantKeys": [
+        "Color",
+        "Specification"
+      ],
+      "variantCount": 2,
+      "imageCount": 5,
+      "selectedEbayCategory": "43506",
+      "payload": {
+        "title": "Shoe Cabinet, Shoe Storage Cabinet,",
+        "categoryId": "43506",
+        "conditionId": "1000",
+        "country": "US",
+        "currency": "USD",
+        "postalCode": "10001",
+        "location": "New York, New York",
+        "dispatchTimeMax": 3,
+        "listingDuration": "GTC",
+        "listingType": "FixedPriceItem",
+        "descriptionHtml": "<p><em></em></p>\n <p><em>About this item<br>SOLID CONSTRUCTION: Say goodbye to the flimsy and cheap shoe stand closet shoe rack. Made of premium E0 particle board, our entryway shoe cabinet with solid construction that would not make your shoes wobble or even let them down; 0.59' thicker boards enable this shoe organizer to load much heavier items, and making the rack more solid while using.<br>FLEXIBLE AND LARGE CAPACITY: The top shelf of this shoe storage can be used to place your bags, potted plants and decorations; 7-tier shoe cabinet with adjustable panel helps you easily classify your different types of shoes from slippers to boots. Measuring: 29.6\" W x 14.6\" D x 43.3\" H, this shoe rack can store up to 24 pairs of shoes, which can easily organize messy shoes for your family.<br>ELEGANT HOME DECOR: Crafted with wooden board and finely polished with water-proof and wear-resistant grey paint, this eye-catching shoes cabinet with doors will impress your friends deeply when they enter your home. Sleek gray with black metal handles and legs, adds a warm touch and some modern flair, to be decorative enough to suit any corner of your house.<br>SIMPLE AND COMPACT DESIGN: Simple design plus powerful function, this storage cabinet is not only as a shoe shelf, but also can be as a kitchen storage cabinet. With two swinging doors, this cabinet offers plenty of hidden storage to keep your home clutter-free. The space-saving vertical storage design is an ideal storage solution for your hallway, entryway, closet, dormitory, garage.</em></p>\n <br>\n <p></p>\n <img src=\"https://cf.cjdropshipping.com/17696448/79e6ad4f-6d9e-4b77-b070-6a01c51f9746.jpg\" style=\"max-width:100%;\" contenteditable=\"false\">\n <br>\n <p></p>",
+        "itemSpecifics": {
+          "Brand": "Unbranded",
+          "Type": "Hanging Shoe Organizer",
+          "Source": "CJ Dropshipping",
+          "CJ PID": "2016750686621003777",
+          "Item Height": "15 cm",
+          "Item Length": "Less Than 5 in",
+          "Item Width": "15 cm",
+          "MPN": "Does not apply"
+        },
+        "images": [
+          "https://cf.cjdropshipping.com/17696448/79e6ad4f-6d9e-4b77-b070-6a01c51f9746.jpg",
+          "https://cf.cjdropshipping.com/17696448/90490d6e-e2cb-4c9a-9753-3f36922a1516.jpg",
+          "https://cf.cjdropshipping.com/17696448/1d8ebf2e-dd7d-4596-8aae-9189c1bf0dd5.jpg",
+          "https://cf.cjdropshipping.com/17696448/f0dae6d6-cf8a-470c-958f-e5e8f808dca9.jpg",
+          "https://cf.cjdropshipping.com/17696448/bffaaf5a-7c9b-45be-8ce4-c32c41afe375.jpg"
+        ],
+        "returnPolicy": {
+          "returnsAcceptedOption": "ReturnsAccepted",
+          "refundOption": "MoneyBack",
+          "returnsWithinOption": "Days_30",
+          "shippingCostPaidByOption": "Buyer"
+        },
+        "shippingDetails": {
+          "shippingType": "Flat",
+          "shippingService": "UPSGround",
+          "shippingServiceCost": 0
+        },
+        "variations": [
+          {
+            "sku": "CJFU27480160001",
+            "quantity": 5,
+            "startPrice": 188.99,
+            "specifics": {
+              "Color": "Rustic Brown",
+              "Specification": "Option 1"
+            }
+          },
+          {
+            "sku": "CJFU27480160001-2",
+            "quantity": 5,
+            "startPrice": 188.99,
+            "specifics": {
+              "Color": "Rustic Brown",
+              "Specification": "Option 2"
+            }
+          }
+        ],
+        "variationSpecificsSet": {
+          "Color": [
+            "Rustic Brown"
+          ],
+          "Specification": [
+            "Option 1",
+            "Option 2"
+          ]
+        },
+        "variationPictures": {
+          "variationSpecificName": "Color",
+          "sets": [
+            {
+              "value": "Rustic Brown",
+              "urls": [
+                "https://cf.cjdropshipping.com/17696448/79e6ad4f-6d9e-4b77-b070-6a01c51f9746.jpg"
+              ]
+            }
+          ]
+        },
+        "debug": {
+          "cjProductId": "2016750686621003777",
+          "visualVariationKey": "Color",
+          "warnings": [
+            "CJFU27480160001: duplicate SKU repaired as CJFU27480160001-2.",
+            "Duplicate variation combinations repaired with unique Specification values.",
+            "Mapped by eBay taxonomy suggestion: Shoe Organizers."
+          ]
+        }
+      },
+      "preflight": [],
+      "warnings": [
+        "CJFU27480160001: duplicate SKU repaired as CJFU27480160001-2.",
+        "Duplicate variation combinations repaired with unique Specification values.",
+        "Mapped by eBay taxonomy suggestion: Shoe Organizers.",
+        "Funds from your sales may be unavailable and show as on hold for a period of time. Learn more:https://www.ebay.com/help/selling/getting-paid/getting-paid-items-youve-sold/pending-payments?id=4816",
+        "You'll be able to list $28,047.93 more this month. Request to list more: https://www.ebay.com/help/selling/listings/selling-limits?id=4107 "
+      ],
+      "requestXml": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<AddFixedPriceItemRequest xmlns=\"urn:ebay:apis:eBLBaseComponents\">\n  <ErrorLanguage>en_US</ErrorLanguage>\n  <WarningLevel>High</WarningLevel>\n  <Item>\n    <Title>Shoe Cabinet, Shoe Storage Cabinet,</Title>\n    <PrimaryCategory><CategoryID>43506</CategoryID></PrimaryCategory>\n    <CategoryMappingAllowed>true</CategoryMappingAllowed>\n    <ConditionID>1000</ConditionID>\n    <Country>US</Country>\n    <Currency>USD</Currency>\n    <DispatchTimeMax>3</DispatchTimeMax>\n    <ListingDuration>GTC</ListingDuration>\n    <ListingType>FixedPriceItem</ListingType>\n    <Location>New York, New York</Location>\n    <PostalCode>10001</PostalCode>\n    <Description><![CDATA[<p><em></em></p>\n <p><em>About this item<br>SOLID CONSTRUCTION: Say goodbye to the flimsy and cheap shoe stand closet shoe rack. Made of premium E0 particle board, our entryway shoe cabinet with solid construction that would not make your shoes wobble or even let them down; 0.59' thicker boards enable this shoe organizer to load much heavier items, and making the rack more solid while using.<br>FLEXIBLE AND LARGE CAPACITY: The top shelf of this shoe storage can be used to place your bags, potted plants and decorations; 7-tier shoe cabinet with adjustable panel helps you easily classify your different types of shoes from slippers to boots. Measuring: 29.6\" W x 14.6\" D x 43.3\" H, this shoe rack can store up to 24 pairs of shoes, which can easily organize messy shoes for your family.<br>ELEGANT HOME DECOR: Crafted with wooden board and finely polished with water-proof and wear-resistant grey paint, this eye-catching shoes cabinet with doors will impress your friends deeply when they enter your home. Sleek gray with black metal handles and legs, adds a warm touch and some modern flair, to be decorative enough to suit any corner of your house.<br>SIMPLE AND COMPACT DESIGN: Simple design plus powerful function, this storage cabinet is not only as a shoe shelf, but also can be as a kitchen storage cabinet. With two swinging doors, this cabinet offers plenty of hidden storage to keep your home clutter-free. The space-saving vertical storage design is an ideal storage solution for your hallway, entryway, closet, dormitory, garage.</em></p>\n <br>\n <p></p>\n <img src=\"https://cf.cjdropshipping.com/17696448/79e6ad4f-6d9e-4b77-b070-6a01c51f9746.jpg\" style=\"max-width:100%;\" contenteditable=\"false\">\n <br>\n <p></p>]]></Description>\n    <Site>US</Site>\n    <ReturnPolicy>\n      <ReturnsAcceptedOption>ReturnsAccepted</ReturnsAcceptedOption>\n      <RefundOption>MoneyBack</RefundOption>\n      <ReturnsWithinOption>Days_30</ReturnsWithinOption>\n      <ShippingCostPaidByOption>Buyer</ShippingCostPaidByOption>\n    </ReturnPolicy>\n    <ShippingDetails>\n      <ShippingType>Flat</ShippingType>\n      <ShippingServiceOptions>\n        <ShippingServicePriority>1</ShippingServicePriority>\n        <ShippingService>UPSGround</ShippingService>\n        <ShippingServiceCost currencyID=\"USD\">0.00</ShippingServiceCost>\n        <ShippingServiceAdditionalCost currencyID=\"USD\">0.00</ShippingServiceAdditionalCost>\n      </ShippingServiceOptions>\n    </ShippingDetails>\n    <PictureDetails><PictureURL>https://cf.cjdropshipping.com/17696448/79e6ad4f-6d9e-4b77-b070-6a01c51f9746.jpg</PictureURL><PictureURL>https://cf.cjdropshipping.com/17696448/90490d6e-e2cb-4c9a-9753-3f36922a1516.jpg</PictureURL><PictureURL>https://cf.cjdropshipping.com/17696448/1d8ebf2e-dd7d-4596-8aae-9189c1bf0dd5.jpg</PictureURL><PictureURL>https://cf.cjdropshipping.com/17696448/f0dae6d6-cf8a-470c-958f-e5e8f808dca9.jpg</PictureURL><PictureURL>https://cf.cjdropshipping.com/17696448/bffaaf5a-7c9b-45be-8ce4-c32c41afe375.jpg</PictureURL></PictureDetails>\n    <ItemSpecifics><NameValueList><Name>Brand</Name><Value>Unbranded</Value></NameValueList><NameValueList><Name>Type</Name><Value>Hanging Shoe Organizer</Value></NameValueList><NameValueList><Name>Source</Name><Value>CJ Dropshipping</Value></NameValueList><NameValueList><Name>CJ PID</Name><Value>2016750686621003777</Value></NameValueList><NameValueList><Name>Item Height</Name><Value>15 cm</Value></NameValueList><NameValueList><Name>Item Length</Name><Value>Less Than 5 in</Value></NameValueList><NameValueList><Name>Item Width</Name><Value>15 cm</Value></NameValueList><NameValueList><Name>MPN</Name><Value>Does not apply</Value></NameValueList></ItemSpecifics>\n    <Variations><Variation><SKU>CJFU27480160001</SKU><Quantity>5</Quantity><StartPrice currencyID=\"USD\">188.99</StartPrice><VariationSpecifics><NameValueList><Name>Color</Name><Value>Rustic Brown</Value></NameValueList><NameValueList><Name>Specification</Name><Value>Option 1</Value></NameValueList></VariationSpecifics></Variation><Variation><SKU>CJFU27480160001-2</SKU><Quantity>5</Quantity><StartPrice currencyID=\"USD\">188.99</StartPrice><VariationSpecifics><NameValueList><Name>Color</Name><Value>Rustic Brown</Value></NameValueList><NameValueList><Name>Specification</Name><Value>Option 2</Value></NameValueList></VariationSpecifics></Variation><VariationSpecificsSet><NameValueList><Name>Color</Name><Value>Rustic Brown</Value></NameValueList><NameValueList><Name>Specification</Name><Value>Option 1</Value><Value>Option 2</Value></NameValueList></VariationSpecificsSet><Pictures><VariationSpecificName>Color</VariationSpecificName><VariationSpecificPictureSet><VariationSpecificValue>Rustic Brown</VariationSpecificValue><PictureURL>https://cf.cjdropshipping.com/17696448/79e6ad4f-6d9e-4b77-b070-6a01c51f9746.jpg</PictureURL></VariationSpecificPictureSet></Pictures></Variations>\n  </Item>\n</AddFixedPriceItemRequest>",
+      "ebayAttempt": {
+        "attemptedAt": "2026-06-19T04:06:27.835Z",
+        "mode": "live",
+        "ack": "Warning",
+        "itemId": "336646519427",
+        "requestXml": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<AddFixedPriceItemRequest xmlns=\"urn:ebay:apis:eBLBaseComponents\">\n  <ErrorLanguage>en_US</ErrorLanguage>\n  <WarningLevel>High</WarningLevel>\n  <Item>\n    <Title>Shoe Cabinet, Shoe Storage Cabinet,</Title>\n    <PrimaryCategory><CategoryID>43506</CategoryID></PrimaryCategory>\n    <CategoryMappingAllowed>true</CategoryMappingAllowed>\n    <ConditionID>1000</ConditionID>\n    <Country>US</Country>\n    <Currency>USD</Currency>\n    <DispatchTimeMax>3</DispatchTimeMax>\n    <ListingDuration>GTC</ListingDuration>\n    <ListingType>FixedPriceItem</ListingType>\n    <Location>New York, New York</Location>\n    <PostalCode>10001</PostalCode>\n    <Description><![CDATA[<p><em></em></p>\n <p><em>About this item<br>SOLID CONSTRUCTION: Say goodbye to the flimsy and cheap shoe stand closet shoe rack. Made of premium E0 particle board, our entryway shoe cabinet with solid construction that would not make your shoes wobble or even let them down; 0.59' thicker boards enable this shoe organizer to load much heavier items, and making the rack more solid while using.<br>FLEXIBLE AND LARGE CAPACITY: The top shelf of this shoe storage can be used to place your bags, potted plants and decorations; 7-tier shoe cabinet with adjustable panel helps you easily classify your different types of shoes from slippers to boots. Measuring: 29.6\" W x 14.6\" D x 43.3\" H, this shoe rack can store up to 24 pairs of shoes, which can easily organize messy shoes for your family.<br>ELEGANT HOME DECOR: Crafted with wooden board and finely polished with water-proof and wear-resistant grey paint, this eye-catching shoes cabinet with doors will impress your friends deeply when they enter your home. Sleek gray with black metal handles and legs, adds a warm touch and some modern flair, to be decorative enough to suit any corner of your house.<br>SIMPLE AND COMPACT DESIGN: Simple design plus powerful function, this storage cabinet is not only as a shoe shelf, but also can be as a kitchen storage cabinet. With two swinging doors, this cabinet offers plenty of hidden storage to keep your home clutter-free. The space-saving vertical storage design is an ideal storage solution for your hallway, entryway, closet, dormitory, garage.</em></p>\n <br>\n <p></p>\n <img src=\"https://cf.cjdropshipping.com/17696448/79e6ad4f-6d9e-4b77-b070-6a01c51f9746.jpg\" style=\"max-width:100%;\" contenteditable=\"false\">\n <br>\n <p></p>]]></Description>\n    <Site>US</Site>\n    <ReturnPolicy>\n      <ReturnsAcceptedOption>ReturnsAccepted</ReturnsAcceptedOption>\n      <RefundOption>MoneyBack</RefundOption>\n      <ReturnsWithinOption>Days_30</ReturnsWithinOption>\n      <ShippingCostPaidByOption>Buyer</ShippingCostPaidByOption>\n    </ReturnPolicy>\n    <ShippingDetails>\n      <ShippingType>Flat</ShippingType>\n      <ShippingServiceOptions>\n        <ShippingServicePriority>1</ShippingServicePriority>\n        <ShippingService>UPSGround</ShippingService>\n        <ShippingServiceCost currencyID=\"USD\">0.00</ShippingServiceCost>\n        <ShippingServiceAdditionalCost currencyID=\"USD\">0.00</ShippingServiceAdditionalCost>\n      </ShippingServiceOptions>\n    </ShippingDetails>\n    <PictureDetails><PictureURL>https://cf.cjdropshipping.com/17696448/79e6ad4f-6d9e-4b77-b070-6a01c51f9746.jpg</PictureURL><PictureURL>https://cf.cjdropshipping.com/17696448/90490d6e-e2cb-4c9a-9753-3f36922a1516.jpg</PictureURL><PictureURL>https://cf.cjdropshipping.com/17696448/1d8ebf2e-dd7d-4596-8aae-9189c1bf0dd5.jpg</PictureURL><PictureURL>https://cf.cjdropshipping.com/17696448/f0dae6d6-cf8a-470c-958f-e5e8f808dca9.jpg</PictureURL><PictureURL>https://cf.cjdropshipping.com/17696448/bffaaf5a-7c9b-45be-8ce4-c32c41afe375.jpg</PictureURL></PictureDetails>\n    <ItemSpecifics><NameValueList><Name>Brand</Name><Value>Unbranded</Value></NameValueList><NameValueList><Name>Type</Name><Value>Hanging Shoe Organizer</Value></NameValueList><NameValueList><Name>Source</Name><Value>CJ Dropshipping</Value></NameValueList><NameValueList><Name>CJ PID</Name><Value>2016750686621003777</Value></NameValueList><NameValueList><Name>Item Height</Name><Value>15 cm</Value></NameValueList><NameValueList><Name>Item Length</Name><Value>Less Than 5 in</Value></NameValueList><NameValueList><Name>Item Width</Name><Value>15 cm</Value></NameValueList><NameValueList><Name>MPN</Name><Value>Does not apply</Value></NameValueList></ItemSpecifics>\n    <Variations><Variation><SKU>CJFU27480160001</SKU><Quantity>5</Quantity><StartPrice currencyID=\"USD\">188.99</StartPrice><VariationSpecifics><NameValueList><Name>Color</Name><Value>Rustic Brown</Value></NameValueList><NameValueList><Name>Specification</Name><Value>Option 1</Value></NameValueList></VariationSpecifics></Variation><Variation><SKU>CJFU27480160001-2</SKU><Quantity>5</Quantity><StartPrice currencyID=\"USD\">188.99</StartPrice><VariationSpecifics><NameValueList><Name>Color</Name><Value>Rustic Brown</Value></NameValueList><NameValueList><Name>Specification</Name><Value>Option 2</Value></NameValueList></VariationSpecifics></Variation><VariationSpecificsSet><NameValueList><Name>Color</Name><Value>Rustic Brown</Value></NameValueList><NameValueList><Name>Specification</Name><Value>Option 1</Value><Value>Option 2</Value></NameValueList></VariationSpecificsSet><Pictures><VariationSpecificName>Color</VariationSpecificName><VariationSpecificPictureSet><VariationSpecificValue>Rustic Brown</VariationSpecificValue><PictureURL>https://cf.cjdropshipping.com/17696448/79e6ad4f-6d9e-4b77-b070-6a01c51f9746.jpg</PictureURL></VariationSpecificPictureSet></Pictures></Variations>\n  </Item>\n</AddFixedPriceItemRequest>",
+        "responseXml": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<AddFixedPriceItemResponse xmlns=\"urn:ebay:apis:eBLBaseComponents\"><Timestamp>2026-06-19T04:06:27.736Z</Timestamp><Ack>Warning</Ack><Errors><ShortMessage>Funds from your sales may be unavailable and show as on hold for a period of time.</ShortMessage><LongMessage>Funds from your sales may be unavailable and show as on hold for a period of time. Learn more:https://www.ebay.com/help/selling/getting-paid/getting-paid-items-youve-sold/pending-payments?id=4816</LongMessage><ErrorCode>21917236</ErrorCode><SeverityCode>Warning</SeverityCode><ErrorParameters ParamID=\"0\"><Value>Funds from your sales may be unavailable and show as on hold for a period of time.</Value></ErrorParameters><ErrorParameters ParamID=\"1\"><Value>Funds from your sales may be unavailable and show as on hold for a period of time. Learn more:https://www.ebay.com/help/selling/getting-paid/getting-paid-items-youve-sold/pending-payments?id=4816</Value></ErrorParameters><ErrorParameters ParamID=\"2\"><Value>PayPalHold</Value></ErrorParameters><ErrorParameters ParamID=\"3\"><Value>https://www.ebay.com/help/selling/getting-paid/getting-paid-items-youve-sold/pending-payments?id=4816</Value></ErrorParameters><ErrorClassification>RequestError</ErrorClassification></Errors><Errors><ShortMessage>You&apos;ll be able to list $28,047.93 more this month. </ShortMessage><LongMessage>You&apos;ll be able to list $28,047.93 more this month. Request to list more: https://www.ebay.com/help/selling/listings/selling-limits?id=4107 </LongMessage><ErrorCode>21919189</ErrorCode><SeverityCode>Warning</SeverityCode><ErrorParameters ParamID=\"0\"><Value>You&apos;ll be able to list $28,047.93 more this month. </Value></ErrorParameters><ErrorParameters ParamID=\"1\"><Value>You&apos;ll be able to list $28,047.93 more this month. Request to list more: https://www.ebay.com/help/selling/listings/selling-limits?id=4107 </Value></ErrorParameters><ErrorParameters ParamID=\"2\"><Value>https://www.ebay.com/help/selling/listings/selling-limits?id=4107</Value></ErrorParameters><ErrorParameters ParamID=\"3\"><Value>&lt;div&gt;You&apos;ll be able to list $28,047.93 more this month. &lt;a target=&quot;_blank&quot; href=&quot;https://www.ebay.com/help/selling/listings/selling-limits?id=4107&quot;&gt;Request to list more&lt;/a&gt;&lt;/div&gt;</Value></ErrorParameters><ErrorParameters ParamID=\"4\"><Value>OPTIONAL</Value></ErrorParameters><ErrorClassification>RequestError</ErrorClassification></Errors><Version>1469</Version><Build>E1469_UNI_API5_19110941_R1</Build><ItemID>336646519427</ItemID><StartTime>2026-06-19T04:06:26.844Z</StartTime><EndTime>2026-07-19T04:06:26.844Z</EndTime><Fees><Fee><Name>AuctionLengthFee</Name><Fee currencyID=\"USD\">0.0</Fee></Fee><Fee><Name>BoldFee</Name><Fee currencyID=\"USD\">0.0</Fee></Fee><Fee><Name>BuyItNowFee</Name><Fee currencyID=\"USD\">0.0</Fee></Fee><Fee><Name>CategoryFeaturedFee</Name><Fee currencyID=\"USD\">0.0</Fee></Fee><Fee><Name>FeaturedFee</Name><Fee currencyID=\"USD\">0.0</Fee></Fee><Fee><Name>GalleryPlusFee</Name><Fee currencyID=\"USD\">0.0</Fee></Fee><Fee><Name>FeaturedGalleryFee</Name><Fee currencyID=\"USD\">0.0</Fee></Fee><Fee><Name>FixedPriceDurationFee</Name><Fee currencyID=\"USD\">0.0</Fee></Fee><Fee><Name>GalleryFee</Name><Fee currencyID=\"USD\">0.0</Fee></Fee><Fee><Name>GiftIconFee</Name><Fee currencyID=\"USD\">0.0</Fee></Fee><Fee><Name>HighLightFee</Name><Fee currencyID=\"USD\">0.0</Fee></Fee><Fee><Name>InsertionFee</Name><Fee currencyID=\"USD\">0.0</Fee><PromotionalDiscount currencyID=\"USD\">0.35</PromotionalDiscount></Fee><Fee><Name>InternationalInsertionFee</Name><Fee currencyID=\"USD\">0.0</Fee></Fee><Fee><Name>ListingDesignerFee</Name><Fee currencyID=\"USD\">0.0</Fee></Fee><Fee><Name>ListingFee</Name><Fee currencyID=\"USD\">0.0</Fee><PromotionalDiscount currencyID=\"USD\">0.35</PromotionalDiscount></Fee><Fee><Name>PhotoDisplayFee</Name><Fee currencyID=\"USD\">0.0</Fee></Fee><Fee><Name>PhotoFee</Name><Fee currencyID=\"USD\">0.0</Fee></Fee><Fee><Name>ReserveFee</Name><Fee currencyID=\"USD\">0.0</Fee></Fee><Fee><Name>SchedulingFee</Name><Fee currencyID=\"USD\">0.0</Fee></Fee><Fee><Name>SubtitleFee</Name><Fee currencyID=\"USD\">0.0</Fee></Fee><Fee><Name>BorderFee</Name><Fee currencyID=\"USD\">0.0</Fee></Fee><Fee><Name>ProPackBundleFee</Name><Fee currencyID=\"USD\">0.0</Fee></Fee><Fee><Name>BasicUpgradePackBundleFee</Name><Fee currencyID=\"USD\">0.0</Fee></Fee><Fee><Name>ValuePackBundleFee</Name><Fee currencyID=\"USD\">0.0</Fee></Fee><Fee><Name>PrivateListingFee</Name><Fee currencyID=\"USD\">0.0</Fee></Fee><Fee><Name>ProPackPlusBundleFee</Name><Fee currencyID=\"USD\">0.0</Fee></Fee><Fee><Name>MotorsGermanySearchFee</Name><Fee currencyID=\"USD\">0.0</Fee></Fee></Fees><DiscountReason>SpecialOffer</DiscountReason></AddFixedPriceItemResponse>",
+        "errors": [],
+        "warnings": [
+          "Funds from your sales may be unavailable and show as on hold for a period of time. Learn more:https://www.ebay.com/help/selling/getting-paid/getting-paid-items-youve-sold/pending-payments?id=4816",
+          "You'll be able to list $28,047.93 more this month. Request to list more: https://www.ebay.com/help/selling/listings/selling-limits?id=4107 "
+        ],
+        "fees": [
+          {
+            "name": "AuctionLengthFee",
+            "amount": 0,
+            "currency": "USD"
+          },
+          {
+            "name": "BoldFee",
+            "amount": 0,
+            "currency": "USD"
+          },
+          {
+            "name": "BuyItNowFee",
+            "amount": 0,
+            "currency": "USD"
+          },
+          {
+            "name": "CategoryFeaturedFee",
+            "amount": 0,
+            "currency": "USD"
+          },
+          {
+            "name": "FeaturedFee",
+            "amount": 0,
+            "currency": "USD"
+          },
+          {
+            "name": "GalleryPlusFee",
+            "amount": 0,
+            "currency": "USD"
+          },
+          {
+            "name": "FeaturedGalleryFee",
+            "amount": 0,
+            "currency": "USD"
+          },
+          {
+            "name": "FixedPriceDurationFee",
+            "amount": 0,
+            "currency": "USD"
+          },
+          {
+            "name": "GalleryFee",
+            "amount": 0,
+            "currency": "USD"
+          },
+          {
+            "name": "GiftIconFee",
+            "amount": 0,
+            "currency": "USD"
+          },
+          {
+            "name": "HighLightFee",
+            "amount": 0,
+            "currency": "USD"
+          },
+          {
+            "name": "InsertionFee",
+            "amount": 0,
+            "currency": "USD"
+          },
+          {
+            "name": "InternationalInsertionFee",
+            "amount": 0,
+            "currency": "USD"
+          },
+          {
+            "name": "ListingDesignerFee",
+            "amount": 0,
+            "currency": "USD"
+          },
+          {
+            "name": "ListingFee",
+            "amount": 0,
+            "currency": "USD"
+          },
+          {
+            "name": "PhotoDisplayFee",
+            "amount": 0,
+            "currency": "USD"
+          },
+          {
+            "name": "PhotoFee",
+            "amount": 0,
+            "currency": "USD"
+          },
+          {
+            "name": "ReserveFee",
+            "amount": 0,
+            "currency": "USD"
+          },
+          {
+            "name": "SchedulingFee",
+            "amount": 0,
+            "currency": "USD"
+          },
+          {
+            "name": "SubtitleFee",
+            "amount": 0,
+            "currency": "USD"
+          },
+          {
+            "name": "BorderFee",
+            "amount": 0,
+            "currency": "USD"
+          },
+          {
+            "name": "ProPackBundleFee",
+            "amount": 0,
+            "currency": "USD"
+          },
+          {
+            "name": "BasicUpgradePackBundleFee",
+            "amount": 0,
+            "currency": "USD"
+          },
+          {
+            "name": "ValuePackBundleFee",
+            "amount": 0,
+            "currency": "USD"
+          },
+          {
+            "name": "PrivateListingFee",
+            "amount": 0,
+            "currency": "USD"
+          },
+          {
+            "name": "ProPackPlusBundleFee",
+            "amount": 0,
+            "currency": "USD"
+          },
+          {
+            "name": "MotorsGermanySearchFee",
+            "amount": 0,
+            "currency": "USD"
+          }
+        ]
+      },
+      "status": "passed",
+      "errors": []
+    },
+    {
+      "cjProductId": "2016750986459643905",
+      "title": "Shoe Cabinet ,Shoe Rack Organizer",
+      "productType": "Shoe Organizer",
+      "variantKeys": [
+        "Color",
+        "Specification"
+      ],
+      "variantCount": 2,
+      "imageCount": 5,
+      "selectedEbayCategory": "43506",
+      "payload": {
+        "title": "Shoe Cabinet ,Shoe Rack Organizer",
+        "categoryId": "43506",
+        "conditionId": "1000",
+        "country": "US",
+        "currency": "USD",
+        "postalCode": "10001",
+        "location": "New York, New York",
+        "dispatchTimeMax": 3,
+        "listingDuration": "GTC",
+        "listingType": "FixedPriceItem",
+        "descriptionHtml": "<p><em></em></p>\n <p><em>About this item<br>Ample Storage Capacity: This 5-tier shoe cabinet accommodates 20-25 pairs (Men's size 10-10.5), plus additional space at the bottom for easy access to everyday shoes—perfect for keeping your home clutter-free<br>Versatile Multi-Use Design: More than just a shoe cabinet! Its slim, vertical design fits effortlessly into entryways, hallways, dorms, or garages, organizing shoes while enhancing your space<br>Durable &amp; Sturdy Build: Crafted with high-quality MDF and reinforced steel legs, this cabinet offers stability and durability, ensuring it remains wobble-free and reliable for everyday use<br>Sleek, Modern Aesthetic: With its elegant white finish, gold stripes, and diamond-textured design, this minimalist shoe cabinet adds a luxurious touch to any room, complementing modern home décor</em></p>\n <br>\n <p></p>\n <img src=\"https://cf.cjdropshipping.com/17696448/bc392c00-955b-4b40-8ef0-e5e0242efafd.jpg\" style=\"max-width:100%;\" contenteditable=\"false\">\n <br>\n <p></p>",
+        "itemSpecifics": {
+          "Brand": "Unbranded",
+          "Type": "Hanging Shoe Organizer",
+          "Source": "CJ Dropshipping",
+          "CJ PID": "2016750986459643905",
+          "Item Height": "15 cm",
+          "Item Length": "Less Than 5 in",
+          "Item Width": "15 cm",
+          "MPN": "Does not apply"
+        },
+        "images": [
+          "https://cf.cjdropshipping.com/17696448/bc392c00-955b-4b40-8ef0-e5e0242efafd.jpg",
+          "https://cf.cjdropshipping.com/17696448/64aace4b-e92c-41d1-91f0-ba6da0532515.jpg",
+          "https://cf.cjdropshipping.com/17696448/ae08cc4e-34e0-46fb-aa78-f9b2dca655e8.jpg",
+          "https://cf.cjdropshipping.com/17696448/2fd6b878-4be4-47fc-a015-32f1b83569b7.jpg",
+          "https://cf.cjdropshipping.com/17696448/bf82db32-ff28-4fcc-a5e1-73bc5c1d30cc.jpg"
+        ],
+        "returnPolicy": {
+          "returnsAcceptedOption": "ReturnsAccepted",
+          "refundOption": "MoneyBack",
+          "returnsWithinOption": "Days_30",
+          "shippingCostPaidByOption": "Buyer"
+        },
+        "shippingDetails": {
+          "shippingType": "Flat",
+          "shippingService": "UPSGround",
+          "shippingServiceCost": 0
+        },
+        "variations": [
+          {
+            "sku": "CJFU27480350001",
+            "quantity": 5,
+            "startPrice": 181.99,
+            "specifics": {
+              "Color": "White and Gold",
+              "Specification": "Option 1"
+            }
+          },
+          {
+            "sku": "CJFU27480350001-2",
+            "quantity": 5,
+            "startPrice": 181.99,
+            "specifics": {
+              "Color": "White and Gold",
+              "Specification": "Option 2"
+            }
+          }
+        ],
+        "variationSpecificsSet": {
+          "Color": [
+            "White and Gold"
+          ],
+          "Specification": [
+            "Option 1",
+            "Option 2"
+          ]
+        },
+        "variationPictures": {
+          "variationSpecificName": "Color",
+          "sets": [
+            {
+              "value": "White and Gold",
+              "urls": [
+                "https://cf.cjdropshipping.com/17696448/bc392c00-955b-4b40-8ef0-e5e0242efafd.jpg"
+              ]
+            }
+          ]
+        },
+        "debug": {
+          "cjProductId": "2016750986459643905",
+          "visualVariationKey": "Color",
+          "warnings": [
+            "CJFU27480350001: duplicate SKU repaired as CJFU27480350001-2.",
+            "Duplicate variation combinations repaired with unique Specification values.",
+            "Mapped by eBay taxonomy suggestion: Shoe Organizers."
+          ]
+        }
+      },
+      "preflight": [],
+      "warnings": [
+        "CJFU27480350001: duplicate SKU repaired as CJFU27480350001-2.",
+        "Duplicate variation combinations repaired with unique Specification values.",
+        "Mapped by eBay taxonomy suggestion: Shoe Organizers.",
+        "Funds from your sales may be unavailable and show as on hold for a period of time. Learn more:https://www.ebay.com/help/selling/getting-paid/getting-paid-items-youve-sold/pending-payments?id=4816",
+        "You'll be able to list $26,228.03 more this month. Request to list more: https://www.ebay.com/help/selling/listings/selling-limits?id=4107 "
+      ],
+      "requestXml": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<AddFixedPriceItemRequest xmlns=\"urn:ebay:apis:eBLBaseComponents\">\n  <ErrorLanguage>en_US</ErrorLanguage>\n  <WarningLevel>High</WarningLevel>\n  <Item>\n    <Title>Shoe Cabinet ,Shoe Rack Organizer</Title>\n    <PrimaryCategory><CategoryID>43506</CategoryID></PrimaryCategory>\n    <CategoryMappingAllowed>true</CategoryMappingAllowed>\n    <ConditionID>1000</ConditionID>\n    <Country>US</Country>\n    <Currency>USD</Currency>\n    <DispatchTimeMax>3</DispatchTimeMax>\n    <ListingDuration>GTC</ListingDuration>\n    <ListingType>FixedPriceItem</ListingType>\n    <Location>New York, New York</Location>\n    <PostalCode>10001</PostalCode>\n    <Description><![CDATA[<p><em></em></p>\n <p><em>About this item<br>Ample Storage Capacity: This 5-tier shoe cabinet accommodates 20-25 pairs (Men's size 10-10.5), plus additional space at the bottom for easy access to everyday shoes—perfect for keeping your home clutter-free<br>Versatile Multi-Use Design: More than just a shoe cabinet! Its slim, vertical design fits effortlessly into entryways, hallways, dorms, or garages, organizing shoes while enhancing your space<br>Durable &amp; Sturdy Build: Crafted with high-quality MDF and reinforced steel legs, this cabinet offers stability and durability, ensuring it remains wobble-free and reliable for everyday use<br>Sleek, Modern Aesthetic: With its elegant white finish, gold stripes, and diamond-textured design, this minimalist shoe cabinet adds a luxurious touch to any room, complementing modern home décor</em></p>\n <br>\n <p></p>\n <img src=\"https://cf.cjdropshipping.com/17696448/bc392c00-955b-4b40-8ef0-e5e0242efafd.jpg\" style=\"max-width:100%;\" contenteditable=\"false\">\n <br>\n <p></p>]]></Description>\n    <Site>US</Site>\n    <ReturnPolicy>\n      <ReturnsAcceptedOption>ReturnsAccepted</ReturnsAcceptedOption>\n      <RefundOption>MoneyBack</RefundOption>\n      <ReturnsWithinOption>Days_30</ReturnsWithinOption>\n      <ShippingCostPaidByOption>Buyer</ShippingCostPaidByOption>\n    </ReturnPolicy>\n    <ShippingDetails>\n      <ShippingType>Flat</ShippingType>\n      <ShippingServiceOptions>\n        <ShippingServicePriority>1</ShippingServicePriority>\n        <ShippingService>UPSGround</ShippingService>\n        <ShippingServiceCost currencyID=\"USD\">0.00</ShippingServiceCost>\n        <ShippingServiceAdditionalCost currencyID=\"USD\">0.00</ShippingServiceAdditionalCost>\n      </ShippingServiceOptions>\n    </ShippingDetails>\n    <PictureDetails><PictureURL>https://cf.cjdropshipping.com/17696448/bc392c00-955b-4b40-8ef0-e5e0242efafd.jpg</PictureURL><PictureURL>https://cf.cjdropshipping.com/17696448/64aace4b-e92c-41d1-91f0-ba6da0532515.jpg</PictureURL><PictureURL>https://cf.cjdropshipping.com/17696448/ae08cc4e-34e0-46fb-aa78-f9b2dca655e8.jpg</PictureURL><PictureURL>https://cf.cjdropshipping.com/17696448/2fd6b878-4be4-47fc-a015-32f1b83569b7.jpg</PictureURL><PictureURL>https://cf.cjdropshipping.com/17696448/bf82db32-ff28-4fcc-a5e1-73bc5c1d30cc.jpg</PictureURL></PictureDetails>\n    <ItemSpecifics><NameValueList><Name>Brand</Name><Value>Unbranded</Value></NameValueList><NameValueList><Name>Type</Name><Value>Hanging Shoe Organizer</Value></NameValueList><NameValueList><Name>Source</Name><Value>CJ Dropshipping</Value></NameValueList><NameValueList><Name>CJ PID</Name><Value>2016750986459643905</Value></NameValueList><NameValueList><Name>Item Height</Name><Value>15 cm</Value></NameValueList><NameValueList><Name>Item Length</Name><Value>Less Than 5 in</Value></NameValueList><NameValueList><Name>Item Width</Name><Value>15 cm</Value></NameValueList><NameValueList><Name>MPN</Name><Value>Does not apply</Value></NameValueList></ItemSpecifics>\n    <Variations><Variation><SKU>CJFU27480350001</SKU><Quantity>5</Quantity><StartPrice currencyID=\"USD\">181.99</StartPrice><VariationSpecifics><NameValueList><Name>Color</Name><Value>White and Gold</Value></NameValueList><NameValueList><Name>Specification</Name><Value>Option 1</Value></NameValueList></VariationSpecifics></Variation><Variation><SKU>CJFU27480350001-2</SKU><Quantity>5</Quantity><StartPrice currencyID=\"USD\">181.99</StartPrice><VariationSpecifics><NameValueList><Name>Color</Name><Value>White and Gold</Value></NameValueList><NameValueList><Name>Specification</Name><Value>Option 2</Value></NameValueList></VariationSpecifics></Variation><VariationSpecificsSet><NameValueList><Name>Color</Name><Value>White and Gold</Value></NameValueList><NameValueList><Name>Specification</Name><Value>Option 1</Value><Value>Option 2</Value></NameValueList></VariationSpecificsSet><Pictures><VariationSpecificName>Color</VariationSpecificName><VariationSpecificPictureSet><VariationSpecificValue>White and Gold</VariationSpecificValue><PictureURL>https://cf.cjdropshipping.com/17696448/bc392c00-955b-4b40-8ef0-e5e0242efafd.jpg</PictureURL></VariationSpecificPictureSet></Pictures></Variations>\n  </Item>\n</AddFixedPriceItemRequest>",
+      "ebayAttempt": {
+        "attemptedAt": "2026-06-19T04:06:31.456Z",
+        "mode": "live",
+        "ack": "Warning",
+        "itemId": "336646519437",
+        "requestXml": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<AddFixedPriceItemRequest xmlns=\"urn:ebay:apis:eBLBaseComponents\">\n  <ErrorLanguage>en_US</ErrorLanguage>\n  <WarningLevel>High</WarningLevel>\n  <Item>\n    <Title>Shoe Cabinet ,Shoe Rack Organizer</Title>\n    <PrimaryCategory><CategoryID>43506</CategoryID></PrimaryCategory>\n    <CategoryMappingAllowed>true</CategoryMappingAllowed>\n    <ConditionID>1000</ConditionID>\n    <Country>US</Country>\n    <Currency>USD</Currency>\n    <DispatchTimeMax>3</DispatchTimeMax>\n    <ListingDuration>GTC</ListingDuration>\n    <ListingType>FixedPriceItem</ListingType>\n    <Location>New York, New York</Location>\n    <PostalCode>10001</PostalCode>\n    <Description><![CDATA[<p><em></em></p>\n <p><em>About this item<br>Ample Storage Capacity: This 5-tier shoe cabinet accommodates 20-25 pairs (Men's size 10-10.5), plus additional space at the bottom for easy access to everyday shoes—perfect for keeping your home clutter-free<br>Versatile Multi-Use Design: More than just a shoe cabinet! Its slim, vertical design fits effortlessly into entryways, hallways, dorms, or garages, organizing shoes while enhancing your space<br>Durable &amp; Sturdy Build: Crafted with high-quality MDF and reinforced steel legs, this cabinet offers stability and durability, ensuring it remains wobble-free and reliable for everyday use<br>Sleek, Modern Aesthetic: With its elegant white finish, gold stripes, and diamond-textured design, this minimalist shoe cabinet adds a luxurious touch to any room, complementing modern home décor</em></p>\n <br>\n <p></p>\n <img src=\"https://cf.cjdropshipping.com/17696448/bc392c00-955b-4b40-8ef0-e5e0242efafd.jpg\" style=\"max-width:100%;\" contenteditable=\"false\">\n <br>\n <p></p>]]></Description>\n    <Site>US</Site>\n    <ReturnPolicy>\n      <ReturnsAcceptedOption>ReturnsAccepted</ReturnsAcceptedOption>\n      <RefundOption>MoneyBack</RefundOption>\n      <ReturnsWithinOption>Days_30</ReturnsWithinOption>\n      <ShippingCostPaidByOption>Buyer</ShippingCostPaidByOption>\n    </ReturnPolicy>\n    <ShippingDetails>\n      <ShippingType>Flat</ShippingType>\n      <ShippingServiceOptions>\n        <ShippingServicePriority>1</ShippingServicePriority>\n        <ShippingService>UPSGround</ShippingService>\n        <ShippingServiceCost currencyID=\"USD\">0.00</ShippingServiceCost>\n        <ShippingServiceAdditionalCost currencyID=\"USD\">0.00</ShippingServiceAdditionalCost>\n      </ShippingServiceOptions>\n    </ShippingDetails>\n    <PictureDetails><PictureURL>https://cf.cjdropshipping.com/17696448/bc392c00-955b-4b40-8ef0-e5e0242efafd.jpg</PictureURL><PictureURL>https://cf.cjdropshipping.com/17696448/64aace4b-e92c-41d1-91f0-ba6da0532515.jpg</PictureURL><PictureURL>https://cf.cjdropshipping.com/17696448/ae08cc4e-34e0-46fb-aa78-f9b2dca655e8.jpg</PictureURL><PictureURL>https://cf.cjdropshipping.com/17696448/2fd6b878-4be4-47fc-a015-32f1b83569b7.jpg</PictureURL><PictureURL>https://cf.cjdropshipping.com/17696448/bf82db32-ff28-4fcc-a5e1-73bc5c1d30cc.jpg</PictureURL></PictureDetails>\n    <ItemSpecifics><NameValueList><Name>Brand</Name><Value>Unbranded</Value></NameValueList><NameValueList><Name>Type</Name><Value>Hanging Shoe Organizer</Value></NameValueList><NameValueList><Name>Source</Name><Value>CJ Dropshipping</Value></NameValueList><NameValueList><Name>CJ PID</Name><Value>2016750986459643905</Value></NameValueList><NameValueList><Name>Item Height</Name><Value>15 cm</Value></NameValueList><NameValueList><Name>Item Length</Name><Value>Less Than 5 in</Value></NameValueList><NameValueList><Name>Item Width</Name><Value>15 cm</Value></NameValueList><NameValueList><Name>MPN</Name><Value>Does not apply</Value></NameValueList></ItemSpecifics>\n    <Variations><Variation><SKU>CJFU27480350001</SKU><Quantity>5</Quantity><StartPrice currencyID=\"USD\">181.99</StartPrice><VariationSpecifics><NameValueList><Name>Color</Name><Value>White and Gold</Value></NameValueList><NameValueList><Name>Specification</Name><Value>Option 1</Value></NameValueList></VariationSpecifics></Variation><Variation><SKU>CJFU27480350001-2</SKU><Quantity>5</Quantity><StartPrice currencyID=\"USD\">181.99</StartPrice><VariationSpecifics><NameValueList><Name>Color</Name><Value>White and Gold</Value></NameValueList><NameValueList><Name>Specification</Name><Value>Option 2</Value></NameValueList></VariationSpecifics></Variation><VariationSpecificsSet><NameValueList><Name>Color</Name><Value>White and Gold</Value></NameValueList><NameValueList><Name>Specification</Name><Value>Option 1</Value><Value>Option 2</Value></NameValueList></VariationSpecificsSet><Pictures><VariationSpecificName>Color</VariationSpecificName><VariationSpecificPictureSet><VariationSpecificValue>White and Gold</VariationSpecificValue><PictureURL>https://cf.cjdropshipping.com/17696448/bc392c00-955b-4b40-8ef0-e5e0242efafd.jpg</PictureURL></VariationSpecificPictureSet></Pictures></Variations>\n  </Item>\n</AddFixedPriceItemRequest>",
+        "responseXml": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<AddFixedPriceItemResponse xmlns=\"urn:ebay:apis:eBLBaseComponents\"><Timestamp>2026-06-19T04:06:31.352Z</Timestamp><Ack>Warning</Ack><Errors><ShortMessage>Funds from your sales may be unavailable and show as on hold for a period of time.</ShortMessage><LongMessage>Funds from your sales may be unavailable and show as on hold for a period of time. Learn more:https://www.ebay.com/help/selling/getting-paid/getting-paid-items-youve-sold/pending-payments?id=4816</LongMessage><ErrorCode>21917236</ErrorCode><SeverityCode>Warning</SeverityCode><ErrorParameters ParamID=\"0\"><Value>Funds from your sales may be unavailable and show as on hold for a period of time.</Value></ErrorParameters><ErrorParameters ParamID=\"1\"><Value>Funds from your sales may be unavailable and show as on hold for a period of time. Learn more:https://www.ebay.com/help/selling/getting-paid/getting-paid-items-youve-sold/pending-payments?id=4816</Value></ErrorParameters><ErrorParameters ParamID=\"2\"><Value>PayPalHold</Value></ErrorParameters><ErrorParameters ParamID=\"3\"><Value>https://www.ebay.com/help/selling/getting-paid/getting-paid-items-youve-sold/pending-payments?id=4816</Value></ErrorParameters><ErrorClassification>RequestError</ErrorClassification></Errors><Errors><ShortMessage>You&apos;ll be able to list $26,228.03 more this month. </ShortMessage><LongMessage>You&apos;ll be able to list $26,228.03 more this month. Request to list more: https://www.ebay.com/help/selling/listings/selling-limits?id=4107 </LongMessage><ErrorCode>21919189</ErrorCode><SeverityCode>Warning</SeverityCode><ErrorParameters ParamID=\"0\"><Value>You&apos;ll be able to list $26,228.03 more this month. </Value></ErrorParameters><ErrorParameters ParamID=\"1\"><Value>You&apos;ll be able to list $26,228.03 more this month. Request to list more: https://www.ebay.com/help/selling/listings/selling-limits?id=4107 </Value></ErrorParameters><ErrorParameters ParamID=\"2\"><Value>https://www.ebay.com/help/selling/listings/selling-limits?id=4107</Value></ErrorParameters><ErrorParameters ParamID=\"3\"><Value>&lt;div&gt;You&apos;ll be able to list $26,228.03 more this month. &lt;a target=&quot;_blank&quot; href=&quot;https://www.ebay.com/help/selling/listings/selling-limits?id=4107&quot;&gt;Request to list more&lt;/a&gt;&lt;/div&gt;</Value></ErrorParameters><ErrorParameters ParamID=\"4\"><Value>OPTIONAL</Value></ErrorParameters><ErrorClassification>RequestError</ErrorClassification></Errors><Version>1469</Version><Build>E1469_UNI_API5_19110941_R1</Build><ItemID>336646519437</ItemID><StartTime>2026-06-19T04:06:30.528Z</StartTime><EndTime>2026-07-19T04:06:30.528Z</EndTime><Fees><Fee><Name>AuctionLengthFee</Name><Fee currencyID=\"USD\">0.0</Fee></Fee><Fee><Name>BoldFee</Name><Fee currencyID=\"USD\">0.0</Fee></Fee><Fee><Name>BuyItNowFee</Name><Fee currencyID=\"USD\">0.0</Fee></Fee><Fee><Name>CategoryFeaturedFee</Name><Fee currencyID=\"USD\">0.0</Fee></Fee><Fee><Name>FeaturedFee</Name><Fee currencyID=\"USD\">0.0</Fee></Fee><Fee><Name>GalleryPlusFee</Name><Fee currencyID=\"USD\">0.0</Fee></Fee><Fee><Name>FeaturedGalleryFee</Name><Fee currencyID=\"USD\">0.0</Fee></Fee><Fee><Name>FixedPriceDurationFee</Name><Fee currencyID=\"USD\">0.0</Fee></Fee><Fee><Name>GalleryFee</Name><Fee currencyID=\"USD\">0.0</Fee></Fee><Fee><Name>GiftIconFee</Name><Fee currencyID=\"USD\">0.0</Fee></Fee><Fee><Name>HighLightFee</Name><Fee currencyID=\"USD\">0.0</Fee></Fee><Fee><Name>InsertionFee</Name><Fee currencyID=\"USD\">0.0</Fee><PromotionalDiscount currencyID=\"USD\">0.35</PromotionalDiscount></Fee><Fee><Name>InternationalInsertionFee</Name><Fee currencyID=\"USD\">0.0</Fee></Fee><Fee><Name>ListingDesignerFee</Name><Fee currencyID=\"USD\">0.0</Fee></Fee><Fee><Name>ListingFee</Name><Fee currencyID=\"USD\">0.0</Fee><PromotionalDiscount currencyID=\"USD\">0.35</PromotionalDiscount></Fee><Fee><Name>PhotoDisplayFee</Name><Fee currencyID=\"USD\">0.0</Fee></Fee><Fee><Name>PhotoFee</Name><Fee currencyID=\"USD\">0.0</Fee></Fee><Fee><Name>ReserveFee</Name><Fee currencyID=\"USD\">0.0</Fee></Fee><Fee><Name>SchedulingFee</Name><Fee currencyID=\"USD\">0.0</Fee></Fee><Fee><Name>SubtitleFee</Name><Fee currencyID=\"USD\">0.0</Fee></Fee><Fee><Name>BorderFee</Name><Fee currencyID=\"USD\">0.0</Fee></Fee><Fee><Name>ProPackBundleFee</Name><Fee currencyID=\"USD\">0.0</Fee></Fee><Fee><Name>BasicUpgradePackBundleFee</Name><Fee currencyID=\"USD\">0.0</Fee></Fee><Fee><Name>ValuePackBundleFee</Name><Fee currencyID=\"USD\">0.0</Fee></Fee><Fee><Name>PrivateListingFee</Name><Fee currencyID=\"USD\">0.0</Fee></Fee><Fee><Name>ProPackPlusBundleFee</Name><Fee currencyID=\"USD\">0.0</Fee></Fee><Fee><Name>MotorsGermanySearchFee</Name><Fee currencyID=\"USD\">0.0</Fee></Fee></Fees><DiscountReason>SpecialOffer</DiscountReason></AddFixedPriceItemResponse>",
+        "errors": [],
+        "warnings": [
+          "Funds from your sales may be unavailable and show as on hold for a period of time. Learn more:https://www.ebay.com/help/selling/getting-paid/getting-paid-items-youve-sold/pending-payments?id=4816",
+          "You'll be able to list $26,228.03 more this month. Request to list more: https://www.ebay.com/help/selling/listings/selling-limits?id=4107 "
+        ],
+        "fees": [
+          {
+            "name": "AuctionLengthFee",
+            "amount": 0,
+            "currency": "USD"
+          },
+          {
+            "name": "BoldFee",
+            "amount": 0,
+            "currency": "USD"
+          },
+          {
+            "name": "BuyItNowFee",
+            "amount": 0,
+            "currency": "USD"
+          },
+          {
+            "name": "CategoryFeaturedFee",
+            "amount": 0,
+            "currency": "USD"
+          },
+          {
+            "name": "FeaturedFee",
+            "amount": 0,
+            "currency": "USD"
+          },
+          {
+            "name": "GalleryPlusFee",
+            "amount": 0,
+            "currency": "USD"
+          },
+          {
+            "name": "FeaturedGalleryFee",
+            "amount": 0,
+            "currency": "USD"
+          },
+          {
+            "name": "FixedPriceDurationFee",
+            "amount": 0,
+            "currency": "USD"
+          },
+          {
+            "name": "GalleryFee",
+            "amount": 0,
+            "currency": "USD"
+          },
+          {
+            "name": "GiftIconFee",
+            "amount": 0,
+            "currency": "USD"
+          },
+          {
+            "name": "HighLightFee",
+            "amount": 0,
+            "currency": "USD"
+          },
+          {
+            "name": "InsertionFee",
+            "amount": 0,
+            "currency": "USD"
+          },
+          {
+            "name": "InternationalInsertionFee",
+            "amount": 0,
+            "currency": "USD"
+          },
+          {
+            "name": "ListingDesignerFee",
+            "amount": 0,
+            "currency": "USD"
+          },
+          {
+            "name": "ListingFee",
+            "amount": 0,
+            "currency": "USD"
+          },
+          {
+            "name": "PhotoDisplayFee",
+            "amount": 0,
+            "currency": "USD"
+          },
+          {
+            "name": "PhotoFee",
+            "amount": 0,
+            "currency": "USD"
+          },
+          {
+            "name": "ReserveFee",
+            "amount": 0,
+            "currency": "USD"
+          },
+          {
+            "name": "SchedulingFee",
+            "amount": 0,
+            "currency": "USD"
+          },
+          {
+            "name": "SubtitleFee",
+            "amount": 0,
+            "currency": "USD"
+          },
+          {
+            "name": "BorderFee",
+            "amount": 0,
+            "currency": "USD"
+          },
+          {
+            "name": "ProPackBundleFee",
+            "amount": 0,
+            "currency": "USD"
+          },
+          {
+            "name": "BasicUpgradePackBundleFee",
+            "amount": 0,
+            "currency": "USD"
+          },
+          {
+            "name": "ValuePackBundleFee",
+            "amount": 0,
+            "currency": "USD"
+          },
+          {
+            "name": "PrivateListingFee",
+            "amount": 0,
+            "currency": "USD"
+          },
+          {
+            "name": "ProPackPlusBundleFee",
+            "amount": 0,
+            "currency": "USD"
+          },
+          {
+            "name": "MotorsGermanySearchFee",
+            "amount": 0,
+            "currency": "USD"
+          }
+        ]
+      },
+      "status": "passed",
+      "errors": []
+    },
+    {
+      "cjProductId": "1958730821808918529",
+      "title": "10 Tiers Shoe Rack Storage Organizer Shoe Shelf Organizer For Entryway Holds 80",
+      "productType": "Shoe Organizer",
+      "variantKeys": [
+        "Color",
+        "Specification"
+      ],
+      "variantCount": 2,
+      "imageCount": 5,
+      "selectedEbayCategory": "43506",
+      "payload": {
+        "title": "10 Tiers Shoe Rack Storage Organizer Shoe Shelf Organizer For Entryway Holds 80",
+        "categoryId": "43506",
+        "conditionId": "1000",
+        "country": "US",
+        "currency": "USD",
+        "postalCode": "10001",
+        "location": "New York, New York",
+        "dispatchTimeMax": 3,
+        "listingDuration": "GTC",
+        "listingType": "FixedPriceItem",
+        "descriptionHtml": "<p><img src=\"https://cf.cjdropshipping.com/5d8b9237-476b-467a-899e-19d17c2fa112.jpg\" style=\"max-width:100%;\" contenteditable=\"false\"/><img src=\"https://cf.cjdropshipping.com/4b8088ab-ea43-47ee-8c57-28b4f8b474b9.jpg\" style=\"max-width:100%;\" contenteditable=\"false\"/><img src=\"https://cf.cjdropshipping.com/c3a73073-18bf-40d9-ae0c-e57fe0a12f03.jpg\" style=\"max-width:100%;\" contenteditable=\"false\"/><img src=\"https://cf.cjdropshipping.com/7b9d9186-f210-4153-bb53-e6c81d70d4c5.jpg\" style=\"max-width:100%;\" contenteditable=\"false\"/><img src=\"https://cf.cjdropshipping.com/73010fca-342f-43cc-a431-890d7fc8ba1b.jpg\" style=\"max-width:100%;\" contenteditable=\"false\"/></p>",
+        "itemSpecifics": {
+          "Brand": "Unbranded",
+          "Type": "Hanging Shoe Organizer",
+          "Source": "CJ Dropshipping",
+          "CJ PID": "1958730821808918529",
+          "Item Height": "15 cm",
+          "Item Length": "Less Than 5 in",
+          "Item Width": "15 cm",
+          "MPN": "Does not apply"
+        },
+        "images": [
+          "https://cf.cjdropshipping.com/7e49a18d-976a-46e0-a64b-0775461e77fb.jpg",
+          "https://cf.cjdropshipping.com/6f8b35f7-334a-4759-abfa-7821193aa619.jpg",
+          "https://cf.cjdropshipping.com/1302b033-3bf7-42dd-b067-e71e24aa3752.jpg",
+          "https://cf.cjdropshipping.com/ffad374a-fba3-491f-8465-45d752f31ba6.jpg",
+          "https://cf.cjdropshipping.com/190998cd-5a36-4e1e-8233-3e8ad135dbfc.jpg"
+        ],
+        "returnPolicy": {
+          "returnsAcceptedOption": "ReturnsAccepted",
+          "refundOption": "MoneyBack",
+          "returnsWithinOption": "Days_30",
+          "shippingCostPaidByOption": "Buyer"
+        },
+        "shippingDetails": {
+          "shippingType": "Flat",
+          "shippingService": "UPSGround",
+          "shippingServiceCost": 0
+        },
+        "variations": [
+          {
+            "sku": "CJJT246460301AZ",
+            "quantity": 5,
+            "startPrice": 46.99,
+            "specifics": {
+              "Color": "As picture",
+              "Specification": "Option 1"
+            }
+          },
+          {
+            "sku": "CJJT246460301AZ-2",
+            "quantity": 5,
+            "startPrice": 46.99,
+            "specifics": {
+              "Color": "As picture",
+              "Specification": "Option 2"
+            }
+          }
+        ],
+        "variationSpecificsSet": {
+          "Color": [
+            "As picture"
+          ],
+          "Specification": [
+            "Option 1",
+            "Option 2"
+          ]
+        },
+        "variationPictures": {
+          "variationSpecificName": "Color",
+          "sets": [
+            {
+              "value": "As picture",
+              "urls": [
+                "https://cf.cjdropshipping.com/1302b033-3bf7-42dd-b067-e71e24aa3752.jpg"
+              ]
+            }
+          ]
+        },
+        "debug": {
+          "cjProductId": "1958730821808918529",
+          "visualVariationKey": "Color",
+          "warnings": [
+            "CJJT246460301AZ: duplicate SKU repaired as CJJT246460301AZ-2.",
+            "Duplicate variation combinations repaired with unique Specification values.",
+            "Mapped by eBay taxonomy suggestion: Shoe Organizers."
+          ]
+        }
+      },
+      "preflight": [],
+      "warnings": [
+        "CJJT246460301AZ: duplicate SKU repaired as CJJT246460301AZ-2.",
+        "Duplicate variation combinations repaired with unique Specification values.",
+        "Mapped by eBay taxonomy suggestion: Shoe Organizers.",
+        "Funds from your sales may be unavailable and show as on hold for a period of time. Learn more:https://www.ebay.com/help/selling/getting-paid/getting-paid-items-youve-sold/pending-payments?id=4816",
+        "You'll be able to list $25,758.13 more this month. Request to list more: https://www.ebay.com/help/selling/listings/selling-limits?id=4107 "
+      ],
+      "requestXml": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<AddFixedPriceItemRequest xmlns=\"urn:ebay:apis:eBLBaseComponents\">\n  <ErrorLanguage>en_US</ErrorLanguage>\n  <WarningLevel>High</WarningLevel>\n  <Item>\n    <Title>10 Tiers Shoe Rack Storage Organizer Shoe Shelf Organizer For Entryway Holds 80</Title>\n    <PrimaryCategory><CategoryID>43506</CategoryID></PrimaryCategory>\n    <CategoryMappingAllowed>true</CategoryMappingAllowed>\n    <ConditionID>1000</ConditionID>\n    <Country>US</Country>\n    <Currency>USD</Currency>\n    <DispatchTimeMax>3</DispatchTimeMax>\n    <ListingDuration>GTC</ListingDuration>\n    <ListingType>FixedPriceItem</ListingType>\n    <Location>New York, New York</Location>\n    <PostalCode>10001</PostalCode>\n    <Description><![CDATA[<p><img src=\"https://cf.cjdropshipping.com/5d8b9237-476b-467a-899e-19d17c2fa112.jpg\" style=\"max-width:100%;\" contenteditable=\"false\"/><img src=\"https://cf.cjdropshipping.com/4b8088ab-ea43-47ee-8c57-28b4f8b474b9.jpg\" style=\"max-width:100%;\" contenteditable=\"false\"/><img src=\"https://cf.cjdropshipping.com/c3a73073-18bf-40d9-ae0c-e57fe0a12f03.jpg\" style=\"max-width:100%;\" contenteditable=\"false\"/><img src=\"https://cf.cjdropshipping.com/7b9d9186-f210-4153-bb53-e6c81d70d4c5.jpg\" style=\"max-width:100%;\" contenteditable=\"false\"/><img src=\"https://cf.cjdropshipping.com/73010fca-342f-43cc-a431-890d7fc8ba1b.jpg\" style=\"max-width:100%;\" contenteditable=\"false\"/></p>]]></Description>\n    <Site>US</Site>\n    <ReturnPolicy>\n      <ReturnsAcceptedOption>ReturnsAccepted</ReturnsAcceptedOption>\n      <RefundOption>MoneyBack</RefundOption>\n      <ReturnsWithinOption>Days_30</ReturnsWithinOption>\n      <ShippingCostPaidByOption>Buyer</ShippingCostPaidByOption>\n    </ReturnPolicy>\n    <ShippingDetails>\n      <ShippingType>Flat</ShippingType>\n      <ShippingServiceOptions>\n        <ShippingServicePriority>1</ShippingServicePriority>\n        <ShippingService>UPSGround</ShippingService>\n        <ShippingServiceCost currencyID=\"USD\">0.00</ShippingServiceCost>\n        <ShippingServiceAdditionalCost currencyID=\"USD\">0.00</ShippingServiceAdditionalCost>\n      </ShippingServiceOptions>\n    </ShippingDetails>\n    <PictureDetails><PictureURL>https://cf.cjdropshipping.com/7e49a18d-976a-46e0-a64b-0775461e77fb.jpg</PictureURL><PictureURL>https://cf.cjdropshipping.com/6f8b35f7-334a-4759-abfa-7821193aa619.jpg</PictureURL><PictureURL>https://cf.cjdropshipping.com/1302b033-3bf7-42dd-b067-e71e24aa3752.jpg</PictureURL><PictureURL>https://cf.cjdropshipping.com/ffad374a-fba3-491f-8465-45d752f31ba6.jpg</PictureURL><PictureURL>https://cf.cjdropshipping.com/190998cd-5a36-4e1e-8233-3e8ad135dbfc.jpg</PictureURL></PictureDetails>\n    <ItemSpecifics><NameValueList><Name>Brand</Name><Value>Unbranded</Value></NameValueList><NameValueList><Name>Type</Name><Value>Hanging Shoe Organizer</Value></NameValueList><NameValueList><Name>Source</Name><Value>CJ Dropshipping</Value></NameValueList><NameValueList><Name>CJ PID</Name><Value>1958730821808918529</Value></NameValueList><NameValueList><Name>Item Height</Name><Value>15 cm</Value></NameValueList><NameValueList><Name>Item Length</Name><Value>Less Than 5 in</Value></NameValueList><NameValueList><Name>Item Width</Name><Value>15 cm</Value></NameValueList><NameValueList><Name>MPN</Name><Value>Does not apply</Value></NameValueList></ItemSpecifics>\n    <Variations><Variation><SKU>CJJT246460301AZ</SKU><Quantity>5</Quantity><StartPrice currencyID=\"USD\">46.99</StartPrice><VariationSpecifics><NameValueList><Name>Color</Name><Value>As picture</Value></NameValueList><NameValueList><Name>Specification</Name><Value>Option 1</Value></NameValueList></VariationSpecifics></Variation><Variation><SKU>CJJT246460301AZ-2</SKU><Quantity>5</Quantity><StartPrice currencyID=\"USD\">46.99</StartPrice><VariationSpecifics><NameValueList><Name>Color</Name><Value>As picture</Value></NameValueList><NameValueList><Name>Specification</Name><Value>Option 2</Value></NameValueList></VariationSpecifics></Variation><VariationSpecificsSet><NameValueList><Name>Color</Name><Value>As picture</Value></NameValueList><NameValueList><Name>Specification</Name><Value>Option 1</Value><Value>Option 2</Value></NameValueList></VariationSpecificsSet><Pictures><VariationSpecificName>Color</VariationSpecificName><VariationSpecificPictureSet><VariationSpecificValue>As picture</VariationSpecificValue><PictureURL>https://cf.cjdropshipping.com/1302b033-3bf7-42dd-b067-e71e24aa3752.jpg</PictureURL></VariationSpecificPictureSet></Pictures></Variations>\n  </Item>\n</AddFixedPriceItemRequest>",
+      "ebayAttempt": {
+        "attemptedAt": "2026-06-19T04:06:36.125Z",
+        "mode": "live",
+        "ack": "Warning",
+        "itemId": "336646519443",
+        "requestXml": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<AddFixedPriceItemRequest xmlns=\"urn:ebay:apis:eBLBaseComponents\">\n  <ErrorLanguage>en_US</ErrorLanguage>\n  <WarningLevel>High</WarningLevel>\n  <Item>\n    <Title>10 Tiers Shoe Rack Storage Organizer Shoe Shelf Organizer For Entryway Holds 80</Title>\n    <PrimaryCategory><CategoryID>43506</CategoryID></PrimaryCategory>\n    <CategoryMappingAllowed>true</CategoryMappingAllowed>\n    <ConditionID>1000</ConditionID>\n    <Country>US</Country>\n    <Currency>USD</Currency>\n    <DispatchTimeMax>3</DispatchTimeMax>\n    <ListingDuration>GTC</ListingDuration>\n    <ListingType>FixedPriceItem</ListingType>\n    <Location>New York, New York</Location>\n    <PostalCode>10001</PostalCode>\n    <Description><![CDATA[<p><img src=\"https://cf.cjdropshipping.com/5d8b9237-476b-467a-899e-19d17c2fa112.jpg\" style=\"max-width:100%;\" contenteditable=\"false\"/><img src=\"https://cf.cjdropshipping.com/4b8088ab-ea43-47ee-8c57-28b4f8b474b9.jpg\" style=\"max-width:100%;\" contenteditable=\"false\"/><img src=\"https://cf.cjdropshipping.com/c3a73073-18bf-40d9-ae0c-e57fe0a12f03.jpg\" style=\"max-width:100%;\" contenteditable=\"false\"/><img src=\"https://cf.cjdropshipping.com/7b9d9186-f210-4153-bb53-e6c81d70d4c5.jpg\" style=\"max-width:100%;\" contenteditable=\"false\"/><img src=\"https://cf.cjdropshipping.com/73010fca-342f-43cc-a431-890d7fc8ba1b.jpg\" style=\"max-width:100%;\" contenteditable=\"false\"/></p>]]></Description>\n    <Site>US</Site>\n    <ReturnPolicy>\n      <ReturnsAcceptedOption>ReturnsAccepted</ReturnsAcceptedOption>\n      <RefundOption>MoneyBack</RefundOption>\n      <ReturnsWithinOption>Days_30</ReturnsWithinOption>\n      <ShippingCostPaidByOption>Buyer</ShippingCostPaidByOption>\n    </ReturnPolicy>\n    <ShippingDetails>\n      <ShippingType>Flat</ShippingType>\n      <ShippingServiceOptions>\n        <ShippingServicePriority>1</ShippingServicePriority>\n        <ShippingService>UPSGround</ShippingService>\n        <ShippingServiceCost currencyID=\"USD\">0.00</ShippingServiceCost>\n        <ShippingServiceAdditionalCost currencyID=\"USD\">0.00</ShippingServiceAdditionalCost>\n      </ShippingServiceOptions>\n    </ShippingDetails>\n    <PictureDetails><PictureURL>https://cf.cjdropshipping.com/7e49a18d-976a-46e0-a64b-0775461e77fb.jpg</PictureURL><PictureURL>https://cf.cjdropshipping.com/6f8b35f7-334a-4759-abfa-7821193aa619.jpg</PictureURL><PictureURL>https://cf.cjdropshipping.com/1302b033-3bf7-42dd-b067-e71e24aa3752.jpg</PictureURL><PictureURL>https://cf.cjdropshipping.com/ffad374a-fba3-491f-8465-45d752f31ba6.jpg</PictureURL><PictureURL>https://cf.cjdropshipping.com/190998cd-5a36-4e1e-8233-3e8ad135dbfc.jpg</PictureURL></PictureDetails>\n    <ItemSpecifics><NameValueList><Name>Brand</Name><Value>Unbranded</Value></NameValueList><NameValueList><Name>Type</Name><Value>Hanging Shoe Organizer</Value></NameValueList><NameValueList><Name>Source</Name><Value>CJ Dropshipping</Value></NameValueList><NameValueList><Name>CJ PID</Name><Value>1958730821808918529</Value></NameValueList><NameValueList><Name>Item Height</Name><Value>15 cm</Value></NameValueList><NameValueList><Name>Item Length</Name><Value>Less Than 5 in</Value></NameValueList><NameValueList><Name>Item Width</Name><Value>15 cm</Value></NameValueList><NameValueList><Name>MPN</Name><Value>Does not apply</Value></NameValueList></ItemSpecifics>\n    <Variations><Variation><SKU>CJJT246460301AZ</SKU><Quantity>5</Quantity><StartPrice currencyID=\"USD\">46.99</StartPrice><VariationSpecifics><NameValueList><Name>Color</Name><Value>As picture</Value></NameValueList><NameValueList><Name>Specification</Name><Value>Option 1</Value></NameValueList></VariationSpecifics></Variation><Variation><SKU>CJJT246460301AZ-2</SKU><Quantity>5</Quantity><StartPrice currencyID=\"USD\">46.99</StartPrice><VariationSpecifics><NameValueList><Name>Color</Name><Value>As picture</Value></NameValueList><NameValueList><Name>Specification</Name><Value>Option 2</Value></NameValueList></VariationSpecifics></Variation><VariationSpecificsSet><NameValueList><Name>Color</Name><Value>As picture</Value></NameValueList><NameValueList><Name>Specification</Name><Value>Option 1</Value><Value>Option 2</Value></NameValueList></VariationSpecificsSet><Pictures><VariationSpecificName>Color</VariationSpecificName><VariationSpecificPictureSet><VariationSpecificValue>As picture</VariationSpecificValue><PictureURL>https://cf.cjdropshipping.com/1302b033-3bf7-42dd-b067-e71e24aa3752.jpg</PictureURL></VariationSpecificPictureSet></Pictures></Variations>\n  </Item>\n</AddFixedPriceItemRequest>",
+        "responseXml": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<AddFixedPriceItemResponse xmlns=\"urn:ebay:apis:eBLBaseComponents\"><Timestamp>2026-06-19T04:06:36.014Z</Timestamp><Ack>Warning</Ack><Errors><ShortMessage>Funds from your sales may be unavailable and show as on hold for a period of time.</ShortMessage><LongMessage>Funds from your sales may be unavailable and show as on hold for a period of time. Learn more:https://www.ebay.com/help/selling/getting-paid/getting-paid-items-youve-sold/pending-payments?id=4816</LongMessage><ErrorCode>21917236</ErrorCode><SeverityCode>Warning</SeverityCode><ErrorParameters ParamID=\"0\"><Value>Funds from your sales may be unavailable and show as on hold for a period of time.</Value></ErrorParameters><ErrorParameters ParamID=\"1\"><Value>Funds from your sales may be unavailable and show as on hold for a period of time. Learn more:https://www.ebay.com/help/selling/getting-paid/getting-paid-items-youve-sold/pending-payments?id=4816</Value></ErrorParameters><ErrorParameters ParamID=\"2\"><Value>PayPalHold</Value></ErrorParameters><ErrorParameters ParamID=\"3\"><Value>https://www.ebay.com/help/selling/getting-paid/getting-paid-items-youve-sold/pending-payments?id=4816</Value></ErrorParameters><ErrorClassification>RequestError</ErrorClassification></Errors><Errors><ShortMessage>You&apos;ll be able to list $25,758.13 more this month. </ShortMessage><LongMessage>You&apos;ll be able to list $25,758.13 more this month. Request to list more: https://www.ebay.com/help/selling/listings/selling-limits?id=4107 </LongMessage><ErrorCode>21919189</ErrorCode><SeverityCode>Warning</SeverityCode><ErrorParameters ParamID=\"0\"><Value>You&apos;ll be able to list $25,758.13 more this month. </Value></ErrorParameters><ErrorParameters ParamID=\"1\"><Value>You&apos;ll be able to list $25,758.13 more this month. Request to list more: https://www.ebay.com/help/selling/listings/selling-limits?id=4107 </Value></ErrorParameters><ErrorParameters ParamID=\"2\"><Value>https://www.ebay.com/help/selling/listings/selling-limits?id=4107</Value></ErrorParameters><ErrorParameters ParamID=\"3\"><Value>&lt;div&gt;You&apos;ll be able to list $25,758.13 more this month. &lt;a target=&quot;_blank&quot; href=&quot;https://www.ebay.com/help/selling/listings/selling-limits?id=4107&quot;&gt;Request to list more&lt;/a&gt;&lt;/div&gt;</Value></ErrorParameters><ErrorParameters ParamID=\"4\"><Value>OPTIONAL</Value></ErrorParameters><ErrorClassification>RequestError</ErrorClassification></Errors><Version>1469</Version><Build>E1469_UNI_API5_19110941_R1</Build><ItemID>336646519443</ItemID><StartTime>2026-06-19T04:06:34.417Z</StartTime><EndTime>2026-07-19T04:06:34.417Z</EndTime><Fees><Fee><Name>AuctionLengthFee</Name><Fee currencyID=\"USD\">0.0</Fee></Fee><Fee><Name>BoldFee</Name><Fee currencyID=\"USD\">0.0</Fee></Fee><Fee><Name>BuyItNowFee</Name><Fee currencyID=\"USD\">0.0</Fee></Fee><Fee><Name>CategoryFeaturedFee</Name><Fee currencyID=\"USD\">0.0</Fee></Fee><Fee><Name>FeaturedFee</Name><Fee currencyID=\"USD\">0.0</Fee></Fee><Fee><Name>GalleryPlusFee</Name><Fee currencyID=\"USD\">0.0</Fee></Fee><Fee><Name>FeaturedGalleryFee</Name><Fee currencyID=\"USD\">0.0</Fee></Fee><Fee><Name>FixedPriceDurationFee</Name><Fee currencyID=\"USD\">0.0</Fee></Fee><Fee><Name>GalleryFee</Name><Fee currencyID=\"USD\">0.0</Fee></Fee><Fee><Name>GiftIconFee</Name><Fee currencyID=\"USD\">0.0</Fee></Fee><Fee><Name>HighLightFee</Name><Fee currencyID=\"USD\">0.0</Fee></Fee><Fee><Name>InsertionFee</Name><Fee currencyID=\"USD\">0.0</Fee><PromotionalDiscount currencyID=\"USD\">0.35</PromotionalDiscount></Fee><Fee><Name>InternationalInsertionFee</Name><Fee currencyID=\"USD\">0.0</Fee></Fee><Fee><Name>ListingDesignerFee</Name><Fee currencyID=\"USD\">0.0</Fee></Fee><Fee><Name>ListingFee</Name><Fee currencyID=\"USD\">0.0</Fee><PromotionalDiscount currencyID=\"USD\">0.35</PromotionalDiscount></Fee><Fee><Name>PhotoDisplayFee</Name><Fee currencyID=\"USD\">0.0</Fee></Fee><Fee><Name>PhotoFee</Name><Fee currencyID=\"USD\">0.0</Fee></Fee><Fee><Name>ReserveFee</Name><Fee currencyID=\"USD\">0.0</Fee></Fee><Fee><Name>SchedulingFee</Name><Fee currencyID=\"USD\">0.0</Fee></Fee><Fee><Name>SubtitleFee</Name><Fee currencyID=\"USD\">0.0</Fee></Fee><Fee><Name>BorderFee</Name><Fee currencyID=\"USD\">0.0</Fee></Fee><Fee><Name>ProPackBundleFee</Name><Fee currencyID=\"USD\">0.0</Fee></Fee><Fee><Name>BasicUpgradePackBundleFee</Name><Fee currencyID=\"USD\">0.0</Fee></Fee><Fee><Name>ValuePackBundleFee</Name><Fee currencyID=\"USD\">0.0</Fee></Fee><Fee><Name>PrivateListingFee</Name><Fee currencyID=\"USD\">0.0</Fee></Fee><Fee><Name>ProPackPlusBundleFee</Name><Fee currencyID=\"USD\">0.0</Fee></Fee><Fee><Name>MotorsGermanySearchFee</Name><Fee currencyID=\"USD\">0.0</Fee></Fee></Fees><DiscountReason>SpecialOffer</DiscountReason></AddFixedPriceItemResponse>",
+        "errors": [],
+        "warnings": [
+          "Funds from your sales may be unavailable and show as on hold for a period of time. Learn more:https://www.ebay.com/help/selling/getting-paid/getting-paid-items-youve-sold/pending-payments?id=4816",
+          "You'll be able to list $25,758.13 more this month. Request to list more: https://www.ebay.com/help/selling/listings/selling-limits?id=4107 "
+        ],
+        "fees": [
+          {
+            "name": "AuctionLengthFee",
+            "amount": 0,
+            "currency": "USD"
+          },
+          {
+            "name": "BoldFee",
+            "amount": 0,
+            "currency": "USD"
+          },
+          {
+            "name": "BuyItNowFee",
+            "amount": 0,
+            "currency": "USD"
+          },
+          {
+            "name": "CategoryFeaturedFee",
+            "amount": 0,
+            "currency": "USD"
+          },
+          {
+            "name": "FeaturedFee",
+            "amount": 0,
+            "currency": "USD"
+          },
+          {
+            "name": "GalleryPlusFee",
+            "amount": 0,
+            "currency": "USD"
+          },
+          {
+            "name": "FeaturedGalleryFee",
+            "amount": 0,
+            "currency": "USD"
+          },
+          {
+            "name": "FixedPriceDurationFee",
+            "amount": 0,
+            "currency": "USD"
+          },
+          {
+            "name": "GalleryFee",
+            "amount": 0,
+            "currency": "USD"
+          },
+          {
+            "name": "GiftIconFee",
+            "amount": 0,
+            "currency": "USD"
+          },
+          {
+            "name": "HighLightFee",
+            "amount": 0,
+            "currency": "USD"
+          },
+          {
+            "name": "InsertionFee",
+            "amount": 0,
+            "currency": "USD"
+          },
+          {
+            "name": "InternationalInsertionFee",
+            "amount": 0,
+            "currency": "USD"
+          },
+          {
+            "name": "ListingDesignerFee",
+            "amount": 0,
+            "currency": "USD"
+          },
+          {
+            "name": "ListingFee",
+            "amount": 0,
+            "currency": "USD"
+          },
+          {
+            "name": "PhotoDisplayFee",
+            "amount": 0,
+            "currency": "USD"
+          },
+          {
+            "name": "PhotoFee",
+            "amount": 0,
+            "currency": "USD"
+          },
+          {
+            "name": "ReserveFee",
+            "amount": 0,
+            "currency": "USD"
+          },
+          {
+            "name": "SchedulingFee",
+            "amount": 0,
+            "currency": "USD"
+          },
+          {
+            "name": "SubtitleFee",
+            "amount": 0,
+            "currency": "USD"
+          },
+          {
+            "name": "BorderFee",
+            "amount": 0,
+            "currency": "USD"
+          },
+          {
+            "name": "ProPackBundleFee",
+            "amount": 0,
+            "currency": "USD"
+          },
+          {
+            "name": "BasicUpgradePackBundleFee",
+            "amount": 0,
+            "currency": "USD"
+          },
+          {
+            "name": "ValuePackBundleFee",
+            "amount": 0,
+            "currency": "USD"
+          },
+          {
+            "name": "PrivateListingFee",
+            "amount": 0,
+            "currency": "USD"
+          },
+          {
+            "name": "ProPackPlusBundleFee",
+            "amount": 0,
+            "currency": "USD"
+          },
+          {
+            "name": "MotorsGermanySearchFee",
+            "amount": 0,
+            "currency": "USD"
+          }
+        ]
+      },
+      "status": "passed",
+      "errors": []
+    }
+  ]
+}

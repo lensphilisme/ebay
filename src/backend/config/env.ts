@@ -24,6 +24,23 @@ export interface AppConfig {
     password?: string;
     apiKey?: string;
   };
+  listing: {
+    liveListingEnabled: boolean;
+    preflightRequired: boolean;
+    maxAllowedInsertionFee: number;
+    maxAllowedListingFee: number;
+    allowPaidListingUpgrades: boolean;
+    allowSubtitle: boolean;
+    allowBoldTitle: boolean;
+    allowPromotedListings: boolean;
+    endTestListingsAfterSuccess: boolean;
+    minProfitUsd: number;
+    markupPercent: number;
+    ebayFeeBufferPercent: number;
+    paymentFeeBufferPercent: number;
+    roundTo: number;
+    maxListingQuantity: number;
+  };
   ai: {
     provider: string;
     apiKey?: string;
@@ -82,6 +99,23 @@ export function getConfig(): AppConfig {
       password: envValue('CJ_PASSWORD'),
       apiKey: envValue('CJ_API_KEY'),
     },
+    listing: {
+      liveListingEnabled: boolEnv('LIVE_EBAY_LISTING_ENABLED', false),
+      preflightRequired: boolEnv('EBAY_PREFLIGHT_REQUIRED', true),
+      maxAllowedInsertionFee: numberEnv('MAX_ALLOWED_INSERTION_FEE', 0),
+      maxAllowedListingFee: numberEnv('MAX_ALLOWED_LISTING_FEE', 0),
+      allowPaidListingUpgrades: boolEnv('ALLOW_PAID_LISTING_UPGRADES', false),
+      allowSubtitle: boolEnv('ALLOW_SUBTITLE', false),
+      allowBoldTitle: boolEnv('ALLOW_BOLD_TITLE', false),
+      allowPromotedListings: boolEnv('ALLOW_PROMOTED_LISTINGS', false),
+      endTestListingsAfterSuccess: boolEnv('END_TEST_LISTINGS_AFTER_SUCCESS', false),
+      minProfitUsd: numberEnv('MIN_PROFIT_USD', 5),
+      markupPercent: numberEnv('MARKUP_PERCENT', 35),
+      ebayFeeBufferPercent: numberEnv('EBAY_FEE_BUFFER_PERCENT', 15),
+      paymentFeeBufferPercent: numberEnv('PAYMENT_FEE_BUFFER_PERCENT', 4),
+      roundTo: numberEnv('ROUND_TO', 0.99),
+      maxListingQuantity: Math.max(1, Math.min(50, numberEnv('MAX_LISTING_QUANTITY', 5))),
+    },
     ai: {
       provider: envValue('AI_PROVIDER') ?? 'none',
       apiKey: envValue('AI_API_KEY'),
@@ -92,4 +126,15 @@ export function getConfig(): AppConfig {
       geminiModel: envValue('GEMINI_MODEL') ?? 'gemini-1.5-flash',
     },
   };
+}
+
+function boolEnv(key: string, fallback: boolean): boolean {
+  const value = envValue(key);
+  if (value == null) return fallback;
+  return ['1', 'true', 'yes', 'on'].includes(value.trim().toLowerCase());
+}
+
+function numberEnv(key: string, fallback: number): number {
+  const value = Number(envValue(key));
+  return Number.isFinite(value) ? value : fallback;
 }

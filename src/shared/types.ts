@@ -176,10 +176,15 @@ export interface ListingPerformance {
   title: string;
   daysLive: number;
   views: number;
-  clicks: number;
+  clicks?: number;
+  clicksEstimated?: number;
+  clickDataAvailable?: boolean;
   watchers: number;
   sales: number;
+  trafficTransactions?: number;
+  lifetimeSold?: number;
   impressions?: number;
+  trafficAvailable?: boolean;
   currentPrice: number;
   landedCost: number;
   cjStock: number;
@@ -206,6 +211,7 @@ export interface EbayListingSnapshot {
   price: number;
   quantityAvailable: number;
   quantitySold: number;
+  watchers?: number;
   imageUrl?: string;
   viewUrl?: string;
   marketplaceId?: string;
@@ -220,6 +226,7 @@ export interface ListingTrafficSnapshot {
   clickThroughRate: number;
   salesConversionRate: number;
   transactions: number;
+  clicksEstimated?: number;
   raw: unknown;
 }
 

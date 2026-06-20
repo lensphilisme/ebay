@@ -1,523 +1,847 @@
-You are a senior full-stack AI automation engineer. REBuild a private family-use automation system that connects CJ Dropshipping products to eBay listings using these repositories as the technical foundation: add a settings for the env credentials 
-use typescript/expo instead of php
-1. Clone eBay MCP repository at @[github:https%3A%2F%2Fgithub.com%2Fyosefhayim%2Febay-mcp:GitHub Sync - yosefhayim/ebay-mcp]  
-@[github:https%3A%2F%2Fgithub.com%2Fyosefhayim%2Febay-mcp:GitHub Sync - yosefhayim/ebay-mcp] 
-Important eBay files to inspect and reuse:
-ebay api doc can found for more research here https://developer.ebay.com/develop/guides-v2/using-ebay-restful-apis#response-components
-* src/api/client.ts
-* src/utils/http.ts
-* src/api/index.ts
-* src/mcp/runtime.ts
-* src/tools/registry.ts
-* src/tools/definitions/index.ts
-* src/auth/oauth.ts
-* src/server-http.ts
-* src/index.ts
-* package.json
+You are a senior TypeScript engineer, eBay Trading API live-listing expert, CJ Dropshipping API expert, variant parser specialist, category mapping specialist, and QA automation engineer.
 
-2. Clone CJ Dropshipping MCP repository at 
-    @[github:https%3A%2F%2Fgithub.com%2Flensphilisme%2Fapi-mcp:GitHub Sync - lensphilisme/api-mcp] @[github:https%3A%2F%2Fgithub.com%2Flensphilisme%2Fapi-mcp:GitHub Sync - lensphilisme/api-mcp] 
+Your mission is to build, repair, verify, and harden a reusable CJ Dropshipping → eBay listing engine.
 
-Important CJ files to inspect and reuse if not clone but please clone instead
+This is not a “list 10 products automatically” feature.
 
-* src/mcp-server/index.ts
-* src/api-client/http-client.ts
-* src/api-client/endpoints.ts
-* src/mcp-server/tools/product.tool.ts
+The real goal is to prove that the system can safely and correctly import/list CJ products to eBay in every supported scenario:
 
-Main goal:
-Create a private automation machine that finds products on CJ Dropshipping, calculates profitable eBay prices, creates eBay listings, modifies listings over time, and optimizes titles, descriptions, item specifics, images, prices, and promoted listing rules.
+1. One simple product.
+2. One product with no variants.
+3. One product with simple variants.
+4. One product with complex multi-key variants.
+5. One product with variant-specific images.
+6. One product with messy CJ attributes.
+7. One product with difficult category mapping.
+8. Bulk product listing.
+9. Bulk product listing where some products fail and others succeed.
+10. Full real eBay live listing with real prices, real variants, real images, and real category/item-specific validation.
 
-The app must support both:
+The 10-product test is only a QA stress test. It is not the business limit. The final engine must be reusable later inside a larger system that can process more products.
 
-1. Manual bulk product import from CJ to eBay.
-2. AI-assisted automated product selection and listing creation.
+ACTIVE TECHNOLOGY
 
-This is not a public SaaS yet. Build it as a private family tool first, but structure the code so it can become SaaS later.
+The active system is TypeScript-based.
 
-Preferred frontend:
-Use Expo / React Native if building in Rork.
-Make the UI responsive for mobile, tablet, and desktop widths.
-Use a clean modern dashboard style with gradient backgrounds, cards, clear status badges, and simple action buttons.
+Do not assume Laravel.
+Do not assume PHP.
+Do not assume WAMP.
+Do not assume local PHP controllers.
+Do not build a PHP bridge.
+Do not make the final solution depend on ebayDashboardController.php.
 
-Core system modules: NO demo data no seed data: 
+Old PHP files, old PHP controllers, old logs, or previous WAMP paths may exist only as forensic reference. Use them only to understand old successful eBay payload patterns, category IDs, item specifics, variant structures, image mapping, and error fixes.
 
-1. Authentication and integrations documentation of cj api can be found here https://developers.cjdropshipping.com/en/api/api2/mcp.html#_1-local-mode-vs-code-copilot-codex-cursor-and-more  https://developers.cjdropshipping.com/en/api/api2/api/auth.html#_1-authentication-2
+The final implementation must be TypeScript.
 
-* Connect to eBay using OAuth.
-* Connect to CJ Dropshipping using CJ API/MCP credentials.
-* Store tokens securely.
-* Add integration health checks.
-* Show connection status for eBay and CJ.
-* Support sandbox/dev mode and production mode.
+HIGH-LEVEL OBJECTIVE
 
-2. CJ product discovery
-    Use CJ MCP tools/endpoints to:
+Create or repair a TypeScript CJ → eBay listing engine that can:
 
-* search_products
-* get_product_detail
-* get_product_variants
-* query_cj_inventory
-* calculate_freight
-* get_category_tree
-* get_warehouses
-* list_product_connections
-* create_product_connection
-* get_product_reviews if available
+1. Accept one CJ product.
+2. Accept multiple CJ products in bulk.
+3. Normalize CJ product data.
+4. Parse simple and complex variants.
+5. Map variant images correctly.
+6. Map CJ categories to valid eBay leaf categories.
+7. Generate valid eBay item specifics.
+8. Sanitize all text, attributes, HTML, XML, URLs, and SKUs.
+9. Calculate real eBay prices from real CJ costs.
+10. Build a valid eBay Trading API payload.
+11. Preflight-check the payload.
+12. Create real live eBay listings when explicitly enabled.
+13. Read the eBay logs after every attempt.
+14. Fix all listing-blocking bugs.
+15. Retry until the system is proven stable.
+16. Produce a final QA report showing what product types passed, what failed, what was fixed, and what is still unsupported.
 
-Build a CJ search screen with filters:
+CORE PRINCIPLE
 
-* keyword
-* category
-* warehouse country
-* minimum inventory
-* minimum/maximum product price
-* shipping country
-* product weight
-* rating/reviews if available
-* platform zone, especially eBay
-* exclude products already listed
-* exclude duplicate/similar products
+Do not optimize for one lucky product.
 
-3. eBay market research
-    Before listing a CJ product, search eBay for comparable items.
+The system must be able to handle many product shapes.
 
-Use the first 60–75 characters of the CJ product title as the initial eBay search query.
-Retrieve the latest/best matching 10–15 comparable eBay listings.
-Use matching logic to compare:
+The engine must be generic, reusable, and later pluggable into a larger automation system.
 
-* title similarity
-* category similarity
-* product type
-* variant similarity
-* price
-* shipping cost
-* condition
-* seller/listing style if available
+This task is successful only when the engine can process both single-product and bulk-product CJ imports/listings without fragile one-off hacks.
 
-Calculate:
+LIVE EBAY MODE
 
-* average market price
-* median market price
-* lowest reasonable price
-* highest reasonable price
-* outliers to ignore
-* recommended listing price
-* confidence score
+The final test must use real eBay live listing when explicitly enabled.
 
-Do not blindly match unrelated products. Add a confidence score and reject weak matches.
+Use this config:
 
-4. Profit calculator
-    Use this default fee model:
-
-* eBay fee buffer: 15%
-* promoted ad buffer: 2%
-* total marketplace buffer: 17%
-
-Formula:
-landed_cost = CJ product cost + CJ shipping cost
-break_even_price = landed_cost / (1 - 0.17)
-target_price = break_even_price + desired_profit
-
-Add a dynamic profit ladder from $0 to $450 profit.
-
-The ladder must increase gradually, not in giant jumps.
-Do not price a $100 landed-cost product at $400 unless market data supports it.
-Do not price a $400 landed-cost product at only $500 if profit rules and market data suggest otherwise.
-
-Create a smart profit function:
-
-* Low-cost products can use higher percentage markup.
-* High-cost products should use lower percentage markup but higher dollar profit.
-* Never exceed market average unless confidence is high.
-* Never list below break-even.
-* Always show estimated profit after fees.
-* Always show margin percentage.
-
-Example pricing logic:
-
-* landed cost $0–$10: profit target $5–$15
-* landed cost $10–$25: profit target $8–$25
-* landed cost $25–$50: profit target $15–$45
-* landed cost $50–$100: profit target $25–$75
-* landed cost $100–$200: profit target $40–$125
-* landed cost $200–$450: profit target $75–$250
-* landed cost $450+: profit target can go higher but must be validated by eBay market data
-
-Also allow manual override.
-
-5. eBay listing creation
-    Create eBay listings from CJ product data.
-
-For every listing, generate:
-
-* SEO-optimized eBay title
-* subtitle if supported
-* clean description
-* bullet features
-* full item specifics
-* category suggestion
-* condition
-* brand
-* model
-* type
-* color
-* size
-* material
-* dimensions
-* weight
-* compatibility if relevant
-* package contents
-* shipping policy
-* return policy
-* payment policy
-* quantity
-* SKU mapping
-* CJ product ID
-* CJ variant ID
-* CJ supplier/warehouse data
-* images
+EBAY_ENV=production
+LIVE_EBAY_LISTING_ENABLED=true
+EBAY_PREFLIGHT_REQUIRED=true
+MAX_ALLOWED_INSERTION_FEE=0
+MAX_ALLOWED_LISTING_FEE=0
+ALLOW_PAID_LISTING_UPGRADES=false
+ALLOW_SUBTITLE=false
+ALLOW_BOLD_TITLE=false
+ALLOW_PROMOTED_LISTINGS=false
+END_TEST_LISTINGS_AFTER_SUCCESS=false
 
 Important:
-Maximize item specifics because eBay search visibility depends heavily on complete product attributes.
-Never create vague listings.
-Never create duplicate listings.
-Never create two listings with the same title.
-Detect duplicates even if CJ has the same product from different suppliers.
 
-6. Image optimization
-    Build an image manager.
+1. VerifyAddFixedPriceItem may be used as a preflight validation step.
+2. VerifyAddFixedPriceItem does not count as final live success.
+3. Final success requires a real live AddFixedPriceItem or the project’s real live eBay listing equivalent.
+4. Do not create paid listing upgrades.
+5. Do not use fake prices.
+6. Do not use placeholder product data.
+7. Do not list below CJ cost.
+8. Do not list restricted or risky products.
+9. If eBay reports a non-zero listing fee above the configured limit, skip that product and document the reason.
+10. If an unexpected fee appears, stop additional live attempts until the cause is identified.
 
-For each CJ product:
+DISCOVERY PHASE
 
-* pull product images
-* choose the strongest main image
-* score images for click appeal
-* prefer clear, bright, product-focused images
-* avoid cluttered, low-resolution, watermarked, ugly, or misleading images
-* allow manual selection of main image
-* allow AI to recommend better image order
-* optionally generate enhanced image suggestions later through a separate AI/image API
+Inspect the current TypeScript project.
 
-Do not falsely modify images unless a real image-processing integration is added.
-For now, implement image scoring, sorting, cropping preview, and main-image selection.
-Add a field for future AI image enhancement integration.
+Find and document:
 
-7. Listing optimizer
-    After listings are live, monitor performance and automatically recommend or apply changes.
+1. package.json
+2. tsconfig.json
+3. src/
+4. app/
+5. server/
+6. routes/
+7. api/
+8. services/
+9. lib/
+10. utils/
+11. scripts/
+12. jobs/
+13. queues/
+14. database layer
+15. ORM layer
+16. environment config
+17. logging system
+18. existing CJ API client
+19. existing eBay API client
+20. existing eBay XML builder
+21. existing listing service
+22. existing category mapper
+23. existing item specifics mapper
+24. existing variant parser
+25. existing image parser
+26. existing bulk import/listing code
+27. tests
 
-Track:
+Search for:
 
-* views
-* clicks
-* click-through rate
-* watchers
-* sales
-* days live
-* impressions if available
-* price changes
-* title changes
-* description changes
-* image changes
+CJ
+cjdropshipping
+dropshipping
+ebay
+eBay
+Trading
+AddFixedPriceItem
+VerifyAddFixedPriceItem
+FixedPriceItem
+ReviseFixedPriceItem
+EndFixedPriceItem
+Inventory
+Variation
+Variations
+VariationSpecifics
+VariationSpecificsSet
+VariationSpecificPictureSet
+PictureURL
+Pictures
+ItemSpecifics
+NameValueList
+CategoryID
+CategoryMapping
+SKU
+productSku
+variantId
+vid
+pid
+productId
+variant
+variants
+attribute
+attributes
+attr
+image
+images
+gallery
+bulk
+listing
+listProduct
+createListing
+xml
+sanitize
+logger
+log
+price
+shipping
+policy
+businessPolicy
+
+Do not stop after inspecting files. The task requires running the listing pipeline and fixing bugs.
+
+LEGACY PHP / LOG FORENSICS
+
+If old PHP files or old eBay logs are available, use them only as reference.
+
+Look for:
+
+1. Previously successful AddFixedPriceItem requests.
+2. Previously accepted XML shape.
+3. Previously working category IDs.
+4. Previously accepted item specifics.
+5. Previously accepted variation payloads.
+6. Previously accepted image mapping.
+7. Previous eBay errors.
+8. Previous bug fixes.
+9. Old category-map assumptions.
+10. Old variant parser behavior.
+
+Do not copy PHP architecture.
+
+Translate only the useful behavior into clean TypeScript.
+
+REUSABLE ENGINE REQUIREMENT
+
+Create or repair a reusable listing engine with clean TypeScript boundaries.
+
+The engine should expose functions or services similar to:
+
+1. fetchCJProduct(productId)
+2. searchCJProducts(filters)
+3. normalizeCJProduct(rawCJProduct)
+4. parseCJVariants(rawCJProduct)
+5. mapCJCategoryToEbayCategory(normalizedProduct)
+6. buildEbayItemSpecifics(normalizedProduct)
+7. calculateEbayPrices(normalizedProduct)
+8. buildEbayTradingPayload(normalizedProduct)
+9. preflightEbayListing(payload)
+10. createLiveEbayListing(payload)
+11. listSingleCJProduct(productId)
+12. listBulkCJProducts(productIds or filters)
+13. parseEbayErrors(response or log)
+14. retryFailedListing(failureContext)
+15. generateQAReport(results)
+
+The engine must work independently before it is connected to the larger system.
+
+SINGLE PRODUCT TESTING
+
+The system must support testing one product at a time.
+
+Create or repair a command/script/API action like:
+
+npm run ebay:test-single -- --cjProductId=PRODUCT_ID --live=false
+
+npm run ebay:test-single -- --cjProductId=PRODUCT_ID --live=true
+
+or the closest project-appropriate equivalent.
+
+The single-product flow must:
+
+1. Fetch the CJ product.
+2. Normalize the product.
+3. Parse variants.
+4. Validate images.
+5. Map category.
+6. Build item specifics.
+7. Calculate price.
+8. Build eBay payload.
+9. Preflight with eBay.
+10. Create live eBay listing only when live mode is enabled.
+11. Read logs.
+12. Return structured result.
+
+BULK PRODUCT TESTING
+
+The system must support bulk listing.
+
+Create or repair a command/script/API action like:
+
+npm run ebay:test-bulk -- --limit=10 --live=false
+
+npm run ebay:test-bulk -- --limit=10 --live=true
+
+or the closest project-appropriate equivalent.
+
+The bulk flow must:
+
+1. Select multiple CJ products.
+2. Normalize each product separately.
+3. Validate each product separately.
+4. List eligible products.
+5. Skip unsafe products.
+6. Continue after individual product failure.
+7. Never let one bad product crash the full batch.
+8. Save per-product success/failure results.
+9. Save per-product eBay errors.
+10. Produce a final report.
+
+The QA test should use at least 10 products to prove coverage, but the code must not be limited to 10.
+
+CJ PRODUCT COVERAGE REQUIREMENTS
+
+Test the engine against multiple product shapes.
+
+The QA sample should include:
+
+1. A simple no-variant product.
+2. A product with Color variants.
+3. A product with Size variants.
+4. A product with Color + Size variants.
+5. A product with Color + Style variants.
+6. A product with Color + Ships From variants if available.
+7. A product with Plug Type + Color variants if available.
+8. A product with variant-specific images.
+9. A product with messy attributes.
+10. A product requiring non-trivial category mapping.
+
+Avoid unsafe products:
+
+1. Adult products.
+2. Weapons.
+3. Tactical/self-defense products.
+4. Supplements.
+5. Medical products.
+6. Products with health claims.
+7. Trademark-risk products.
+8. Counterfeit-risk products.
+9. Branded products with unclear authorization.
+10. Products likely to violate eBay policy.
+
+The system should aim to support every safe CJ product type, but it must also have clear skip rules for products that are unsafe, restricted, impossible to categorize, missing required data, or likely to create eBay account risk.
+
+NORMALIZED PRODUCT CONTRACT
+
+Every CJ product must be normalized into a consistent internal TypeScript object before eBay payload generation.
+
+The normalized product should include:
+
+1. cjProductId
+2. source
+3. title
+4. cleanTitle
+5. descriptionHtml
+6. cleanDescriptionHtml
+7. cjCategoryId
+8. cjCategoryPath
+9. ebayCategoryId
+10. brand
+11. conditionId
+12. productImages
+13. itemSpecifics
+14. variants
+15. shippingData
+16. baseCost
+17. calculatedPrice
+18. currency
+19. sourceUrl
+20. rawDataReference for debugging
+
+Every normalized variant should include:
+
+1. cjVariantId
+2. rawSku
+3. cleanSku
+4. price
+5. cost
+6. quantity
+7. attributes
+8. imageUrls
+9. weight
+10. dimensions
+11. shippingCost
+12. calculatedEbayPrice
+13. isValid
+14. invalidReason
+
+VARIANT PARSER REQUIREMENTS
+
+The variant parser must be one of the strongest parts of the system.
+
+It must support:
+
+1. No variants.
+2. One variation key.
+3. Two variation keys.
+4. Three variation keys where eBay category allows it.
+5. Missing variant images.
+6. Duplicate variant values.
+7. Duplicate variant combinations.
+8. Messy CJ attribute labels.
+9. Empty attributes.
+10. Unsupported variant structures.
+
+Supported variation keys should include:
+
+Color
+Size
+Style
+Material
+Ships From
+Plug Type
+Quantity
+Capacity
+Model
+Pattern
+Type
+Bundle
+Length
+Width
+Specification
+
+Supported combinations should include:
+
+Color + Size
+Color + Style
+Color + Ships From
+Plug Type + Color
+Material + Color
+Size + Quantity
+Model + Color
+Capacity + Color
+Pattern + Size
+Type + Color + Size
 
 Rules:
 
-* If views are low after X days, improve title and item specifics.
-* If views are high but clicks are low, change main image and title.
-* If clicks are high but no sales, reduce price slightly or improve description.
-* If item has no sales after 14 days, reduce price by 2–5%.
-* If item has no sales after 30 days, rewrite title, improve image, and reduce price again.
-* If item has no sales after 45–60 days, end listing or relist with a better title/category/image.
-* If CJ stock becomes low or unavailable, pause/end eBay listing.
-* If CJ cost or shipping rises, recalculate price and revise eBay listing.
-* If competitor market price drops, adjust price carefully.
-* If product sells quickly, increase price slightly.
+1. Every variant must have a unique SKU.
+2. Every variant must have a unique variation combination.
+3. Every variant must include all required variation keys.
+4. Variation key names must be normalized.
+5. Variation values must be normalized.
+6. Empty keys must be removed or repaired.
+7. Empty values must be removed or repaired.
+8. Invalid variants must be skipped safely.
+9. Duplicate variant combinations must be removed.
+10. Variant prices must be valid.
+11. Variant quantities must be valid.
+12. Variant images must map to the correct visual value.
+13. If a product has fewer than 2 valid variants after parsing, it may be listed as a single-SKU product only if safe.
+14. If the variant structure is too broken, skip the product and document the reason.
+15. Never allow one bad variant to crash the whole product unless the product cannot be safely represented on eBay.
 
-All automation must support:
+EBAY VARIATION PAYLOAD REQUIREMENTS
 
-* approval mode
-* semi-auto mode
-* full-auto mode
+For multi-variant products, build a valid eBay Trading API variation payload.
 
-Default should be approval mode.
+The payload must include:
 
-8. Anti-duplicate engine
-    Create a duplicate detection system.
+1. Variations
+2. Variation
+3. SKU
+4. StartPrice
+5. Quantity
+6. VariationSpecifics
+7. VariationSpecificsSet
+8. NameValueList
+9. VariationSpecificPictureSet when variant images exist
+10. PictureURL values grouped under the correct visual variation value
 
-Check duplicates by:
+Rules:
 
-* CJ product ID
-* CJ variant ID
-* normalized title
-* image hash if possible
-* product dimensions
-* SKU
-* supplier product similarity
-* eBay active listing title similarity
+1. VariationSpecificsSet must include every variation name.
+2. VariationSpecificsSet must include every possible value.
+3. Each Variation must include the same variation names.
+4. No duplicate variation combinations.
+5. No duplicate SKUs.
+6. No empty variation names.
+7. No empty variation values.
+8. No invalid XML characters.
+9. No image URLs that eBay will reject.
+10. No variation image mapping mismatch.
 
-If similarity is above threshold, block auto-listing and show warning.
+VARIANT IMAGE SWITCHING REQUIREMENTS
 
-9. Category automation
-    Allow the user to choose categories to monitor.
+eBay image switching must work.
 
-Example:
+For products with visual variants:
 
-* pet supplies
-* home improvement
-* phone accessories
-* kitchen gadgets
-* car accessories
-* beauty tools
-* office supplies
+1. Detect the best visual variation key.
+2. Prefer Color, Style, Pattern, Model, Plug Type, or Material over Size.
+3. Build VariationSpecificPictureSet using the selected visual key.
+4. Map each visual variation value to the correct image URLs.
+5. Merge images when multiple variants share the same visual value.
+6. Remove duplicate images.
+7. Use HTTPS image URLs.
+8. Validate image URL format.
+9. Use fallback product images only when variant images are missing.
+10. Never attach the wrong image to the wrong variant value.
+11. Log exactly which visual variation key was used for image switching.
 
-When new CJ products appear in selected categories:
+CATEGORY MAPPING REQUIREMENTS
 
-* scan product
-* calculate landed cost
-* research eBay market
-* estimate profit
-* check duplicate risk
-* draft eBay listing
-* send to approval queue
+The category mapper must not be a weak hard-coded hack.
 
-Do not auto-publish brand-new products unless full-auto mode is enabled.
+It must:
 
-10. Dashboard screens
-    Build these screens:
+1. Map CJ categories to eBay leaf categories.
+2. Validate that the selected category supports fixed-price listings.
+3. Validate that the selected category supports variations when listing variants.
+4. Use eBay category features where available.
+5. Use cached successful mappings where available.
+6. Use old PHP/log mappings only as reference, not as the whole solution.
+7. Avoid one-category-for-everything behavior.
+8. Skip products where no safe eBay category can be selected.
+9. Log category mapping decisions.
+10. Save successful category mappings for future reuse.
 
-A. Home Dashboard
+ITEM SPECIFICS REQUIREMENTS
 
-* total active listings
-* draft listings
-* products needing approval
-* listings needing optimization
-* estimated monthly profit
-* low stock warnings
-* failed sync warnings
-* CJ/eBay connection status
+The item specifics builder must:
 
-B. CJ Product Search
+1. Convert CJ attributes into eBay item specifics.
+2. Remove CJ garbage fields.
+3. Remove duplicates.
+4. Remove empty values.
+5. Normalize item-specific names.
+6. Normalize item-specific values.
+7. Respect eBay length limits.
+8. Include Brand when possible.
+9. Use Unbranded when brand is missing and allowed.
+10. Use Does not apply only where appropriate.
+11. Include useful values such as Type, Color, Size, Material, Style, Pattern, Model, MPN, Department, Compatible Brand, Compatible Model where relevant.
+12. Avoid sending invalid XML.
+13. Avoid sending attributes that conflict with variation specifics.
+14. Add required category specifics when eBay requires them.
+15. Skip the product if required specifics cannot be safely provided.
 
-* filters
-* product cards
-* landed cost
-* estimated eBay price
-* estimated profit
-* duplicate warning
-* “Create Draft Listing” button
-* “Bulk Select” button
+SANITIZATION REQUIREMENTS
 
-C. Product Detail / Listing Builder
+Before building the eBay payload, sanitize:
 
-* CJ product data
-* variants
-* inventory
-* freight calculation
-* eBay market comparison
-* title generator
-* description generator
-* item specifics editor
-* image selector
-* profit calculator
-* publish/draft buttons
+1. Title.
+2. Description.
+3. HTML.
+4. Variant names.
+5. Variant values.
+6. Item-specific names.
+7. Item-specific values.
+8. SKUs.
+9. Image URLs.
+10. Category names.
+11. Policy names.
+12. Shipping data.
 
-D. Bulk Listing Queue
+Handle:
 
-* selected products
-* generated titles
-* generated prices
-* profit estimate
-* image preview
-* duplicate status
-* approval checkboxes
-* bulk publish
+1. Invalid UTF-8.
+2. XML special characters.
+3. HTML entities.
+4. Emojis.
+5. Control characters.
+6. Smart quotes.
+7. Non-breaking spaces.
+8. Invisible characters.
+9. Overlong titles.
+10. Broken HTML.
+11. Empty required fields.
+12. Duplicate whitespace.
+13. CJ formatting garbage.
 
-E. Active Listings
+The final eBay XML must always be valid XML.
 
-* eBay listings
-* price
-* profit estimate
-* views/clicks/sales
-* optimization score
-* stock status
-* quick actions: revise title, revise price, change image, end listing
+PRICING REQUIREMENTS
 
-F. Optimization Center
+Use real pricing.
 
-* listings with low views
-* listings with low clicks
-* listings with no sales
-* listings with price mismatch
-* listings with CJ stock/cost issues
-* recommended action
-* approve action button
+For every product and variant:
 
-G. Rules Engine
-Let user configure:
+1. Pull CJ product cost.
+2. Pull CJ variant cost.
+3. Pull shipping cost if available.
+4. Add configured markup.
+5. Add minimum profit.
+6. Add eBay fee buffer.
+7. Add payment processing buffer if configured.
+8. Round prices properly.
+9. Never list at zero.
+10. Never list below cost.
+11. Never list with missing price.
+12. Never list out-of-stock variants unless the system intentionally supports zero-quantity listings.
+13. Log the price calculation for debugging.
 
-* fee percentage
-* ad percentage
-* minimum profit
-* maximum profit
-* price drop schedule
-* title rewrite schedule
-* image change schedule
-* end listing after X days
-* auto-list categories
-* approval/full-auto mode
+Use configurable pricing rules.
 
-H. Settings
+Example config:
 
-* eBay credentials
-* CJ credentials
-* marketplace
-* default shipping country
-* default eBay policies
-* default profit rules
-* AI model/API settings
-* logs
+MIN_PROFIT_USD=5
+MARKUP_PERCENT=35
+EBAY_FEE_BUFFER_PERCENT=15
+PAYMENT_FEE_BUFFER_PERCENT=4
+ROUND_TO=.99
 
-11. Backend architecture
-    Use a clean modular backend.
+Do not hard-code fake prices just to make testing pass.
 
-Recommended structure:
+EBAY BUSINESS POLICY REQUIREMENTS
 
-* integrations/ebay
-* integrations/cj
-* services/product-research
-* services/pricing
-* services/listing-builder
-* services/optimizer
-* services/duplicate-detection
-* services/rules-engine
-* services/image-scoring
-* services/scheduler
-* database/models
-* api/routes
-* jobs/workers
+Use the project’s existing eBay account setup.
 
-Database tables:
+Detect whether the account uses:
 
-* users
-* integrations
-* cj_products
-* cj_variants
-* ebay_market_comparisons
-* listing_drafts
-* ebay_listings
-* product_connections
-* price_history
-* optimization_events
-* automation_rules
-* image_assets
-* duplicate_checks
-* job_logs
-* audit_logs
+1. Business policies.
+2. Payment policy.
+3. Shipping policy.
+4. Return policy.
+5. Legacy payment/shipping fields.
 
-12. AI bridge
-    Create an AI service abstraction so the app can later connect to OpenAI, Claude, Gemini, local LLMs, or another AI app.
+Build the payload accordingly.
 
-AI tasks:
+Do not replace working auth logic unless broken.
 
-* title generation
-* description generation
-* item specifics extraction
-* category suggestion
-* market comparison reasoning
-* duplicate reasoning
-* image attractiveness scoring
-* optimization recommendations
+Do not invent fake policy IDs.
 
-Never hardcode one AI provider deeply into the system.
-Use an interface:
-AIProvider.generateTitle()
-AIProvider.generateDescription()
-AIProvider.extractItemSpecifics()
-AIProvider.scoreImages()
-AIProvider.compareMarketListings()
-AIProvider.recommendOptimization()
+Validate:
 
-13. Safety and control
-    The system must not randomly publish or change listings without rules.
+1. Payment policy.
+2. Shipping policy.
+3. Return policy.
+4. Dispatch time.
+5. Location.
+6. Country.
+7. Currency.
+8. Listing duration.
+9. Condition ID.
+10. Listing type.
 
-Add:
+LOGGING AND RETRY LOOP
 
-* action preview
-* approval queue
-* rollback history where possible
-* audit logs
-* dry-run mode
-* manual override
-* error logs
-* rate limit handling
-* failed job retry
-* token refresh handling
+After every eBay attempt:
 
-14. Initial MVP priority
-    Build in this order:
+1. Read the active eBay log.
+2. Parse the latest request.
+3. Parse the latest response.
+4. Detect success, warning, or error.
+5. Classify the error.
+6. Fix the root cause.
+7. Clear or rotate the active log safely.
+8. Retry.
+9. Continue until the product passes or is correctly skipped.
 
-Phase 1:
+Do not permanently destroy useful logs.
 
-* connect CJ
-* connect eBay
-* search CJ products
-* calculate freight
-* calculate profit
-* create listing draft
+When clearing logs:
 
-Phase 2:
+1. Archive the current log with timestamp.
+2. Truncate the active log.
+3. Run the next attempt.
+4. Read only the fresh result.
+5. Repeat.
 
-* eBay market research
-* duplicate detection
-* AI title/description/item specifics
-* bulk draft queue
+Classify errors as:
 
-Phase 3:
+1. Auth error.
+2. Token error.
+3. XML error.
+4. Category error.
+5. Unsupported variation error.
+6. Duplicate variation error.
+7. Image error.
+8. Item specifics error.
+9. Required specifics error.
+10. Price error.
+11. Quantity error.
+12. Shipping error.
+13. Payment policy error.
+14. Return policy error.
+15. Business policy error.
+16. Fee error.
+17. eBay account limitation error.
+18. CJ API error.
+19. CJ product data error.
+20. Network error.
+21. Database error.
+22. Unknown error.
 
-* publish to eBay
-* active listing monitoring
-* price/title/description revision
+For every error, either fix the code or create a safe skip rule.
 
-Phase 4:
+Do not ignore errors.
 
-* autonomous rules engine
-* category auto-scanner
-* image scoring
-* optimization center
+Do not ignore warnings that can become listing failures.
 
-Phase 5:
+QA TEST MATRIX
 
-* full family dashboard
-* advanced analytics
-* AI provider switching
-* SaaS-ready structure
+Run a real QA test matrix.
 
-15. Important implementation behavior
-    Inspect both repositories first.
-    Do not invent fake function names when real MCP tools exist.
-    Reuse the API clients and tool patterns from the repositories.
-    If direct MCP calling is difficult in the current environment, create wrapper services that call the same underlying API endpoints.
-    Build clean code, not a demo.
-    Every automation must produce logs.
-    Every automatic listing action must be traceable.
-    Every price must show how it was calculated.
-    Every duplicate decision must explain why.
-    Every optimization recommendation must show the reason.
+The test matrix must include:
 
-Final product:
-A private AI-powered CJ-to-eBay listing automation machine that can:
+1. Single simple product.
+2. Single complex product.
+3. Single product with variant images.
+4. Single product with messy attributes.
+5. Bulk product test with at least 10 products.
+6. Bulk product test where at least one product is skipped safely.
+7. Category mapping test.
+8. Item specifics test.
+9. Image-switching test.
+10. Price calculation test.
+11. XML validation test.
+12. Live eBay preflight test.
+13. Real live eBay listing test when enabled.
 
-* find CJ products
-* calculate true landed cost
-* research eBay market price
-* generate eBay-ready listing content
-* maximize eBay item specifics
-* select the best main image
-* prevent duplicate listings
-* bulk-list products
-* revise price/title/description/images
-* monitor performance
-* end or optimize weak listings
-* gradually adjust profit from $0 to $450+ intelligently
-* support approval mode, semi-auto mode, and full-auto mode
-* run beautifully on all screen sizes with a modern gradient UI
+The number 10 is only the minimum QA sample size for bulk testing. The engine must be designed to handle more than 10 products later.
+
+TEST COMMANDS
+
+Create or repair TypeScript-compatible commands.
+
+Examples:
+
+npm run cj:search-test-products
+
+npm run cj:inspect-product -- --cjProductId=PRODUCT_ID
+
+npm run ebay:test-single -- --cjProductId=PRODUCT_ID --live=false
+
+npm run ebay:test-single -- --cjProductId=PRODUCT_ID --live=true
+
+npm run ebay:test-bulk -- --limit=10 --live=false
+
+npm run ebay:test-bulk -- --limit=10 --live=true
+
+npm run ebay:parse-log
+
+npm run ebay:clear-log
+
+npm run ebay:end-test-listing -- --itemId=EBAY_ITEM_ID
+
+Use equivalent commands if the project structure requires it.
+
+AUTOMATED TESTS
+
+Add automated tests where possible.
+
+Test:
+
+1. CJ normalization.
+2. No-variant product handling.
+3. Single-variant-key product handling.
+4. Multi-variant-key product handling.
+5. Variant image mapping.
+6. Duplicate variant detection.
+7. SKU cleaning.
+8. Category mapping.
+9. Item specifics generation.
+10. Required specifics handling.
+11. XML escaping.
+12. HTML cleaning.
+13. Image URL validation.
+14. Price calculation.
+15. eBay payload generation.
+16. Error parser.
+17. Retry logic.
+18. Bulk listing partial failure.
+19. Fee prevention.
+20. Live listing guardrails.
+
+Use Vitest, Jest, or the project’s existing test framework.
+
+If no test framework exists, add a minimal TypeScript test runner or script-based QA harness.
+
+FINAL ACCEPTANCE CRITERIA
+
+The task is complete only when:
+
+1. The TypeScript system can process one CJ product.
+2. The TypeScript system can process bulk CJ products.
+3. The engine handles no-variant products.
+4. The engine handles simple variant products.
+5. The engine handles complex multi-key variant products.
+6. The engine handles variant-specific images.
+7. eBay image switching payload is correct.
+8. Category mapping works or safely skips unsupported products.
+9. Item specifics generation works.
+10. Required item specifics are handled.
+11. XML is valid.
+12. Text sanitization works.
+13. Prices are real and profitable.
+14. Out-of-stock variants are handled safely.
+15. Bad products do not crash bulk listing.
+16. Logs are checked after every attempt.
+17. Errors are classified and fixed.
+18. Safe skip rules exist for unsupported products.
+19. At least one real live eBay listing succeeds when live mode is enabled.
+20. Bulk QA with at least 10 products completes with clear pass/fail results.
+21. No known listing-blocking bug remains.
+22. The final engine is reusable and ready to be linked into the larger system later.
+
+FINAL REPORT REQUIRED
+
+When finished, provide:
+
+1. Active TypeScript stack discovered.
+2. Files inspected.
+3. Files changed.
+4. Old PHP/log references used, if any.
+5. Bugs found.
+6. Fixes made.
+7. Variant parser behavior.
+8. Image-switching behavior.
+9. Category mapper behavior.
+10. Item specifics behavior.
+11. Sanitization behavior.
+12. Pricing behavior.
+13. Single-product test results.
+14. Bulk-product test results.
+15. List of products tested.
+16. For each tested product:
+
+    * CJ product ID
+    * product title
+    * product type
+    * variant keys
+    * variant count
+    * image count
+    * selected eBay category
+    * preflight result
+    * live listing result if live mode was enabled
+    * eBay item ID if listed
+    * errors found
+    * fixes applied
+    * final status
+17. Logs reviewed.
+18. eBay errors encountered.
+19. How each error was fixed.
+20. Products skipped and why.
+21. Confirmation of whether live eBay listing was used.
+22. Confirmation of whether any listing fee appeared.
+23. Commands to rerun the tests.
+24. Remaining limitations.
+25. Exact instructions for linking this engine into the larger system later.
+
+IMPORTANT BEHAVIOR RULES
+
+Do not build a fake local-only import.
+
+Do not build a PHP solution.
+
+Do not make “10 listings” the system feature.
+
+Do not hard-code one product and call it done.
+
+Do not hard-code one category and call it done.
+
+Do not stop at payload generation.
+
+Do not stop at sandbox.
+
+Do not stop at VerifyAddFixedPriceItem if live listing is enabled.
+
+Do not ignore logs.
+
+Do not ignore variant image switching.
+
+Do not ignore item specifics.
+
+Do not ignore category compatibility.
+
+Do not ignore pricing.
+
+Do not ignore eBay errors.
+
+Do not make fragile one-off fixes.
+
+Build a reusable CJ → eBay TypeScript listing engine that can later be connected to the larger automation system and handle single or bulk product listing reliably.
